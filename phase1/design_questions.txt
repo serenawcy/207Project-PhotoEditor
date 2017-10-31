@@ -7,4 +7,14 @@ What happens when a new tag is created?
 
 Which class is keeping track of the association between tags and files?
 
-What happens when user delete an currently-existing tag or a nonexistent tag?
+What happens when user deletes an currently-existing tag or a nonexistent tag?
+
+How does the system generate a list of all image files?
+
+How does the system rename the image file to include the tags?
+
+How does the system allow the user to open a directory containing the current image file?
+
+Which class is keeping track of the association between directories and files?
+
+How can user go back to the older sets of tags for a particular file?

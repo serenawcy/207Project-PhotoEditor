@@ -7,3 +7,4 @@ What happens when a new tag is created?
 
 Which class is keeping track of the association between tags and files?
 
+What happens when user delete an currently-existing tag or a nonexistent tag?

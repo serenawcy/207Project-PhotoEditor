@@ -52,7 +52,7 @@ public final class FileChooserScene extends Application {
 //                            ManipulationManagerScene.setFile(inputFile);
 //                            ManipulationManagerScene.display();
                             openFile(file);
-                            AddTagScene.display();
+                            ManipulationManagerScene.display();
                             stage.close();
                         }
                     }

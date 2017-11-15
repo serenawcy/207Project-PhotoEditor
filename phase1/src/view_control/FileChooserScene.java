@@ -35,6 +35,7 @@ public final class FileChooserScene extends Application {
 
         final Button openButton = new Button("Open a Picture...");
         final Button getLog = new Button("Get log history");
+        final Button quit = new Button("Quit");
         Button goBack = new Button("Go Back");
 
         openButton.setOnAction(
@@ -63,12 +64,15 @@ public final class FileChooserScene extends Application {
                             }
                 });
 
+        quit.setOnAction(event -> stage.close());
+
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(openButton, 0, 0);
         GridPane.setConstraints(getLog, 1, 0);
+        GridPane.setConstraints(quit, 2, 0);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(openButton, getLog);
+        inputGridPane.getChildren().addAll(openButton, getLog, quit);
 
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(inputGridPane);
@@ -79,7 +83,7 @@ public final class FileChooserScene extends Application {
         stage.show();
 
 
-//        Log Scene
+//       Log Scene
         goBack.setOnAction(event ->  stage.setScene(fileChooserScene));
 //                Text logHistory = new Text(inputFile.getLog());
         Text logHistory = new Text(25, 25,"AASDFSAF \n daskfjalsd");
@@ -92,13 +96,18 @@ public final class FileChooserScene extends Application {
         Application.launch(args);
     }
 
-    private static void configureFileChooser(final FileChooser fileChooser){
+    private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("View Pictures");
         fileChooser.setInitialDirectory(
                 new File(System.getProperty("user.home"))
         );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif")
+        );
     }
-
 
     private void openFile(File file) {
         try {

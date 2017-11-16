@@ -86,7 +86,7 @@ public class Image {
 //    public void renameDelete(String tagToDelete) {
 //        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
 //    }
-//
+
 //    /**
 //     * Get this Image object's tagStore.
 //     * @return a TagManager object

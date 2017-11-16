@@ -52,10 +52,10 @@ public class MoveFileScene {
         });
 
         goBack.setOnAction(e -> {
-            FileChooserScene.display();
-            moveToStage.close();
 //            ManipulationManagerScene.setFile(inputFile);
-//            ManipulationManagerScene.display();
+            ManipulationManagerScene.display();
+//            FileChooserScene.display();
+            moveToStage.close();
         });
 
         VBox addTagLayout = new VBox(10);

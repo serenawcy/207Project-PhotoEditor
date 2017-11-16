@@ -28,7 +28,7 @@ public class MoveFileScene {
 
         //Create two buttons
         Button move = new Button("Select Directory");
-        Button goBack = new Button("Go back");
+        Button goBack = new Button("Go back Last Page");
 
     move.setOnAction(
         e -> {
@@ -55,7 +55,7 @@ public class MoveFileScene {
 
         VBox addTagLayout = new VBox(10);
         addTagLayout.setPadding(new Insets(20, 20, 20, 20));
-        addTagLayout.getChildren().addAll(MoveInstruction, goBack, move);
+        addTagLayout.getChildren().addAll(MoveInstruction, move, goBack);
         addTagLayout.setAlignment(Pos.CENTER);
 
         Scene tagScene = new Scene(addTagLayout);

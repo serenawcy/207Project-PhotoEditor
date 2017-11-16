@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -37,25 +38,28 @@ public final class FileChooserScene extends Application {
         final Button quit = new Button("Quit");
         Button goBack = new Button("Go Back");
 
-        openButton.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        configureFileChooser(fileChooser);
-                        File file = fileChooser.showOpenDialog(stage);
-                        if (file != null) {
-                            String filePath = file.getAbsolutePath();
-                            String fileName = file.getName();
-//                            Image inputImage = new Image(fileName, filePath);
-//                            inputImage = ImageManager.checkExist();
-//                            ManipulationManagerScene.setFile(inputImage);
-//                            ManipulationManagerScene.display();
-                            openFile(file);
-                            MoveFileScene.display();
-                            fileChooserStage.close();
-                        }
-                    }
-                });
+    openButton.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(final ActionEvent e) {
+            configureFileChooser(fileChooser);
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+              String filePath = file.getAbsolutePath();
+              String fileName = file.getName();
+//              System.out.println(filePath);
+//              image inputImage = new Image(fileName, filePath);
+//              inputImage = ImageManager.checkExist();
+//                Image img = new Image(file.toURI().toString());
+//                ManipulationManagerScene.setImage(img);
+//                ManipulationManagerScene.setFile(inputImage);
+                ManipulationManagerScene.display();
+//              openFile(file);
+              MoveFileScene.display();
+              fileChooserStage.close();
+            }
+          }
+        });
 
         getLog.setOnAction(
                 new EventHandler<ActionEvent>() {
@@ -110,16 +114,16 @@ public final class FileChooserScene extends Application {
         );
     }
 
-    private void openFile(File file) {
-        try {
-            desktop.open(file);
-        } catch (IOException ex) {
-            Logger.getLogger(
-                    FileChooserScene.class.getName()).log(
-                    Level.SEVERE, null, ex
-            );
-        }
-    }
+//    private void openFile(File file) {
+//        try {
+//            desktop.open(file);
+//        } catch (IOException ex) {
+//            Logger.getLogger(
+//                    FileChooserScene.class.getName()).log(
+//                    Level.SEVERE, null, ex
+//            );
+//        }
+//    }
 
     public static void display(){
         fileChooserStage.show();

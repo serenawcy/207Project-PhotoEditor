@@ -33,7 +33,7 @@ public final class FileChooserScene extends Application {
 
         final FileChooser fileChooser = new FileChooser();
 
-        final Button openButton = new Button("Open a Picture...");
+        final Button openButton = new Button("Open a Picture");
         final Button getLog = new Button("Get log history");
         final Button quit = new Button("Quit");
         Button goBack = new Button("Go Back");
@@ -55,7 +55,6 @@ public final class FileChooserScene extends Application {
 //                ManipulationManagerScene.setFile(inputImage);
                 ManipulationManagerScene.display();
 //              openFile(file);
-              MoveFileScene.display();
               fileChooserStage.close();
             }
           }
@@ -70,6 +69,12 @@ public final class FileChooserScene extends Application {
                 });
 
         quit.setOnAction(event -> fileChooserStage.close());
+
+        //resize the button
+        openButton.setMinWidth(120);
+        quit.setMinWidth(120);
+        goBack.setMinWidth(120);
+        getLog.setMinWidth(120);
 
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(openButton, 0, 0);

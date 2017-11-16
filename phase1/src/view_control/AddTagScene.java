@@ -40,6 +40,8 @@ public class AddTagScene {
 //            ManipulationManagerScene.display();
         });
 
+        done.setMinWidth(100);
+        goBack.setMinWidth(100);
         VBox addTagLayout = new VBox(10);
         addTagLayout.setPadding(new Insets(20, 20, 20, 20));
         addTagLayout.getChildren().addAll(AddInstruction,tagInput, goBack, done);

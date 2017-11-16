@@ -30,6 +30,9 @@ public class MoveFileScene {
         Button move = new Button("Select Directory");
         Button goBack = new Button("Go back Last Page");
 
+        move.setMinWidth(200);
+        goBack.setMinWidth(200);
+
     move.setOnAction(
         e -> {
           //                    String directoryPath = moveDirectory();

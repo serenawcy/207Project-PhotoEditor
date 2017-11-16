@@ -61,15 +61,15 @@ public class Image {
         this.absoluteAddress = this.absoluteAddress.replace(this.name, newImageName);
     }
 
-//    /**
-//     * Change the name of this Image object.
-//     * @param newImageName new name of this Image object
-//     */
-//    public void changeImageName(String newImageName) {
-//        this.name = newImageName;
-//        this.changeDirectory(newImageName);
-//        TODO: Log
-//    }
+    /**
+     * Change the name of this Image object.
+     * @param newImageName new name of this Image object
+     */
+    public void changeImageName(String newImageName) {
+        this.name = newImageName;
+        this.changeDirectory(newImageName);
+        // TODO: Log
+    }
 
 //    /**
 //     * Rename this Image by adding a tag.

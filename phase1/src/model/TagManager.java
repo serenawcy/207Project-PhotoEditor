@@ -19,13 +19,13 @@ public class TagManager implements Serializable {
         this.allTags.add(tag);
         writeTags();
     }
-//
-//
-//    public void deleteTag(String tag) {
-//
-//        this.allTags.remove(tag);
-//        writeTags();
-//    }
+
+
+    public void deleteTag(String tag) {
+
+        this.allTags.remove(tag);
+        writeTags();
+    }
 //
 //    public boolean checkExist(String tagToCheck) {
 //        if (allTags.contains(tagToCheck)) {

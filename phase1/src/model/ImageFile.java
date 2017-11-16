@@ -99,10 +99,11 @@ public class ImageFile {
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-    public String getLog() {
-        // TODO: Log
-        //
-    }
+//    public String getLog() {
+//        new String logHistory;
+//        // TODO: Log
+//        return logHistory;
+//    }
 
     /**
      * Get this ImageFile object's name.

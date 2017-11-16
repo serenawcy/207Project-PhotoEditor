@@ -35,20 +35,20 @@ public class TagManager implements Serializable {
 //    }
 //
 //
-//    public void writeTags() {
-//        try {
-//            OutputStream file = new FileOutputStream(filePath);
-//            OutputStream buffer = new BufferedOutputStream(file);
-//            ObjectOutput output = new ObjectOutputStream(buffer);
-//            output.writeObject(allTags);
-//            output.close();
-//        } catch (FileNotFoundException e) {
-//            new File(filePath);
-////      writeTags();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void writeTags() {
+        try {
+            OutputStream file = new FileOutputStream(filePath);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
+            output.writeObject(allTags);
+            output.close();
+        } catch (FileNotFoundException e) {
+            new File(filePath);
+//      writeTags();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //
 //
 //    @SuppressWarnings("unchecked")

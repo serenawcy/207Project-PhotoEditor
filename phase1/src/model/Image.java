@@ -39,19 +39,19 @@ public class Image {
 
     }
 
-//    /**
-//     * Delete user input tag name if it exists and rename this Image.
-//     * @param userInputDelete the tag name which is supposed to be deleted from this Image name
-//     */
-//    public void deleteTag(String userInputDelete) {
-//        String[]  nameToDelete = userInputDelete.split(",");
-//        for (String name: nameToDelete) {
-//            if (!this.tagStore.checkExist(name)) {
-//                this.tagStore.deleteTag(name);
-//                this.renameDelete(name);
-//            }
-//        }
-//    }
+    /**
+     * Delete user input tag name if it exists and rename this Image.
+     * @param userInputDelete the tag name which is supposed to be deleted from this Image name
+     */
+    public void deleteTag(String userInputDelete) {
+        String[]  nameToDelete = userInputDelete.split(",");
+        for (String name: nameToDelete) {
+            if (!this.tagStore.checkExist(name)) {
+                this.tagStore.deleteTag(name);
+                this.renameDelete(name);
+            }
+        }
+    }
 
 //    /**
 //     * Change the absolute directory of this Image object.

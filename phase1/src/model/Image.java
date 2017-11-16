@@ -52,7 +52,7 @@ public class Image {
 //            }
 //        }
 //    }
-//
+
 //    /**
 //     * Change the absolute directory of this Image object.
 //     * @param newImageName new name of this Image object
@@ -70,7 +70,7 @@ public class Image {
 //        this.changeDirectory(newImageName);
 //        TODO: Log
 //    }
-//
+
 //    /**
 //     * Rename this Image by adding a tag.
 //     * @param tagToAdd the tag name need to add

@@ -9,12 +9,12 @@ import model.ImageFile;
 
 public class AddTagScene {
 
-    private ImageFile inputFile;
+    private static ImageFile inputFile;
 
 
     public static void display() {
         Stage addScene = new Stage();
-//        addScene.initModality(Modality.APPLICATION_MODAL);
+        addScene.initModality(Modality.APPLICATION_MODAL);
         addScene.setTitle("Add tag(s)");
         addScene.setMinWidth(250);
         Label AddInstruction = new Label();
@@ -31,14 +31,14 @@ public class AddTagScene {
                 e -> {
                     String tags = tagInput.getText();
                     System.out.println(tags);
-                    //            File.addTags(tags);
-                    addScene.close();
+                    inputFile.addTag(tags);
+//                    addScene.close();
                 });
         goBack.setOnAction(e -> {
+            //            ManipulationManagerScene.setFile(inputFile);
+//            ManipulationManagerScene.display();
             FileChooserScene.display();
             addScene.close();
-//            ManipulationManagerScene.setFile(inputFile);
-//            ManipulationManagerScene.display();
         });
 
         done.setMinWidth(100);
@@ -51,7 +51,7 @@ public class AddTagScene {
         Scene tagScene = new Scene(addTagLayout);
         addScene.setScene(tagScene);
         addScene.show();
-//        window.showAndWait();
+        addScene.showAndWait();
     }
 
     public void setImageFile(ImageFile imageFile){

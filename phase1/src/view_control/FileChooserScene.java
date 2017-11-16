@@ -51,8 +51,8 @@ public final class FileChooserScene extends Application {
               String fileName = file.getName();
 //              imgFile = new ImageFile(fileName,filePath);
 //              imgFile = ImageFileManager.checkExist();
-//              Image inputImg = new Image(file.toURI().toString());
-//              ManipulationManagerScene.setImage(inputImg);
+              Image inputImg = new Image(file.toURI().toString());
+              ManipulationManagerScene.setImage(inputImg);
 //              ManipulationManagerScene.setFile(imgFile);
               ManipulationManagerScene.display();
 //              openFile(file);

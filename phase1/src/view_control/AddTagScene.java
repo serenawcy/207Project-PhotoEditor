@@ -30,7 +30,7 @@ public class AddTagScene {
         done.setOnAction(
                 e -> {
                     String tags = tagInput.getText();
-                    System.out.println(tags);
+//                    System.out.println(tags);
 //                    inputFile.addTag(tags);
                 });
         goBack.setOnAction(e -> {

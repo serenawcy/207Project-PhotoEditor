@@ -9,20 +9,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.*;
 import javafx.stage.DirectoryChooser;
+import model.ImageFile;
 
 import java.io.File;
 
 public class MoveFileScene {
 
-//    private Image inputImage;
+    private static ImageFile inputFile;
+
 //    private static Stage moveTo;
-    private static Stage moveTo = new Stage();
+    private static Stage moveToStage = new Stage();
 
     public static void display() {
 //        moveTo = new Stage();
-        moveTo.initModality(Modality.APPLICATION_MODAL);
-        moveTo.setTitle("Select a directory");
-        moveTo.setMinWidth(250);
+        moveToStage.initModality(Modality.APPLICATION_MODAL);
+        moveToStage.setTitle("Select a directory");
+        moveToStage.setMinWidth(250);
         Label MoveInstruction = new Label();
         MoveInstruction.setText("Please select a directory that you want the Image to move");
 
@@ -38,20 +40,20 @@ public class MoveFileScene {
           //                    String directoryPath = moveDirectory();
           String directory;
           final DirectoryChooser directoryChooser = new DirectoryChooser();
-          final File selectedDirectory = directoryChooser.showDialog(moveTo);
+          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
           if (selectedDirectory != null) {
               directory = selectedDirectory.getAbsolutePath();
-            System.out.println(directory);
-            //                        inputImage.changeDirectory(directoryPath);
+//            System.out.println(directory);
+            inputFile.changeDirectory(directory);
           }
           //            ManipulationManagerScene.setFile(inputImage);
 //            ManipulationManagerScene.display();
-          moveTo.close();
+//          moveTo.close();
         });
 
         goBack.setOnAction(e -> {
             FileChooserScene.display();
-            moveTo.close();
+            moveToStage.close();
 //            ManipulationManagerScene.setFile(inputFile);
 //            ManipulationManagerScene.display();
         });
@@ -62,13 +64,13 @@ public class MoveFileScene {
         addTagLayout.setAlignment(Pos.CENTER);
 
         Scene tagScene = new Scene(addTagLayout);
-        moveTo.setScene(tagScene);
-        moveTo.show();
+        moveToStage.setScene(tagScene);
+        moveToStage.show();
     }
 
-//    public void setImage(Image image){
-//        this.inputImage = image;
-//    }
+    public void setImageFile(ImageFile imageFile){
+        inputFile = imageFile;
+    }
 
 //    private static String moveDirectory() {
 //        String directory;

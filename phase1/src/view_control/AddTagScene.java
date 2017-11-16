@@ -5,10 +5,11 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import model.ImageFile;
 
 public class AddTagScene {
 
-//    private File inputFile;
+    private ImageFile inputFile;
 
 
     public static void display() {
@@ -44,17 +45,16 @@ public class AddTagScene {
         goBack.setMinWidth(100);
         VBox addTagLayout = new VBox(10);
         addTagLayout.setPadding(new Insets(20, 20, 20, 20));
-        addTagLayout.getChildren().addAll(AddInstruction,tagInput, goBack, done);
+        addTagLayout.getChildren().addAll(AddInstruction, tagInput, goBack, done);
         addTagLayout.setAlignment(Pos.CENTER);
 
         Scene tagScene = new Scene(addTagLayout);
         addScene.setScene(tagScene);
         addScene.show();
 //        window.showAndWait();
+    }
 
-
-//    public void setFile(File file){
-//        this.inputFile = file;
-//    }
+    public void setImageFile(ImageFile imageFile){
+        this.inputFile = imageFile;
     }
 }

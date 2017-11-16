@@ -18,13 +18,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import model.ImageFile;
+import model.ImageFileManager;
 
 public final class FileChooserScene extends Application {
 
 
     private Desktop desktop = Desktop.getDesktop();
     private Scene logTextScene, fileChooserScene;
-    File inputFile;
+    ImageFile imgFile;
     private static Stage fileChooserStage;
     @Override
     public void start(final Stage stage) {
@@ -47,13 +49,12 @@ public final class FileChooserScene extends Application {
             if (file != null) {
               String filePath = file.getAbsolutePath();
               String fileName = file.getName();
-//              System.out.println(filePath);
-//              image inputImage = new Image(fileName, filePath);
-//              inputImage = ImageManager.checkExist();
-//                Image img = new Image(file.toURI().toString());
-//                ManipulationManagerScene.setImage(img);
-//                ManipulationManagerScene.setFile(inputImage);
-                ManipulationManagerScene.display();
+              imgFile = new ImageFile(fileName,filePath);
+//              imgFile = ImageFileManager.checkExist();
+//              Image inputImg = new Image(file.toURI().toString());
+//              ManipulationManagerScene.setImage(inputImg);
+//              ManipulationManagerScene.setFile(imgFile);
+//              ManipulationManagerScene.display();
 //              openFile(file);
               fileChooserStage.close();
             }

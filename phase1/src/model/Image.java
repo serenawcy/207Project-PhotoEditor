@@ -20,7 +20,7 @@ public class Image {
     public Image(String name, String absoluteAddress) {
         this.name = name;
         this.absoluteAddress = absoluteAddress;
-        this.tagStore = new TagManager();
+        this.tagStore = new TagManager(this.toString());
         // TODO: Log and Handler
     }
 
@@ -95,13 +95,13 @@ public class Image {
         return this.tagStore;
     }
 
-//    /**
-//     * Get the log history of this Image object.
-//     * @return the String of log history
-//     */
-//    public String getLog() {
-//        TODO: Log
-//    }
+    /**
+     * Get the log history of this Image object.
+     * @return the String of log history
+     */
+    public String getLog() {
+        // TODO: Log
+    }
 
     /**
      * Get this Image object's name.

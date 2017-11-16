@@ -5,11 +5,11 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
-import model.ImageFile;
+//import model.ImageFile;
 
 public class AddTagScene {
 
-    private static ImageFile inputFile;
+//    private static ImageFile inputFile;
 
 
     public static void display() {
@@ -31,13 +31,11 @@ public class AddTagScene {
                 e -> {
                     String tags = tagInput.getText();
                     System.out.println(tags);
-                    inputFile.addTag(tags);
-//                    addScene.close();
+//                    inputFile.addTag(tags);
                 });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);
-//            ManipulationManagerScene.display();
-            FileChooserScene.display();
+            ManipulationManagerScene.display();
             addScene.close();
         });
 
@@ -54,7 +52,7 @@ public class AddTagScene {
         addScene.showAndWait();
     }
 
-    public void setImageFile(ImageFile imageFile){
-        this.inputFile = imageFile;
-    }
+//    public void setImageFile(ImageFile imageFile){
+//        this.inputFile = imageFile;
+//    }
 }

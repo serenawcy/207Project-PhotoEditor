@@ -18,15 +18,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-import model.ImageFile;
+//import model.ImageFile;
 import model.ImageFileManager;
 
 public final class FileChooserScene extends Application {
 
 
-    private Desktop desktop = Desktop.getDesktop();
+//    private Desktop desktop = Desktop.getDesktop();
     private Scene logTextScene, fileChooserScene;
-    ImageFile imgFile;
+//    ImageFile imgFile;
     private static Stage fileChooserStage;
     @Override
     public void start(final Stage stage) {
@@ -49,12 +49,12 @@ public final class FileChooserScene extends Application {
             if (file != null) {
               String filePath = file.getAbsolutePath();
               String fileName = file.getName();
-              imgFile = new ImageFile(fileName,filePath);
+//              imgFile = new ImageFile(fileName,filePath);
 //              imgFile = ImageFileManager.checkExist();
 //              Image inputImg = new Image(file.toURI().toString());
 //              ManipulationManagerScene.setImage(inputImg);
 //              ManipulationManagerScene.setFile(imgFile);
-//              ManipulationManagerScene.display();
+              ManipulationManagerScene.display();
 //              openFile(file);
               fileChooserStage.close();
             }
@@ -116,7 +116,8 @@ public final class FileChooserScene extends Application {
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png"),
                 new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif")
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
         );
     }
 

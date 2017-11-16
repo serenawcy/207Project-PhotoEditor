@@ -71,14 +71,14 @@ public class Image {
         // TODO: Log
     }
 
-//    /**
-//     * Rename this Image by adding a tag.
-//     * @param tagToAdd the tag name need to add
-//     */
-//    public void renameAdd(String tagToAdd) {
-//        this.changeImageName(this.name + "@" + tagToAdd);
-//    }
-//
+    /**
+     * Rename this Image by adding a tag.
+     * @param tagToAdd the tag name need to add
+     */
+    public void renameAdd(String tagToAdd) {
+        this.changeImageName(this.name + "@" + tagToAdd);
+    }
+
 //    /**
 //     * Rename this Image by deleting a tag.
 //     * @param tagToDelete the tag name need to delete

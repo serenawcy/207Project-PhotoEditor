@@ -16,9 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.scene.control.Button;
 
 public final class FileChooserScene extends Application {
 
@@ -26,10 +24,10 @@ public final class FileChooserScene extends Application {
     private Desktop desktop = Desktop.getDesktop();
     private Scene logTextScene, fileChooserScene;
     File inputFile;
-    private static Stage stage;
+    private static Stage fileChooserStage;
     @Override
     public void start(final Stage stage) {
-        FileChooserScene.stage = stage;
+        FileChooserScene.fileChooserStage = stage;
         stage.setTitle("Image Manager");
 
         final FileChooser fileChooser = new FileChooser();
@@ -48,13 +46,13 @@ public final class FileChooserScene extends Application {
                         if (file != null) {
                             String filePath = file.getAbsolutePath();
                             String fileName = file.getName();
-//                            File inputFile = new File(fileName, filePath);
-//                            inputFile = FileManager.checkExist();
-//                            ManipulationManagerScene.setFile(inputFile);
+//                            Image inputImage = new Image(fileName, filePath);
+//                            inputImage = ImageManager.checkExist();
+//                            ManipulationManagerScene.setFile(inputImage);
 //                            ManipulationManagerScene.display();
                             openFile(file);
-                            AddTagScene.display();
-                            stage.close();
+                            MoveFileScene.display();
+                            fileChooserStage.close();
                         }
                     }
                 });
@@ -63,11 +61,11 @@ public final class FileChooserScene extends Application {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-                        stage.setScene(logTextScene);
+                        fileChooserStage.setScene(logTextScene);
                     }
                 });
 
-        quit.setOnAction(event -> stage.close());
+        quit.setOnAction(event -> fileChooserStage.close());
 
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(openButton, 0, 0);
@@ -82,12 +80,12 @@ public final class FileChooserScene extends Application {
         rootGroup.setPadding(new Insets(12, 12, 12, 12));
 
         fileChooserScene = new Scene(rootGroup);
-        stage.setScene(fileChooserScene);
-        stage.show();
+        fileChooserStage.setScene(fileChooserScene);
+        fileChooserStage.show();
 
 
 //       Log Scene
-        goBack.setOnAction(event ->  stage.setScene(fileChooserScene));
+        goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
 //                Text logHistory = new Text(inputFile.getLog());
         Text logHistory = new Text(25, 25,"AASDFSAF \n daskfjalsd");
         VBox logLayout = new VBox(20);
@@ -124,7 +122,7 @@ public final class FileChooserScene extends Application {
     }
 
     public static void display(){
-        stage.show();
+        fileChooserStage.show();
     }
 
 }

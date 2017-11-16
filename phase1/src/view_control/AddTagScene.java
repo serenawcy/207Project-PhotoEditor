@@ -13,7 +13,7 @@ public class AddTagScene {
 
     public static void display() {
         Stage addScene = new Stage();
-//        window.initModality(Modality.APPLICATION_MODAL);
+//        addScene.initModality(Modality.APPLICATION_MODAL);
         addScene.setTitle("Add tag(s)");
         addScene.setMinWidth(250);
         Label AddInstruction = new Label();

@@ -20,7 +20,7 @@ public class MoveFileScene {
 //    private static Stage moveTo;
     private static Stage moveToStage = new Stage();
 
-    public static void display() {
+    static void display() {
 //        moveTo = new Stage();
         moveToStage.initModality(Modality.APPLICATION_MODAL);
         moveToStage.setTitle("Select a directory");

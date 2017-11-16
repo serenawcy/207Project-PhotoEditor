@@ -51,12 +51,16 @@ public final class FileChooserScene extends Application {
                 try {
                     ImageFile imageFile = imageFileManager.checkExist(fileName, filePath);
                     ManipulationManagerScene.setFile(imageFile);
+                    Image inputImg = new Image(file.toURI().toString());
+                    ManipulationManagerScene.setImage(inputImg);
+                    ManipulationManagerScene.display();
+                    fileChooserStage.close();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                Image inputImg = new Image(file.toURI().toString());
-                ManipulationManagerScene.setImage(inputImg);
-                ManipulationManagerScene.display();
+//                Image inputImg = new Image(file.toURI().toString());
+//                ManipulationManagerScene.setImage(inputImg);
+//                ManipulationManagerScene.display();
 //              openFile(file);
               fileChooserStage.close();
             }
@@ -100,6 +104,7 @@ public final class FileChooserScene extends Application {
         goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
 //        Text logHistory = new Text(ImageFile.getLog());
         VBox logLayout = new VBox(20);
+        logLayout.getChildren().addAll(goBack);
 //        logLayout.getChildren().addAll(goBack, logHistory);
         logTextScene = new Scene(logLayout, 600, 300);
     }

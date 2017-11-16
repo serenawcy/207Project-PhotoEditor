@@ -1,10 +1,7 @@
 package view_control;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,16 +15,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-//import model.ImageFile;
+import model.ImageFile;
 import model.ImageFileManager;
 
 public final class FileChooserScene extends Application {
 
 
-//    private Desktop desktop = Desktop.getDesktop();
     private Scene logTextScene, fileChooserScene;
-//    ImageFile imgFile;
     private static Stage fileChooserStage;
+
     @Override
     public void start(final Stage stage) {
         FileChooserScene.fileChooserStage = stage;
@@ -49,12 +45,18 @@ public final class FileChooserScene extends Application {
             if (file != null) {
               String filePath = file.getAbsolutePath();
               String fileName = file.getName();
-//              imgFile = new ImageFile(fileName,filePath);
-//              imgFile = ImageFileManager.checkExist();
-              Image inputImg = new Image(file.toURI().toString());
-              ManipulationManagerScene.setImage(inputImg);
-//              ManipulationManagerScene.setFile(imgFile);
-              ManipulationManagerScene.display();
+              ImageFileManager imageFileManager = new ImageFileManager();
+
+              //get back a ImageFile to keep track of this ImageFile
+                try {
+                    ImageFile imageFile = imageFileManager.checkExist(fileName, filePath);
+                    ManipulationManagerScene.setFile(imageFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                Image inputImg = new Image(file.toURI().toString());
+                ManipulationManagerScene.setImage(inputImg);
+                ManipulationManagerScene.display();
 //              openFile(file);
               fileChooserStage.close();
             }
@@ -94,12 +96,11 @@ public final class FileChooserScene extends Application {
         fileChooserStage.show();
 
 
-//       Log Scene
+        //The Log Scene
         goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
-//                Text logHistory = new Text(inputFile.getLog());
-        Text logHistory = new Text(25, 25,"AASDFSAF \n daskfjalsd");
+//        Text logHistory = new Text(ImageFile.getLog());
         VBox logLayout = new VBox(20);
-        logLayout.getChildren().addAll(goBack, logHistory);
+//        logLayout.getChildren().addAll(goBack, logHistory);
         logTextScene = new Scene(logLayout, 600, 300);
     }
 
@@ -132,7 +133,7 @@ public final class FileChooserScene extends Application {
 //        }
 //    }
 
-    public static void display(){
+    static void display(){
         fileChooserStage.show();
     }
 

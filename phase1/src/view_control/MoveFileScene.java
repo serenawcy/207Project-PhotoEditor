@@ -46,15 +46,10 @@ public class MoveFileScene {
 //            System.out.println(directory);
             inputFile.changeDirectory(directory);
           }
-          //            ManipulationManagerScene.setFile(inputImage);
-//            ManipulationManagerScene.display();
-//          moveTo.close();
+
         });
 
         goBack.setOnAction(e -> {
-//            ManipulationManagerScene.setFile(inputFile);
-//            ManipulationManagerScene.display();
-//            FileChooserScene.display();
             moveToStage.close();
         });
 
@@ -65,10 +60,11 @@ public class MoveFileScene {
 
         Scene tagScene = new Scene(addTagLayout);
         moveToStage.setScene(tagScene);
-        moveToStage.show();
+//        moveToStage.show();
+        moveToStage.showAndWait();
     }
 
-    public void setImageFile(ImageFile imageFile){
+    public static void setImageFile(ImageFile imageFile){
         inputFile = imageFile;
     }
 

@@ -1,7 +1,9 @@
 package model;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -26,10 +28,12 @@ public class ImageFile {
         this.absoluteAddress = absoluteAddress;
         this.tagStore = new TagManager(this.toString());
 
-        logger.setLevel(Level.ALL);
-        fileHandler = new FileHandler("/logHistory.txt");
+        // how to make its name unique
+        FileHandler fileHandler = new FileHandler("./logHistory.txt");
         fileHandler.setLevel(Level.FINE);
         fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
+
+        logger.setLevel(Level.ALL);
         logger.addHandler(fileHandler);
     }
 
@@ -85,7 +89,9 @@ public class ImageFile {
      * @param tagToAdd the tag name need to add
      */
     public void renameAdd(String tagToAdd) {
-        this.changeImageName(this.name + "@" + tagToAdd);
+        String newName = this.name + "@" + tagToAdd;
+        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newName);
+        this.changeImageName(newName);
     }
 
     /**
@@ -93,7 +99,10 @@ public class ImageFile {
      * @param tagToDelete the tag name need to delete
      */
     public void renameDelete(String tagToDelete) {
-        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
+
+        String newName = this.name.replace("@" + tagToDelete, "");
+        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newName);
+        this.changeImageName(newName);
     }
 
     /**
@@ -108,10 +117,27 @@ public class ImageFile {
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-//    public String getLog() {
-//        new String logHistory;
-//        // TODO: Log
-//        return logHistory;
+    public String getLog() {
+        new String logHistory;
+        // TODO: Log
+        return logHistory;
+    }
+
+//    public void readFromCSVFile(String filePath)
+//            throws FileNotFoundException {
+//
+//        // FileInputStream can be used for reading raw bytes, like an image.
+//        Scanner scanner = new Scanner(new FileInputStream(filePath));
+//        String[] record;
+//        Student student;
+//
+//        while(scanner.hasNextLine()) {
+//            record = scanner.nextLine().split(",");
+//            student = new Student(record[0].split(" "),
+//                    record[1], record[2]);
+//            students.put(student.getID(), student);
+//        }
+//        scanner.close();
 //    }
 
     /**

@@ -79,9 +79,9 @@ public class ImageFile {
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) {
+        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newImageName);
         this.name = newImageName;
         this.changeDirectory(newImageName);
-        // TODO: Log
     }
 
     /**
@@ -89,9 +89,7 @@ public class ImageFile {
      * @param tagToAdd the tag name need to add
      */
     public void renameAdd(String tagToAdd) {
-        String newName = this.name + "@" + tagToAdd;
-        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newName);
-        this.changeImageName(newName);
+        this.changeImageName(this.name + "@" + tagToAdd);
     }
 
     /**
@@ -99,10 +97,7 @@ public class ImageFile {
      * @param tagToDelete the tag name need to delete
      */
     public void renameDelete(String tagToDelete) {
-
-        String newName = this.name.replace("@" + tagToDelete, "");
-        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newName);
-        this.changeImageName(newName);
+        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
     }
 
     /**
@@ -113,31 +108,14 @@ public class ImageFile {
         return this.tagStore;
     }
 
-    /**
-     * Get the log history of this ImageFile object.
-     * @return the String of log history
-     */
-    public String getLog() {
-        new String logHistory;
-        // TODO: Log
-        return logHistory;
-    }
-
-//    public void readFromCSVFile(String filePath)
-//            throws FileNotFoundException {
-//
-//        // FileInputStream can be used for reading raw bytes, like an image.
-//        Scanner scanner = new Scanner(new FileInputStream(filePath));
-//        String[] record;
-//        Student student;
-//
-//        while(scanner.hasNextLine()) {
-//            record = scanner.nextLine().split(",");
-//            student = new Student(record[0].split(" "),
-//                    record[1], record[2]);
-//            students.put(student.getID(), student);
-//        }
-//        scanner.close();
+//    /**
+//     * Get the log history of this ImageFile object.
+//     * @return the String of log history
+//     */
+//    public String getLog() {
+//        new String logHistory;
+//        // TODO: Log
+//        return logHistory;
 //    }
 
     /**

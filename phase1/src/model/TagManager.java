@@ -49,21 +49,21 @@ public class TagManager implements Serializable {
             e.printStackTrace();
         }
     }
-//
-//
-//    @SuppressWarnings("unchecked")
-//    public ArrayList<String> readTags() {
-//        try {
-//            InputStream file = new FileInputStream(filePath);
-//            InputStream buffer = new BufferedInputStream(file);
-//            ObjectInput input = new ObjectInputStream(buffer);
-//            allTags = (ArrayList<String>) input.readObject();
-//            input.close();
-//        } catch (FileNotFoundException e) {
-//            allTags = new ArrayList<String>();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        return allTags;
-//    }
+
+
+    @SuppressWarnings("unchecked")
+    public ArrayList<String> readTags() {
+        try {
+            InputStream file = new FileInputStream(filePath);
+            InputStream buffer = new BufferedInputStream(file);
+            ObjectInput input = new ObjectInputStream(buffer);
+            allTags = (ArrayList<String>) input.readObject();
+            input.close();
+        } catch (FileNotFoundException e) {
+            allTags = new ArrayList<String>();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allTags;
+    }
 }

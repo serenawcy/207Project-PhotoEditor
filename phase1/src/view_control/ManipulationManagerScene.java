@@ -19,7 +19,7 @@ import java.io.File;
 
 public class ManipulationManagerScene{
 
-    private static ImageFile inputFile;
+    private static ImageFile imgFile;
     private static Image img;
     private static ImageView imageView;
 
@@ -95,7 +95,7 @@ public class ManipulationManagerScene{
     }
 
     public static void setFile(ImageFile imageFile){
-        inputFile = imageFile;
+        imgFile = imageFile;
     }
 }
 

@@ -1,6 +1,10 @@
 package model;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ImageFile {
@@ -17,11 +21,16 @@ public class ImageFile {
      * @param name the name of this ImageFile object
      * @param absoluteAddress the absolute address of this ImageFile object
      */
-    public ImageFile(String name, String absoluteAddress) {
+    public ImageFile(String name, String absoluteAddress) throws IOException {
         this.name = name;
         this.absoluteAddress = absoluteAddress;
         this.tagStore = new TagManager(this.toString());
-        // TODO: Log and Handler
+
+        logger.setLevel(Level.ALL);
+        fileHandler = new FileHandler("/logHistory.txt");
+        fileHandler.setLevel(Level.FINE);
+        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
+        logger.addHandler(fileHandler);
     }
 
     /**

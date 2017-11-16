@@ -68,7 +68,7 @@ public class Image {
 //    public void changeImageName(String newImageName) {
 //        this.name = newImageName;
 //        this.changeDirectory(newImageName);
-//        // TODO: Log
+//        TODO: Log
 //    }
 //
 //    /**
@@ -100,7 +100,7 @@ public class Image {
 //     * @return the String of log history
 //     */
 //    public String getLog() {
-//        // TODO: Log
+//        TODO: Log
 //    }
 
     /**

@@ -112,7 +112,7 @@ public class ImageFile {
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-    public String getLog() throws FileNotFoundException {
+    public static String getLog() throws FileNotFoundException {
         Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
         String logHistory = "";
 

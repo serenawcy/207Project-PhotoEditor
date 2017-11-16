@@ -35,7 +35,7 @@ public class AddTagScene {
                 });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);
-            ManipulationManagerScene.display();
+//            ManipulationManagerScene.display();
             addScene.close();
         });
 

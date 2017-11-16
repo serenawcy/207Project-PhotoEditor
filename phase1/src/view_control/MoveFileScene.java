@@ -53,7 +53,7 @@ public class MoveFileScene {
 
         goBack.setOnAction(e -> {
 //            ManipulationManagerScene.setFile(inputFile);
-            ManipulationManagerScene.display();
+//            ManipulationManagerScene.display();
 //            FileChooserScene.display();
             moveToStage.close();
         });

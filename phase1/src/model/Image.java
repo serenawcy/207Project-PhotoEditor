@@ -24,21 +24,21 @@ public class Image {
         // TODO: Log and Handler
     }
 
-//    /**
-//     * Add user input tag name if it does not exist and rename this Image.
-//     * @param userInputAdd the tag name which is supposed to be added to this Image name
-//     */
-//    public void addTag(String userInputAdd) {
-//        String[]  nameToAdd = userInputAdd.split(",");
-//        for (String name: nameToAdd) {
-//            if (!this.tagStore.checkExist(name)) {
-//                this.tagStore.addTag(name);
-//                this.renameAdd(name);
-//            }
-//        }
-//
-//    }
-//
+    /**
+     * Add user input tag name if it does not exist and rename this Image.
+     * @param userInputAdd the tag name which is supposed to be added to this Image name
+     */
+    public void addTag(String userInputAdd) {
+        String[]  nameToAdd = userInputAdd.split(",");
+        for (String name: nameToAdd) {
+            if (!this.tagStore.checkExist(name)) {
+                this.tagStore.addTag(name);
+                this.renameAdd(name);
+            }
+        }
+
+    }
+
 //    /**
 //     * Delete user input tag name if it exists and rename this Image.
 //     * @param userInputDelete the tag name which is supposed to be deleted from this Image name

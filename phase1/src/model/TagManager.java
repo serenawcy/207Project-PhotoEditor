@@ -15,10 +15,10 @@ public class TagManager implements Serializable {
     }
 
 
-//    public void addTag(String tag) {
-//        this.allTags.add(tag);
-//        writeTags();
-//    }
+    public void addTag(String tag) {
+        this.allTags.add(tag);
+        writeTags();
+    }
 //
 //
 //    public void deleteTag(String tag) {

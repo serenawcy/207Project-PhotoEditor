@@ -79,13 +79,13 @@ public class Image {
         this.changeImageName(this.name + "@" + tagToAdd);
     }
 
-//    /**
-//     * Rename this Image by deleting a tag.
-//     * @param tagToDelete the tag name need to delete
-//     */
-//    public void renameDelete(String tagToDelete) {
-//        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
-//    }
+    /**
+     * Rename this Image by deleting a tag.
+     * @param tagToDelete the tag name need to delete
+     */
+    public void renameDelete(String tagToDelete) {
+        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
+    }
 
 //    /**
 //     * Get this Image object's tagStore.

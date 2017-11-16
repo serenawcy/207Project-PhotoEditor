@@ -53,14 +53,14 @@ public class Image {
         }
     }
 
-//    /**
-//     * Change the absolute directory of this Image object.
-//     * @param newImageName new name of this Image object
-//     */
-//    public void changeDirectory(String newImageName) {
-//        this.absoluteAddress = this.absoluteAddress.replace(this.name, newImageName);
-//    }
-//
+    /**
+     * Change the absolute directory of this Image object.
+     * @param newImageName new name of this Image object
+     */
+    public void changeDirectory(String newImageName) {
+        this.absoluteAddress = this.absoluteAddress.replace(this.name, newImageName);
+    }
+
 //    /**
 //     * Change the name of this Image object.
 //     * @param newImageName new name of this Image object

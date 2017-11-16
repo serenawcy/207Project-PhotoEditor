@@ -87,14 +87,14 @@ public class Image {
         this.changeImageName(this.name.replace("@" + tagToDelete, ""));
     }
 
-//    /**
-//     * Get this Image object's tagStore.
-//     * @return a TagManager object
-//     */
-//    public TagManager getTagManager() {
-//        return this.tagStore;
-//    }
-//
+    /**
+     * Get this Image object's tagStore.
+     * @return a TagManager object
+     */
+    public TagManager getTagManager() {
+        return this.tagStore;
+    }
+
 //    /**
 //     * Get the log history of this Image object.
 //     * @return the String of log history

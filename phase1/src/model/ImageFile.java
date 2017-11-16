@@ -108,15 +108,20 @@ public class ImageFile {
         return this.tagStore;
     }
 
-//    /**
-//     * Get the log history of this ImageFile object.
-//     * @return the String of log history
-//     */
-//    public String getLog() {
-//        new String logHistory;
-//        // TODO: Log
-//        return logHistory;
-//    }
+    /**
+     * Get the log history of this ImageFile object.
+     * @return the String of log history
+     */
+    public String getLog() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
+        String logHistory = "";
+
+        while (scanner.hasNextLine()) {
+            logHistory = logHistory.concat(scanner.nextLine().concat("/n"));
+        }
+        scanner.close();
+        return logHistory;
+    }
 
     /**
      * Get this ImageFile object's name.

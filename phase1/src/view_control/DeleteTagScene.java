@@ -9,7 +9,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
-import model.Image;
+import model.ImageFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class DeleteTagScene {
 
     private static ListView<String> listView;
-    Image inputFile;
+    private static ImageFile inputFile;
 
 //    public static void main(String[] args) {
 //        launch(args);
@@ -83,10 +83,8 @@ public class DeleteTagScene {
 //
 //    }
 
-
-    public void setFile(Image file){
-        this.inputFile = file;
+    public void setFile(ImageFile imageFile){
+        inputFile = imageFile;
     }
-
 
 }

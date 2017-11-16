@@ -6,15 +6,23 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.ImageFile;
+
+
 
 import java.io.File;
 
 
 public class ManipulationManagerScene{
 
-    File inputfile;
+    private static ImageFile inputFile;
+    private static Image img;
+    private static ImageView imageView;
+
 
 
     public static void display() {
@@ -34,14 +42,14 @@ public class ManipulationManagerScene{
                 }
             }
         );
-//        Delete.setOnAction(
-//                new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(final ActionEvent e) {
-//                        DeleteTagScene.display();
-//                    }
-//                }
-//        );
+        Delete.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent e) {
+                        DeleteTagScene.display();
+                    }
+                }
+        );
 //        Select.setOnAction(
 //                new EventHandler<ActionEvent>() {
 //                    @Override
@@ -58,18 +66,18 @@ public class ManipulationManagerScene{
 //                    }
 //                }
 //        );
-//        Back.setOnAction(
-//                new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(final ActionEvent e) {
-//                        FileChooserScene.display();
-//                    }
-//                }
-//        );
+        Back.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent e) {
+                        FileChooserScene.display();
+                    }
+                }
+        );
 
 
         VBox layout1 = new VBox(20);
-        layout1.getChildren().addAll(Add, Delete, Select, Move, Back);
+        layout1.getChildren().addAll(Add, Delete, Select, Move, Back, imageView);
         layout1.setAlignment(Pos.CENTER);
         Scene general = new Scene(layout1, 200, 300);
         window.setScene(general);
@@ -78,5 +86,16 @@ public class ManipulationManagerScene{
 
     }
 
+    public static void setImage(Image image){
+        img = image;
+        imageView = new ImageView(img);
+        imageView.setFitHeight(600);
+        imageView.setFitWidth(500);
+        imageView.setPreserveRatio(true);
+    }
 
+    public static void setFile(ImageFile imageFile){
+        inputFile = imageFile;
+    }
 }
+

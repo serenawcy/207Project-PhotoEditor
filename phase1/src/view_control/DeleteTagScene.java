@@ -50,7 +50,7 @@ public class DeleteTagScene {
         ObservableList<String> tags;
         tags = listView.getSelectionModel().getSelectedItems();
         for (String tag: tags){
-  //          Image.getTags().deleteTag(tag);
+  //          inputFile.getTagManager().deleteTag(tag);
             listView.getItems().remove(tag);
 
 

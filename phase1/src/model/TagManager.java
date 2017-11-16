@@ -26,15 +26,15 @@ public class TagManager implements Serializable {
         this.allTags.remove(tag);
         writeTags();
     }
-//
-//    public boolean checkExist(String tagToCheck) {
-//        if (allTags.contains(tagToCheck)) {
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//
+
+    public boolean checkExist(String tagToCheck) {
+        if (allTags.contains(tagToCheck)) {
+            return true;
+        }
+        return false;
+    }
+
+
     public void writeTags() {
         try {
             OutputStream file = new FileOutputStream(filePath);

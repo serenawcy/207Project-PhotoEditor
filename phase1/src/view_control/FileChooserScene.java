@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.apple.eio.FileManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,10 +24,12 @@ public final class FileChooserScene extends Application {
 
 
     private Desktop desktop = Desktop.getDesktop();
-    Scene logTextScene;
+    private Scene logTextScene, fileChooserScene;
     File inputFile;
+    private static Stage stage;
     @Override
     public void start(final Stage stage) {
+        FileChooserScene.stage = stage;
         stage.setTitle("Image Manager");
 
         final FileChooser fileChooser = new FileChooser();
@@ -52,7 +53,7 @@ public final class FileChooserScene extends Application {
 //                            ManipulationManagerScene.setFile(inputFile);
 //                            ManipulationManagerScene.display();
                             openFile(file);
-                            ManipulationManagerScene.display();
+                            AddTagScene.display();
                             stage.close();
                         }
                     }
@@ -63,7 +64,7 @@ public final class FileChooserScene extends Application {
                     @Override
                     public void handle(final ActionEvent e) {
                         stage.setScene(logTextScene);
-                            }
+                    }
                 });
 
         quit.setOnAction(event -> stage.close());
@@ -80,7 +81,7 @@ public final class FileChooserScene extends Application {
         rootGroup.getChildren().addAll(inputGridPane);
         rootGroup.setPadding(new Insets(12, 12, 12, 12));
 
-        Scene fileChooserScene = new Scene(rootGroup);
+        fileChooserScene = new Scene(rootGroup);
         stage.setScene(fileChooserScene);
         stage.show();
 
@@ -122,5 +123,8 @@ public final class FileChooserScene extends Application {
         }
     }
 
-}
+    public static void display(){
+        stage.show();
+    }
 
+}

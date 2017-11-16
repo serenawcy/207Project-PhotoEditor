@@ -12,12 +12,12 @@ public class AddTagScene {
 
 
     public static void display() {
-        Stage window = new Stage();
+        Stage addScene = new Stage();
 //        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Add tag(s)");
-        window.setMinWidth(250);
-        Label label = new Label();
-        label.setText("Please enter tag(s), separated with \",\"");
+        addScene.setTitle("Add tag(s)");
+        addScene.setMinWidth(250);
+        Label AddInstruction = new Label();
+        AddInstruction.setText("Please enter tag(s), separated with \",\"");
 
         //Create two buttons
         Button done = new Button("Done");
@@ -25,29 +25,29 @@ public class AddTagScene {
         //Form a Text area
         TextField tagInput = new TextField();
 
-    // Clicking will addTags and close window
-    done.setOnAction(
-        e -> {
-          String tags = tagInput.getText();
-          System.out.println(tags);
-          //            File.addTags(tags);
-          window.close();
-        });
+        // Clicking will addTags and close window
+        done.setOnAction(
+                e -> {
+                    String tags = tagInput.getText();
+                    System.out.println(tags);
+                    //            File.addTags(tags);
+                    addScene.close();
+                });
         goBack.setOnAction(e -> {
-            window.close();
+            FileChooserScene.display();
+            addScene.close();
 //            ManipulationManagerScene.setFile(inputFile);
 //            ManipulationManagerScene.display();
         });
 
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(tagInput, goBack, done);
-        //Add buttons
-//        layout.getChildren().addAll(label, done, goBack);
-        layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.show();
+        VBox addTagLayout = new VBox(10);
+        addTagLayout.setPadding(new Insets(20, 20, 20, 20));
+        addTagLayout.getChildren().addAll(AddInstruction,tagInput, goBack, done);
+        addTagLayout.setAlignment(Pos.CENTER);
+
+        Scene tagScene = new Scene(addTagLayout);
+        addScene.setScene(tagScene);
+        addScene.show();
 //        window.showAndWait();
 
 

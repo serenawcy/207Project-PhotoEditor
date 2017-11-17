@@ -9,12 +9,13 @@ import model.ImageFile;
 
 class AddTagScene {
 
-    private static Stage addScene = new Stage();
+    private static Stage addScene;
 
     private static ImageFile inputFile;
 
 
     static void display() {
+        Stage addScene = new Stage();
         addScene.initModality(Modality.APPLICATION_MODAL);
         addScene.setTitle("Add tag(s)");
         addScene.setMinWidth(250);

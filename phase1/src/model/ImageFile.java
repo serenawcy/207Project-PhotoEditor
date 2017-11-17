@@ -27,7 +27,7 @@ public class ImageFile {
             this.originalName = name;
         } else {
             Integer target = name.indexOf("@");
-            this.originalName = name.substring(0, target);
+            this.originalName = name.substring(0, target - 1);
         }
         this.name = name;
         this.absoluteAddress = absoluteAddress;

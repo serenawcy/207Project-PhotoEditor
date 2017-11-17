@@ -18,10 +18,10 @@ public class MoveFileScene {
     private static ImageFile inputFile;
 
 //    private static Stage moveTo;
-    private static Stage moveToStage;
+//    private static Stage moveToStage;
 
     static void display() {
-        moveToStage = new Stage();
+        Stage moveToStage = new Stage();
         moveToStage.initModality(Modality.APPLICATION_MODAL);
         moveToStage.setTitle("Select a directory");
         moveToStage.setMinWidth(250);
@@ -64,7 +64,7 @@ public class MoveFileScene {
         moveToStage.showAndWait();
     }
 
-    public static void setImageFile(ImageFile imageFile){
+    static void setImageFile(ImageFile imageFile){
         inputFile = imageFile;
     }
 

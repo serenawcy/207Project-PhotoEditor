@@ -9,8 +9,6 @@ import model.ImageFile;
 
 class AddTagScene {
 
-    private static Stage addScene;
-
     private static ImageFile inputFile;
 
 

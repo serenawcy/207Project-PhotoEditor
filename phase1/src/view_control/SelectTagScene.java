@@ -86,7 +86,11 @@ public class SelectTagScene {
             }
 
         }
-        inputFile.changeImageName(CurrentName.toString());
+        try {
+            inputFile.changeImageName(CurrentName.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

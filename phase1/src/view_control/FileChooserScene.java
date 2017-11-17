@@ -1,6 +1,7 @@
 package view_control;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ public final class FileChooserScene extends Application {
     private static Stage fileChooserStage;
 
     @Override
-    public void start(final Stage stage) {
+    public void start(final Stage stage) throws FileNotFoundException {
         FileChooserScene.fileChooserStage = stage;
         stage.setTitle("Image Manager");
 
@@ -102,10 +103,10 @@ public final class FileChooserScene extends Application {
 
         //The Log Scene
         goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
-//        Text logHistory = new Text(ImageFile.getLog());
+        Text logHistory = new Text(ImageFile.getLog());
         VBox logLayout = new VBox(20);
         logLayout.getChildren().addAll(goBack);
-//        logLayout.getChildren().addAll(goBack, logHistory);
+        logLayout.getChildren().addAll(goBack, logHistory);
         logTextScene = new Scene(logLayout, 600, 300);
     }
 

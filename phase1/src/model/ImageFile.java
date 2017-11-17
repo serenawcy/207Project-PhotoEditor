@@ -57,7 +57,7 @@ public class ImageFile {
     }
 
     /**
-     * Delete user input tag name if it exists and rename this ImageFile.
+     * Delete user input tag name and rename this ImageFile.
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
     public void deleteTag(String tagToDelete) {
@@ -79,8 +79,9 @@ public class ImageFile {
      */
     public void changeImageName(String newImageName) {
         logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newImageName);
+        String newDirectory = this.absoluteAddress.replace(this.name, newImageName);
         this.name = newImageName;
-        this.changeDirectory(newImageName);
+        this.changeDirectory(newDirectory);
     }
 
     /**

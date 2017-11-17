@@ -105,7 +105,6 @@ public final class FileChooserScene extends Application {
         goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
         Text logHistory = new Text(ImageFile.getLog());
         VBox logLayout = new VBox(20);
-        logLayout.getChildren().addAll(goBack);
         logLayout.getChildren().addAll(goBack, logHistory);
         logTextScene = new Scene(logLayout, 600, 300);
     }

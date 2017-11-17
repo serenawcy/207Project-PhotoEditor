@@ -44,7 +44,11 @@ public class MoveFileScene {
           if (selectedDirectory != null) {
               directory = selectedDirectory.getAbsolutePath();
 //            System.out.println(directory);
-            inputFile.changeDirectory(directory);
+              try {
+                  inputFile.changeDirectory(directory);
+              } catch (Exception e1) {
+                  e1.printStackTrace();
+              }
           }
 
         });

@@ -19,6 +19,7 @@ public class ImageFile {
     private File file;
     private Image image;
 
+
     private TagManager tagStore;
 
     private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
@@ -85,12 +86,20 @@ public class ImageFile {
      * @param newDirectory new absolute directory of this ImageFile object
      */
     public void changeDirectory(String newDirectory) throws Exception{
-        File newFile = new File(newDirectory);
-        boolean rename = file.renameTo(newFile);
-        if (rename) {
-            this.absoluteAddress = newDirectory;
+        // newDirectory is a parent address
+        File dir = new File(newDirectory);
+        File fileNewPath = new File(dir, nameWithSuffix);
+        boolean renamed = file.renameTo(fileNewPath);
+        if (renamed) {
+            this.absoluteAddress = fileNewPath.getAbsolutePath();
         }
-        this.setImage(newFile);
+        this.setImage(fileNewPath);
+//        File newFile = new File(newDirectory);
+//        boolean rename = file.renameTo(newFile);
+//        if (rename) {
+//            this.absoluteAddress = newDirectory;
+//        }
+//        this.setImage(newFile);
     }
 
     /**

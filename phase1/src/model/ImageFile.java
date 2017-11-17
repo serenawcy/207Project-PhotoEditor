@@ -2,17 +2,18 @@ package model;
 
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ImageFile {
-    private String name;
+    private String nameWithoutSuffix;
+    private String suffix;
+    private String nameWithSuffix;
+
     private String absoluteAddress;
     private String originalName;
     private File file;
@@ -28,13 +29,19 @@ public class ImageFile {
      * @param absoluteAddress the absolute address of this ImageFile object
      */
     public ImageFile(String name, String absoluteAddress) throws IOException {
-        if (!name.contains("@")) {
-            this.originalName = name;
+        String[] separate = name.split("\\.(?=[^.]+$)");
+
+        this.nameWithSuffix = name;
+        this.nameWithoutSuffix = separate[0];
+        this.suffix = separate[1];
+
+        if (!this.nameWithoutSuffix.contains("@")) {
+            this.originalName = this.nameWithoutSuffix;
         } else {
             Integer target = name.indexOf("@");
-            this.originalName = name.substring(0, target - 1);
+            this.originalName = this.nameWithoutSuffix.substring(0, target - 1);
         }
-        this.name = name;
+
         this.absoluteAddress = absoluteAddress;
         this.tagStore = new TagManager(this.toString());
 
@@ -91,9 +98,9 @@ public class ImageFile {
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws Exception {
-        logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newImageName);
-        String newDirectory = this.absoluteAddress.replace(this.name, newImageName);
-        this.name = newImageName;
+        logger.log(Level.FINE, "Renamed this image file from " + this.nameWithSuffix + " to " + newImageName + this.suffix);
+        String newDirectory = this.absoluteAddress.replace(this.nameWithoutSuffix, newImageName);
+        this.nameWithoutSuffix = newImageName;
         this.changeDirectory(newDirectory);
     }
 
@@ -102,7 +109,7 @@ public class ImageFile {
      * @param tagToAdd the tag name need to add
      */
     public void renameAdd(String tagToAdd) throws Exception {
-        this.changeImageName(this.name + " @" + tagToAdd);
+        this.changeImageName(this.nameWithoutSuffix + " @" + tagToAdd);
     }
 
     /**
@@ -110,7 +117,7 @@ public class ImageFile {
      * @param tagToDelete the tag name need to delete
      */
     public void renameDelete(String tagToDelete) throws Exception {
-        this.changeImageName(this.name.replace("@" + tagToDelete, ""));
+        this.changeImageName(this.nameWithoutSuffix.replace("@" + tagToDelete, ""));
     }
 
     /**
@@ -126,6 +133,7 @@ public class ImageFile {
      * @return the String of log history
      */
     public static String getLog() throws FileNotFoundException {
+
         Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
         String logHistory = "";
 
@@ -145,19 +153,19 @@ public class ImageFile {
     }
 
     /**
-     * Get this ImageFile object's name.
+     * Get this ImageFile object's name without suffix.
      * @return the name of this ImageFile object
      */
-    public String getName() {
-        return name;
+    public String getNameWithoutSuffix() {
+        return nameWithoutSuffix;
     }
 
     /**
-     * Set this ImageFile object's name.
+     * Set this ImageFile object's name without suffix.
      * @param name the new name of this ImageFile object
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setNameWithoutSuffix(String name) {
+        this.nameWithoutSuffix = name;
     }
 
     /**

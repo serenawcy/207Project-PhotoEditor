@@ -44,7 +44,8 @@ public class ManipulationManagerScene{
                 new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
-                    AddTagScene.display();
+                AddTagScene.setImageFile(imgFile);
+                AddTagScene.display();
                 }
             }
         );
@@ -52,23 +53,25 @@ public class ManipulationManagerScene{
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
+                        DeleteTagScene.setImageFile(imgFile);
                         DeleteTagScene.display();
                     }
                 }
         );
-//        Select.setOnAction(
-//                new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(final ActionEvent e) {
-//                        SelectTagScene.display();
-//                    }
-//                }
-//        );
+        Select.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent e) {
+                        SelectTagScene.setImageFile(imgFile);
+                        SelectTagScene.display();
+                    }
+                }
+        );
         Move.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-//                        MoveFileScene.setImageFile(imgFile);
+                        MoveFileScene.setImageFile(imgFile);
                         MoveFileScene.display();
                     }
                 }

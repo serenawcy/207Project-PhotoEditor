@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import model.ImageFile;
@@ -25,14 +26,15 @@ public class DeleteTagScene {
     public static void display(){
         Stage window = new Stage();
         window.setTitle("Delete Tag(s)");
+        window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to delete");
         Button Delete = new Button("Delete");
 
         listView = new ListView<>();
-//        for(String tag: Image.getTags.ReadTag()) {
-//            listView.getItems().add(tag);
-//        }
-        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
+        for(String tag: inputFile.getTagManager().readTags()) {
+            listView.getItems().add(tag);
+        }
+//        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         Delete.setOnAction(e -> buttonClicked());
 
@@ -50,8 +52,8 @@ public class DeleteTagScene {
         ObservableList<String> tags;
         tags = listView.getSelectionModel().getSelectedItems();
         for (String tag: tags){
-  //          inputFile.getTagManager().deleteTag(tag);
-            listView.getItems().remove(tag);
+            inputFile.getTagManager().deleteTag(tag);
+            //listView.getItems().remove(tag);
 
 
 
@@ -83,7 +85,7 @@ public class DeleteTagScene {
 //
 //    }
 
-    public void setFile(ImageFile imageFile){
+    public static void setImageFile(ImageFile imageFile){
         inputFile = imageFile;
     }
 

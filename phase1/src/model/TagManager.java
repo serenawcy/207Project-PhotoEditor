@@ -34,6 +34,11 @@ public class TagManager implements Serializable {
         return false;
     }
 
+    public void changeTagHistory(ArrayList<String> newTagList) {
+        this.allTags = newTagList;
+        writeTags();
+    }
+
 
     public void writeTags() {
         try {
@@ -63,4 +68,5 @@ public class TagManager implements Serializable {
         }
         return allTags;
     }
+
 }

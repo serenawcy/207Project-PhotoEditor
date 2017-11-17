@@ -29,6 +29,9 @@ public class DeleteTagScene {
         window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to delete");
         Button Delete = new Button("Delete");
+        Button Back = new Button("Go back");
+        Delete.setMinWidth(120);
+        Back.setMinWidth(120);
 
         listView = new ListView<>();
         for(String tag: inputFile.getTagManager().readTags()) {
@@ -37,10 +40,14 @@ public class DeleteTagScene {
 //        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         Delete.setOnAction(e -> buttonClicked());
+        Back.setOnAction(e -> {
+            //            ManipulationManagerScene.setFile(inputFile);
+            window.close();
+        });
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(listView, Delete);
+        layout.getChildren().addAll(listView, Delete, Back);
 
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);

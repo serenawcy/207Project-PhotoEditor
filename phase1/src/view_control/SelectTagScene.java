@@ -28,16 +28,25 @@ public class SelectTagScene {
         window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to rename the photo for");
         Button Submit = new Button("Rename");
+        Button Back = new Button("Go back");
+        Submit.setMinWidth(120);
+        Back.setMinWidth(120);
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
+        layout.getChildren().add(label);
         ArrayList checkBox = new ArrayList(); //Type is CheckBox box1 = new CheckBox();
         for (String tag : inputFile.getTagManager().readTags()) {
             CheckBox box = new CheckBox(tag);
             checkBox.add(box);
             layout.getChildren().add(box); //Display
         }
-        layout.getChildren().addAll(label,Submit);
+        layout.getChildren().add(Submit);
+        layout.getChildren().add(Back);
         Submit.setOnAction(e -> handleOptions(checkBox));
+        Back.setOnAction(e -> {
+            //            ManipulationManagerScene.setFile(inputFile);
+            window.close();
+        });
         Scene scene = new Scene(layout, 500, 250);
         window.setScene(scene);
         window.show();

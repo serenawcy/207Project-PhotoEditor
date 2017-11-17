@@ -1,5 +1,8 @@
 package model;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +15,8 @@ public class ImageFile {
     private String name;
     private String absoluteAddress;
     private String originalName;
+    private File file;
+    private Image image;
 
     private TagManager tagStore;
 
@@ -39,13 +44,16 @@ public class ImageFile {
 
         logger.setLevel(Level.ALL);
         logger.addHandler(fileHandler);
+
+        this.file = new File(absoluteAddress);
+        this.image = new Image(file.toURI().toString());
     }
 
     /**
      * Add user input tag name if it does not exist and rename this ImageFile.
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
      */
-    public void addTag(String userInputAdd) {
+    public void addTag(String userInputAdd) throws Exception {
         String[]  nameToAdd = userInputAdd.split(",");
         for (String name: nameToAdd) {
             if (!this.tagStore.checkExist(name)) {
@@ -60,24 +68,29 @@ public class ImageFile {
      * Delete user input tag name and rename this ImageFile.
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
-    public void deleteTag(String tagToDelete) {
+    public void deleteTag(String tagToDelete) throws Exception {
         this.tagStore.deleteTag(tagToDelete);
         this.renameDelete(tagToDelete);
     }
 
     /**
-     * Change the absolute directory of this ImageFile object.
+     * Change the absolute of this ImageFile object and reset the image of this ImageFile object.
      * @param newDirectory new absolute directory of this ImageFile object
      */
-    public void changeDirectory(String newDirectory) {
-        this.absoluteAddress = newDirectory;
+    public void changeDirectory(String newDirectory) throws Exception{
+        File newFile = new File(newDirectory);
+        boolean rename = file.renameTo(newFile);
+        if (rename) {
+            this.absoluteAddress = newDirectory;
+        }
+        this.setImage(newFile);
     }
 
     /**
      * Change the name of this ImageFile object.
      * @param newImageName new name of this ImageFile object
      */
-    public void changeImageName(String newImageName) {
+    public void changeImageName(String newImageName) throws Exception {
         logger.log(Level.FINE, "Renamed this image file from " + this.name + " to " + newImageName);
         String newDirectory = this.absoluteAddress.replace(this.name, newImageName);
         this.name = newImageName;
@@ -88,7 +101,7 @@ public class ImageFile {
      * Rename this ImageFile by adding a tag.
      * @param tagToAdd the tag name need to add
      */
-    public void renameAdd(String tagToAdd) {
+    public void renameAdd(String tagToAdd) throws Exception {
         this.changeImageName(this.name + " @" + tagToAdd);
     }
 
@@ -96,7 +109,7 @@ public class ImageFile {
      * Rename this ImageFile by deleting a tag.
      * @param tagToDelete the tag name need to delete
      */
-    public void renameDelete(String tagToDelete) {
+    public void renameDelete(String tagToDelete) throws Exception {
         this.changeImageName(this.name.replace("@" + tagToDelete, ""));
     }
 
@@ -161,5 +174,21 @@ public class ImageFile {
      */
     public void setAbsoluteAddress(String absoluteAddress) {
         this.absoluteAddress = absoluteAddress;
+    }
+
+    /**
+     * Get this ImageFile object's image
+     * @return the image of this ImageFile object
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     *  Set this ImageFile object's image
+     * @param newFile the new File to be the image of this ImageFile object
+     */
+    public void setImage(File newFile) {
+        this.image = new Image(newFile.toURI().toString());
     }
 }

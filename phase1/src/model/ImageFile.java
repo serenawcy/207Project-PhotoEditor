@@ -16,7 +16,6 @@ public class ImageFile {
     private TagManager tagStore;
 
     private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
-    private static Handler fileHandler;
 
     /**
      * Create a new empty ImageFile.
@@ -117,7 +116,7 @@ public class ImageFile {
         String logHistory = "";
 
         while (scanner.hasNextLine()) {
-            logHistory = logHistory.concat(scanner.nextLine().concat("/n"));
+            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
         }
         scanner.close();
         return logHistory;

@@ -88,7 +88,7 @@ public class ImageFile {
      * @param tagToAdd the tag name need to add
      */
     public void renameAdd(String tagToAdd) {
-        this.changeImageName(this.name + "@" + tagToAdd);
+        this.changeImageName(this.name + " @" + tagToAdd);
     }
 
     /**

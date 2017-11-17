@@ -42,9 +42,6 @@ public class TagManager implements Serializable {
             ObjectOutput output = new ObjectOutputStream(buffer);
             output.writeObject(allTags);
             output.close();
-        } catch (FileNotFoundException e) {
-            new File(filePath);
-//      writeTags();
         } catch (IOException e) {
             e.printStackTrace();
         }

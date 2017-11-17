@@ -29,12 +29,10 @@ public class ImageFile {
             Integer target = name.indexOf("@");
             this.originalName = name.substring(0, target);
         }
-        this.originalName = name;
         this.name = name;
         this.absoluteAddress = absoluteAddress;
         this.tagStore = new TagManager(this.toString());
 
-        // how to make its name unique
         FileHandler fileHandler = new FileHandler("./logHistory.txt");
         fileHandler.setLevel(Level.FINE);
         fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
@@ -60,24 +58,19 @@ public class ImageFile {
 
     /**
      * Delete user input tag name if it exists and rename this ImageFile.
-     * @param userInputDelete the tag name which is supposed to be deleted from this ImageFile name
+     * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
-    public void deleteTag(String userInputDelete) {
-        String[]  nameToDelete = userInputDelete.split(",");
-        for (String name: nameToDelete) {
-            if (!this.tagStore.checkExist(name)) {
-                this.tagStore.deleteTag(name);
-                this.renameDelete(name);
-            }
-        }
+    public void deleteTag(String tagToDelete) {
+        this.tagStore.deleteTag(tagToDelete);
+        this.renameDelete(tagToDelete);
     }
 
     /**
      * Change the absolute directory of this ImageFile object.
-     * @param newImageName new name of this ImageFile object
+     * @param newDirectory new absolute directory of this ImageFile object
      */
-    public void changeDirectory(String newImageName) {
-        this.absoluteAddress = this.absoluteAddress.replace(this.name, newImageName);
+    public void changeDirectory(String newDirectory) {
+        this.absoluteAddress = newDirectory;
     }
 
     /**

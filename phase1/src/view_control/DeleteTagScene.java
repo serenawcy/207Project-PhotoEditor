@@ -53,7 +53,7 @@ public class DeleteTagScene {
         tags = listView.getSelectionModel().getSelectedItems();
         for (String tag: tags){
             inputFile.getTagManager().deleteTag(tag);
-            //listView.getItems().remove(tag);
+            listView.getItems().remove(tag);
 
 
 

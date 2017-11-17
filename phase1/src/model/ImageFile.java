@@ -23,6 +23,12 @@ public class ImageFile {
      * @param absoluteAddress the absolute address of this ImageFile object
      */
     public ImageFile(String name, String absoluteAddress) throws IOException {
+        if (!name.contains("@")) {
+            this.originalName = name;
+        } else {
+            Integer target = name.indexOf("@");
+            this.originalName = name.substring(0, target);
+        }
         this.originalName = name;
         this.name = name;
         this.absoluteAddress = absoluteAddress;

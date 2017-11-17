@@ -43,7 +43,7 @@ class AddTagScene {
         goBack.setMinWidth(100);
         VBox addTagLayout = new VBox(10);
         addTagLayout.setPadding(new Insets(20, 20, 20, 20));
-        addTagLayout.getChildren().addAll(AddInstruction, tagInput, goBack, done);
+        addTagLayout.getChildren().addAll(AddInstruction, tagInput, done, goBack);
         addTagLayout.setAlignment(Pos.CENTER);
 
         Scene tagScene = new Scene(addTagLayout);

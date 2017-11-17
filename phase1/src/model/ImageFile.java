@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 public class ImageFile {
     private String name;
     private String absoluteAddress;
+    private String originalName;
 
     private TagManager tagStore;
 
@@ -22,6 +23,7 @@ public class ImageFile {
      * @param absoluteAddress the absolute address of this ImageFile object
      */
     public ImageFile(String name, String absoluteAddress) throws IOException {
+        this.originalName = name;
         this.name = name;
         this.absoluteAddress = absoluteAddress;
         this.tagStore = new TagManager(this.toString());
@@ -119,6 +121,14 @@ public class ImageFile {
         }
         scanner.close();
         return logHistory;
+    }
+
+    /**
+     * Get this ImageFile object's original name.
+     * @return the original name of this ImageFile object
+     */
+    public String getOriginalName() {
+        return originalName;
     }
 
     /**

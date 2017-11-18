@@ -149,63 +149,63 @@ public class ImageFile {
 //        scanner.close();
 //        return logHistory;
 //    }
-//
-//    /**
-//     * Get this ImageFile object's file.
-//     * @return the file of this ImageFile object
-//     */
-//    public File getFile() {
-//        return file;
-//    }
-//
-//    /**
-//     *  Set this ImageFile object's file.
-//     * @param file the new File to be the file of this ImageFile object
-//     */
-//    public void setFile(File file) {
-//        this.file = file;
-//    }
-//
-//    /**
-//     * Get this ImageFile object's originalName.
-//     * @return the originalName of this ImageFile object
-//     */
-//    public String getOriginalName() {
-//        return originalName;
-//    }
-//
-//    /**
-//     * Get this ImageFile object's oldName.
-//     * @return the oldName of this ImageFile object
-//     */
-//    public ArrayList<String> getOldName() {
-//        return oldName;
-//    }
-//
-//    /**
-//     * Get this ImageFile object's image.
-//     * @return the image of this ImageFile object
-//     */
-//    public Image getImage() {
-//        return image;
-//    }
-//
-//    /**
-//     *  Set this ImageFile object's image.
-//     * @param newFile the new File to be the image of this ImageFile object
-//     */
-//    public void setImage(File newFile) {
-//        this.image = new Image(newFile.toURI().toString());
-//    }
-//
-//    /**
-//     * Get this ImageFile object's existTag.
-//     * @return the existTag of this ImageFile object
-//     */
-//    public ArrayList<String> getExistTag() {
-//        return existTag;
-//    }
-//
+
+    /**
+     * Get this ImageFile object's file.
+     * @return the file of this ImageFile object
+     */
+    public File getFile() {
+        return file;
+    }
+
+    /**
+     *  Set this ImageFile object's file.
+     * @param file the new File to be the file of this ImageFile object
+     */
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    /**
+     * Get this ImageFile object's originalName.
+     * @return the originalName of this ImageFile object
+     */
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    /**
+     * Get this ImageFile object's oldName.
+     * @return the oldName of this ImageFile object
+     */
+    public ArrayList<String> getOldName() {
+        return oldName;
+    }
+
+    /**
+     * Get this ImageFile object's image.
+     * @return the image of this ImageFile object
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     *  Set this ImageFile object's image.
+     * @param newFile the new File to be the image of this ImageFile object
+     */
+    public void setImage(File newFile) {
+        this.image = new Image(newFile.toURI().toString());
+    }
+
+    /**
+     * Get this ImageFile object's existTag.
+     * @return the existTag of this ImageFile object
+     */
+    public ArrayList<String> getExistTag() {
+        return existTag;
+    }
+
 //    /**
 //     * Return whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
 //     * @param imageFile other ImageFile object which compare with this ImageFile object

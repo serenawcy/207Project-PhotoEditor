@@ -36,13 +36,14 @@ public class FileRenameScene {
         ArrayList<String> tagToPass = new ArrayList<>();
 
         //Serena's (Tag Manager)
-        for(String tag: inputFile.getTagManager().readTags()) {
+        for(String tag: inputFile.getOldName()) {
             listView.getItems().add(tag);
         }
 
 //        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         done.setOnAction(e -> {
-            inputFile.getTagManager().changeTagHistory(buttonClicked());
+            inputFile.changeTagHistory(buttonClicked());
+
         });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);
@@ -76,6 +77,9 @@ public class FileRenameScene {
             }
             listView.getItems().remove(tag);
         }
+        String newName = tags.get(0);
+        String[] separate = newName.split("\\.(?=[^.]+$)");
+        inputFile.changeImageName(separate[0]);
         return tagsSelected;
 
     }

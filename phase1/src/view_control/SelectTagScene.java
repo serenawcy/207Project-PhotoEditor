@@ -35,7 +35,7 @@ public class SelectTagScene {
         layout.setPadding(new Insets(20, 20, 20, 20));
         layout.getChildren().add(label);
         ArrayList checkBox = new ArrayList(); //Type is CheckBox box1 = new CheckBox();
-        for (String tag : inputFile.getTagManager().readTags()) {
+        for (String tag : inputFile.getExistTag()) {
             CheckBox box = new CheckBox(tag);
             checkBox.add(box);
             layout.getChildren().add(box); //Display

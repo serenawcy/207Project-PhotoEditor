@@ -34,11 +34,11 @@ public class DeleteTagScene {
         Back.setMinWidth(120);
 
         listView = new ListView<>();
-        for(String tag: inputFile.getTagManager().readTags()) {
+        for(String tag: inputFile.getExistTag()) {
             listView.getItems().add(tag);
         }
 //        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         Delete.setOnAction(e -> buttonClicked());
         Back.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);

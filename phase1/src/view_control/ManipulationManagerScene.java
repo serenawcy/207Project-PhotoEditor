@@ -28,19 +28,21 @@ public class ManipulationManagerScene{
     public static void display() {
         Stage window = new Stage();
         window.setTitle("Manipulation Scene");
-        Button Add = new Button("Add New Tag");
-        Add.setMinWidth(120);
-        Button Delete = new Button("Delete Tag");
-        Delete.setMinWidth(120);
-        Button Select = new Button("Select Old Tag");
-        Select.setMinWidth(120);
-        Button Move = new Button("Move To");
-        Move.setMinWidth(120);
-        Button Back = new Button("Back");
-        Back.setMinWidth(120);
+        Button add = new Button("Add New Tag");
+        add.setMinWidth(120);
+        Button delete = new Button("Delete Tag");
+        delete.setMinWidth(120);
+        Button select = new Button("Select Old Tag");
+        select.setMinWidth(120);
+        Button move = new Button("Move To");
+        move.setMinWidth(120);
+        Button back = new Button("Back");
+        back.setMinWidth(120);
+        Button rename = new Button("Rename");
+        rename.setMinWidth(120);
 
 
-        Add.setOnAction(
+        add.setOnAction(
                 new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent e) {
@@ -49,7 +51,7 @@ public class ManipulationManagerScene{
                 }
             }
         );
-        Delete.setOnAction(
+        delete.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
@@ -58,7 +60,7 @@ public class ManipulationManagerScene{
                     }
                 }
         );
-        Select.setOnAction(
+        select.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
@@ -67,7 +69,7 @@ public class ManipulationManagerScene{
                     }
                 }
         );
-        Move.setOnAction(
+        move.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
@@ -76,7 +78,7 @@ public class ManipulationManagerScene{
                     }
                 }
         );
-        Back.setOnAction(
+        back.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
@@ -85,12 +87,22 @@ public class ManipulationManagerScene{
                     }
                 }
         );
+        rename.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(final ActionEvent e) {
+                        FileRenameScene.setImageFile(imgFile);
+                        FileRenameScene.display();
+                    }
+                }
+
+        );
 
 
         VBox layout1 = new VBox(20);
-        layout1.getChildren().addAll(Add, Delete, Select, Move, Back, imageView);
+        layout1.getChildren().addAll(add, delete, select, move, rename, back, imageView);
         layout1.setAlignment(Pos.CENTER);
-        Scene general = new Scene(layout1, 400, 550);
+        Scene general = new Scene(layout1, 400, 600);
         window.setScene(general);
         window.show();
 

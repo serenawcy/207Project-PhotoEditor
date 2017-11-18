@@ -82,7 +82,7 @@ public class SelectTagScene {
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
-                CurrentName.append(box.getText());
+                CurrentName.append("@").append(box.getText());
             }
 
         }

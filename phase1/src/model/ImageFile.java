@@ -2,10 +2,7 @@ package model;
 
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -13,7 +10,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ImageFile {
+public class ImageFile implements Serializable{
     private File file;
     private static Image image;
     private String originalName;

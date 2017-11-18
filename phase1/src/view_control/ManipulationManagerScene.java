@@ -87,6 +87,7 @@ public class ManipulationManagerScene{
 
 
         VBox layout1 = new VBox(20);
+        getImage();
         layout1.getChildren().addAll(add, delete, select, move, rename, back, imageView);
         layout1.setAlignment(Pos.CENTER);
         Scene general = new Scene(layout1, 400, 600);
@@ -97,12 +98,11 @@ public class ManipulationManagerScene{
     }
 
     /**
-     * Set the Image that user selected onto the scene.
-     * @param image the image that the user selected.
+     * Get the Image that user selected and show it onto the scene.
      */
 
     // 这里的image parameter 可以去掉了  PASS IN 给我一个IMAGEFILE -> getimage method
-    public static void setImage(){
+    public static void getImage(){
         img = imgFile.getImage();
         imageView = new ImageView(img);
         imageView.setFitHeight(300);

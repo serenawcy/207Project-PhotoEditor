@@ -89,35 +89,35 @@ public class ImageFile {
         this.renameDelete(tagToDelete);
     }
 
-//    /**
-//     * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
-//     * @param newParentDirectory new parent directory of this ImageFile object
-//     */
-//    public void changeDirectory(String newParentDirectory) {
-//        File dir = new File(newParentDirectory);
-//
-//        boolean success = file.renameTo(new File(dir, file.getName()));
-//        if (success) {
-//            this.setImage(this.file);
-//        }
-//    }
-//
-//    /**
-//     * Change the name of this ImageFile object.
-//     * @param newImageName new name of this ImageFile object
-//     */
-//    public void changeImageName(String newImageName) {
-//        logger.log(Level.FINE, "Renamed this image file from " + this.file.getName() + " to "
-//                + newImageName + "." + this.getSuffix(this.file));
-//
-//        File renameFile = new File(this.file.getName().replace(this.getNameWithoutSuffix(this.file), newImageName));
-//        boolean success = this.file.renameTo(renameFile);
-//        if (success) {
-//            this.setImage(this.file);
-//            this.oldName.add(this.file.getName());
-//        }
-//    }
-//
+    /**
+     * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
+     * @param newParentDirectory new parent directory of this ImageFile object
+     */
+    public void changeDirectory(String newParentDirectory) {
+        File dir = new File(newParentDirectory);
+
+        boolean success = file.renameTo(new File(dir, file.getName()));
+        if (success) {
+            this.setImage(this.file);
+        }
+    }
+
+    /**
+     * Change the name of this ImageFile object.
+     * @param newImageName new name of this ImageFile object
+     */
+    public void changeImageName(String newImageName) {
+        logger.log(Level.FINE, "Renamed this image file from " + this.file.getName() + " to "
+                + newImageName + "." + this.getSuffix(this.file));
+
+        File renameFile = new File(this.file.getName().replace(this.getNameWithoutSuffix(this.file), newImageName));
+        boolean success = this.file.renameTo(renameFile);
+        if (success) {
+            this.setImage(this.file);
+            this.oldName.add(this.file.getName());
+        }
+    }
+
 //    /**
 //     * Rename this ImageFile by adding a tag.
 //     * @param tagToAdd the tag name need to be added

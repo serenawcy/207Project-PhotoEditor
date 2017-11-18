@@ -118,22 +118,22 @@ public class ImageFile {
         }
     }
 
-//    /**
-//     * Rename this ImageFile by adding a tag.
-//     * @param tagToAdd the tag name need to be added
-//     */
-//    public void renameAdd(String tagToAdd) {
-//        this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
-//    }
-//
-//    /**
-//     * Rename this ImageFile by deleting a tag.
-//     * @param tagToDelete the tag name need to be deleted
-//     */
-//    public void renameDelete(String tagToDelete) {
-//        this.changeImageName(this.file.getName().replace(" @" + tagToDelete, ""));
-//    }
-//
+    /**
+     * Rename this ImageFile by adding a tag.
+     * @param tagToAdd the tag name need to be added
+     */
+    public void renameAdd(String tagToAdd) {
+        this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
+    }
+
+    /**
+     * Rename this ImageFile by deleting a tag.
+     * @param tagToDelete the tag name need to be deleted
+     */
+    public void renameDelete(String tagToDelete) {
+        this.changeImageName(this.file.getName().replace(" @" + tagToDelete, ""));
+    }
+
 //    /**
 //     * Get the log history of this ImageFile object.
 //     * @return the String of log history

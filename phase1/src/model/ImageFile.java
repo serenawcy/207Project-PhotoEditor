@@ -110,7 +110,7 @@ public class ImageFile implements Serializable{
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
-        this.file = dir;
+        this.file = new File(dir, file.getName());
         if (success) {
             this.setImage(this.file);
         }

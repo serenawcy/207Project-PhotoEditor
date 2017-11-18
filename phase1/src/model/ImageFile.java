@@ -106,7 +106,6 @@ public class ImageFile implements Serializable{
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
-        // test
         this.file = dir;
         if (success) {
             this.setImage(this.file);
@@ -143,7 +142,8 @@ public class ImageFile implements Serializable{
      * @param tagToDelete the tag name need to be deleted
      */
     public void renameDelete(String tagToDelete) {
-        this.changeImageName(this.file.getName().replace(" @" + tagToDelete, ""));
+        String suffix = this.getSuffix(this.file);
+        this.changeImageName(this.file.getName().replace(" @" + tagToDelete, "").replaceFirst("." + suffix, ""));
     }
 
     /**

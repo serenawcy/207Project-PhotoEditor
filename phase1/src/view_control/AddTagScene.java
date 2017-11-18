@@ -30,7 +30,6 @@ class AddTagScene {
         done.setOnAction(
                 e -> {
                     String tags = tagInput.getText();
-//                    System.out.println(tags);
                     try {
                         inputFile.addTag(tags);
                     } catch (Exception e1) {

@@ -85,6 +85,7 @@ public class ImageFile implements Serializable{
         StringBuilder tagAdd = new StringBuilder();
 
         for (String tag: tagToAdd) {
+            this.existTag.add(tag);
             tagAdd = tagAdd.append(tag).append(" @");
         }
 

@@ -28,12 +28,18 @@ public class ImageFile implements Serializable{
 
         this.file = file;
         image = new Image(file.toURI().toString());
-        this.originalName = this.getNameWithoutSuffix(file);
+
+        if (!this.file.getName().contains("@")) {
+            this.originalName = this.getNameWithoutSuffix(this.file);
+        } else {
+            Integer target = this.file.getName().indexOf("@");
+            this.originalName = this.file.getName().substring(0, target - 1);
+        }
 
         this.existTag = new ArrayList<>();
         this.oldName = new ArrayList<>();
 
-        this.oldName.add(this.originalName);
+        this.oldName.add(this.originalName + "." + this.getSuffix(this.file));
 
         FileHandler fileHandler = new FileHandler("./logHistory.txt");
         fileHandler.setLevel(Level.FINE);
@@ -129,6 +135,14 @@ public class ImageFile implements Serializable{
      */
     public void renameDelete(String tagToDelete) {
         this.changeImageName(this.file.getName().replace(" @" + tagToDelete, ""));
+    }
+
+    /**
+     * Update the existTag.
+     * @param tagsToRename the ArrayList of tags to be renamed
+     */
+    public void changeTagHistory(ArrayList<String> tagsToRename) {
+        this.existTag = tagsToRename;
     }
 
     /**

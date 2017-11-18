@@ -1,27 +1,33 @@
 package model;
 
 
+////import java.io.IOException;
+//import java.io.File;
 //import java.io.IOException;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.logging.Level;
 
 public class ImageFileManager {
     private static ArrayList<ImageFile> imageFileList = new ArrayList<ImageFile>();
 
-    public ImageFileManager(){
-    }
+//    /**
+//     * Creates a new empty StudentManager.
+//     * @throws IOException
+//     * @throws ClassNotFoundException
+//     */
+//    public StudentManager(String filePath) throws ClassNotFoundException, IOException {
+//        students = new HashMap<String, Student>();
+//
+//        // Reads serializable objects from file.
+//        // Populates the record list using stored data, if it exists.
+//        File file = new File(filePath);
+//        if (file.exists()) {
+//            readFromFile(filePath);
+//        } else {
+//            file.createNewFile();
+//        }
+//    }
 
-    public ImageFile checkExist(File newFile) throws IOException {
-        //if the image exists according to its absoluteAddress, return this image
-        for (ImageFile checkImageFile: imageFileList) {
-            if (checkImageFile.getFile().getAbsolutePath().equals(newFile.getAbsolutePath())) {
-                return checkImageFile;
-            }
-        }
-        // if not, return a new ImageFile
-        ImageFile newImageFile = new ImageFile(newFile);
-        imageFileList.add(newImageFile);
-        return newImageFile;
-    }
+
 }

@@ -62,6 +62,7 @@ public final class FileChooserScene extends Application {
                             inputFile = imgfile;
                             checkFileExist = true;
                         }
+
                     }
                     if(!checkFileExist){
                         imageFileManager.add(inputFile);

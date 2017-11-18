@@ -36,6 +36,7 @@ class AddTagScene {
                         e1.printStackTrace();
                     }
                     tagInput.clear();
+                    
                 });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);

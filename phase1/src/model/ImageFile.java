@@ -60,7 +60,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
      */
-    private String getNameWithoutSuffix(File file) {
+    public String getNameWithoutSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[0];
     }
@@ -70,7 +70,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its suffix
      * @return the suffix of the File object
      */
-    private String getSuffix(File file) {
+    public String getSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[1];
     }

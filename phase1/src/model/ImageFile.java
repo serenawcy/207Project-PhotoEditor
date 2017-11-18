@@ -60,7 +60,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
      */
-    private String getNameWithoutSuffix(File file) {
+    public String getNameWithoutSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[0];
     }
@@ -70,7 +70,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its suffix
      * @return the suffix of the File object
      */
-    private String getSuffix(File file) {
+    public String getSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[1];
     }
@@ -136,7 +136,7 @@ public class ImageFile implements Serializable{
      * Rename this ImageFile by adding a tag.
      * @param tagToAdd the tag name need to be added
      */
-    private void renameAdd(String tagToAdd) {
+    public void renameAdd(String tagToAdd) {
         this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
     }
 
@@ -144,7 +144,7 @@ public class ImageFile implements Serializable{
      * Rename this ImageFile by deleting a tag.
      * @param tagToDelete the tag name need to be deleted
      */
-    private void renameDelete(String tagToDelete) {
+    public void renameDelete(String tagToDelete) {
         String suffix = this.getSuffix(this.file);
         this.changeImageName(this.file.getName().replace(" @" + tagToDelete, "").replaceFirst("." + suffix, ""));
     }

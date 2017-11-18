@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,7 +23,7 @@ public class FileRenameScene {
     //    public static void main(String[] args) {
 //        launch(args);
 //    }
-    public static void display(){
+    public static void display() {
         Stage window = new Stage();
         window.setTitle("Rename the File");
         window.initModality(Modality.APPLICATION_MODAL);
@@ -36,7 +37,7 @@ public class FileRenameScene {
         ArrayList<String> tagToPass = new ArrayList<>();
 
         //Serena's (Tag Manager)
-        for(String tag: inputFile.getOldName()) {
+        for (String tag : inputFile.getOldName()) {
             listView.getItems().add(tag);
         }
 
@@ -52,7 +53,7 @@ public class FileRenameScene {
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(listView, done,goBack );
+        layout.getChildren().addAll(listView, done, goBack);
 
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);
@@ -61,28 +62,45 @@ public class FileRenameScene {
     }
 
     private static ArrayList<String> buttonClicked() {
-        ObservableList<String> tags;
-        ArrayList<String> tagsSelected = new ArrayList<>();
-        tags = listView.getSelectionModel().getSelectedItems();
-        for (String tag: tags){
-            try {
-                String FileInfo = tag.substring(0, tag.lastIndexOf("."));
-                String[] tagCollection = FileInfo.split("@");
-
-                if (tagCollection.length > 1) {
-                    tagsSelected.addAll(Arrays.asList(tagCollection).subList(1, tagCollection.length));
-                }
-            }catch (Exception e) {
+        ObservableList<String> names;
+        ArrayList<String> nameSelected = new ArrayList<>();
+        names = listView.getSelectionModel().getSelectedItems();
+        for (String name : names) {
+            try{
+                nameSelected.add(name);
+            }catch (Exception e){
                 e.printStackTrace();
             }
-            listView.getItems().remove(tag);
-        }
-        String newName = tags.get(0);
-        String[] separate = newName.split("\\.(?=[^.]+$)");
-        inputFile.changeImageName(separate[0]);
-        return tagsSelected;
 
-    }
+        }
+        String nameGet = nameSelected.get(0);
+        String nameToChange = nameGet.substring(0, nameGet.lastIndexOf("."));
+        inputFile.changeImageName(nameToChange);
+        
+        return nameSelected;
+//        for (String tag: tags){
+//            try {
+//                String FileInfo = tag.substring(0, tag.lastIndexOf("."));
+//                String[] tagCollection = FileInfo.split("@");
+//
+//                if (tagCollection.length > 1) {
+//                    tagsSelected.addAll(Arrays.asList(tagCollection).subList(1, tagCollection.length));
+//                }
+//            }catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            listView.getItems().remove(tag);
+//        }
+//        String newName = tags.get(0);
+//        String[] separate = newName.split("@");
+//        System.out.println(separate[0]);
+//        inputFile.changeImageName(separate[0]);
+//        return tagsSelected;
+        }
+
+
+
+
 //    @Override
 //    public void start(Stage primaryStage) throws Exception {
 //        Stage window = new Stage();

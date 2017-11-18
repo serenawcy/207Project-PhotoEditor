@@ -14,6 +14,7 @@ import model.ImageFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class FileRenameScene {
 
@@ -64,6 +65,7 @@ public class FileRenameScene {
     private static ArrayList<String> buttonClicked() {
         ObservableList<String> names;
         ArrayList<String> nameSelected = new ArrayList<>();
+        ArrayList<String> tagWanted = new ArrayList<>();
         names = listView.getSelectionModel().getSelectedItems();
         for (String name : names) {
             try{
@@ -75,9 +77,13 @@ public class FileRenameScene {
         }
         String nameGet = nameSelected.get(0);
         String nameToChange = nameGet.substring(0, nameGet.lastIndexOf("."));
+        String[] tagWant = nameToChange.split("@");
+        Collections.addAll(tagWanted, tagWant);
+        tagWanted.remove(0);
+
         inputFile.changeImageName(nameToChange);
-        
-        return nameSelected;
+
+        return tagWanted;
 //        for (String tag: tags){
 //            try {
 //                String FileInfo = tag.substring(0, tag.lastIndexOf("."));

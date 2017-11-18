@@ -16,6 +16,7 @@ public class ImageFile implements Serializable{
     private String originalName;
     private ArrayList<String> existTag;
     private ArrayList<String> oldName;
+    private static boolean logFileExist;
 
     private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
 
@@ -42,11 +43,16 @@ public class ImageFile implements Serializable{
         this.oldName.add(this.originalName + "." + this.getSuffix(this.file));
 
         FileHandler fileHandler = new FileHandler("./logHistory.txt");
+        logFileExist = true;
         fileHandler.setLevel(Level.FINE);
         fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
 
         logger.setLevel(Level.ALL);
         logger.addHandler(fileHandler);
+    }
+
+    public static boolean isLogFileExist() {
+        return logFileExist;
     }
 
     /**

@@ -57,6 +57,7 @@ public final class FileChooserScene extends Application {
                     ImageFile inputFile = new ImageFile(file);
                     ImageFileManager imageFileManager = new ImageFileManager(serPath);
                     ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
+
                     for(ImageFile imgfile: imageFiles){
                         if(imgfile.equals(inputFile)){
                             inputFile = imgfile;
@@ -68,6 +69,7 @@ public final class FileChooserScene extends Application {
                         imageFileManager.add(inputFile);
                         imageFileManager.writeToFile(serPath);
                     }
+                    ManipulationManagerScene.setFile(inputFile);
                     ManipulationManagerScene.display();
                     fileChooserStage.close();
 
@@ -82,7 +84,7 @@ public final class FileChooserScene extends Application {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(final ActionEvent e) {
-                        if (ImageFile.isCheckFileExist()) {
+                        if (ImageFile.isLogFileExist()) {
                             try {
                                 logHistory = new Text(ImageFile.getLog());
 //                System.out.println(logHistory);

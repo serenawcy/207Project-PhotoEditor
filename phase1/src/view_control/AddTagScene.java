@@ -26,18 +26,13 @@ class AddTagScene {
         //Form a Text area
         TextField tagInput = new TextField();
 
-        // Clicking will addTags and close window
-        done.setOnAction(
-                e -> {
-                    String tags = tagInput.getText();
-                    try {
-                        inputFile.addTag(tags);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                    tagInput.clear();
-                    
-                });
+    // Clicking will addTags and close window
+    done.setOnAction(
+        e -> {
+          String tags = tagInput.getText();
+          inputFile.addTag(tags);
+          tagInput.clear();
+        });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);
             addScene.close();

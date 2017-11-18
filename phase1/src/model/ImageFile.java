@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class ImageFile {
     private File file;
-    private Image image;
+    private static Image image;
     private String originalName;
     private ArrayList<String> existTag;
     private ArrayList<String> oldName;
@@ -30,7 +30,7 @@ public class ImageFile {
     public ImageFile(File file) throws IOException {
 
         this.file = file;
-        this.image = new Image(file.toURI().toString());
+        image = new Image(file.toURI().toString());
         this.originalName = this.getNameWithoutSuffix(file);
 
         this.existTag = new ArrayList<>();
@@ -186,7 +186,7 @@ public class ImageFile {
      * Get this ImageFile object's image.
      * @return the image of this ImageFile object
      */
-    public Image getImage() {
+    public static Image getImage() {
         return image;
     }
 
@@ -195,7 +195,7 @@ public class ImageFile {
      * @param newFile the new File to be the image of this ImageFile object
      */
     public void setImage(File newFile) {
-        this.image = new Image(newFile.toURI().toString());
+        image = new Image(newFile.toURI().toString());
     }
 
     /**

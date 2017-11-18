@@ -123,7 +123,7 @@ public class ImageFile implements Serializable{
         boolean success = this.file.renameTo(renameFile);
         if (success) {
             this.setImage(this.file);
-            this.oldName.add(this.file.getName());
+            this.oldName.add(renameFile.getName());
         }
     }
 

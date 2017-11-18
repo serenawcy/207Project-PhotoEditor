@@ -66,29 +66,29 @@ public class ImageFile {
         return separate[1];
     }
 
-//    /**
-//     * Add user input tag name if it does not exist and rename this ImageFile.
-//     * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
-//     */
-//    public void addTag(String userInputAdd) {
-//        String[] tagToAdd = userInputAdd.split(",");
-//        for (String tag: tagToAdd) {
-//            if (!this.existTag.contains(tag)) {
-//                this.existTag.add(tag);
-//                this.renameAdd(tag);
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Delete user input tag name and rename this ImageFile.
-//     * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
-//     */
-//    public void deleteTag(String tagToDelete) {
-//        this.existTag.remove(tagToDelete);
-//        this.renameDelete(tagToDelete);
-//    }
-//
+    /**
+     * Add user input tag name if it does not exist and rename this ImageFile.
+     * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
+     */
+    public void addTag(String userInputAdd) {
+        String[] tagToAdd = userInputAdd.split(",");
+        for (String tag: tagToAdd) {
+            if (!this.existTag.contains(tag)) {
+                this.existTag.add(tag);
+                this.renameAdd(tag);
+            }
+        }
+    }
+
+    /**
+     * Delete user input tag name and rename this ImageFile.
+     * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
+     */
+    public void deleteTag(String tagToDelete) {
+        this.existTag.remove(tagToDelete);
+        this.renameDelete(tagToDelete);
+    }
+
 //    /**
 //     * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
 //     * @param newParentDirectory new parent directory of this ImageFile object

@@ -2,6 +2,7 @@ package model;
 
 
 //import java.io.IOException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,15 +12,15 @@ public class ImageFileManager {
     public ImageFileManager(){
     }
 
-    public ImageFile checkExist(String name, String absoluteAddress) throws IOException {
+    public ImageFile checkExist(File newFile) throws IOException {
         //if the image exists according to its absoluteAddress, return this image
-        for (ImageFile checkImage: imageFileList) {
-            if (checkImage.getAbsoluteAddress().equals(absoluteAddress)) {
-                return checkImage;
+        for (ImageFile checkImageFile: imageFileList) {
+            if (checkImageFile.getFile().getAbsolutePath().equals(newFile.getAbsolutePath())) {
+                return checkImageFile;
             }
         }
         // if not, return a new ImageFile
-        ImageFile newImageFile = new ImageFile(name, absoluteAddress);
+        ImageFile newImageFile = new ImageFile(newFile);
         imageFileList.add(newImageFile);
         return newImageFile;
     }

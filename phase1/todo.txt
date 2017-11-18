@@ -1,0 +1,5 @@
+1. Design the whole project by deciding the potential classes
+2. Decide how many windows do we need
+3. Draw out the design diagram
+4. Write out the classes according to the design diagram
+5. Debugging

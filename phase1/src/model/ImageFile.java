@@ -46,26 +46,26 @@ public class ImageFile {
         logger.addHandler(fileHandler);
     }
 
-//    /**
-//     * Get the name of a File object without suffix
-//     * @param file the File object to get its name without suffix
-//     * @return the name of the File object without suffix
-//     */
-//    public String getNameWithoutSuffix(File file) {
-//        String[] separate = file.getName().split("\\.(?=[^.]+$)");
-//        return separate[0];
-//    }
-//
-//    /**
-//     * Get the suffix of a File object
-//     * @param file the File object to get its suffix
-//     * @return the suffix of the File object
-//     */
-//    public String getSuffix(File file) {
-//        String[] separate = file.getName().split("\\.(?=[^.]+$)");
-//        return separate[1];
-//    }
-//
+    /**
+     * Get the name of a File object without suffix
+     * @param file the File object to get its name without suffix
+     * @return the name of the File object without suffix
+     */
+    public String getNameWithoutSuffix(File file) {
+        String[] separate = file.getName().split("\\.(?=[^.]+$)");
+        return separate[0];
+    }
+
+    /**
+     * Get the suffix of a File object
+     * @param file the File object to get its suffix
+     * @return the suffix of the File object
+     */
+    public String getSuffix(File file) {
+        String[] separate = file.getName().split("\\.(?=[^.]+$)");
+        return separate[1];
+    }
+
 //    /**
 //     * Add user input tag name if it does not exist and rename this ImageFile.
 //     * @param userInputAdd the tag name which is supposed to be added to this ImageFile name

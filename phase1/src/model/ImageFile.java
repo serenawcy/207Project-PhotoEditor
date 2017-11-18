@@ -81,12 +81,15 @@ public class ImageFile implements Serializable{
      */
     public void addTag(String userInputAdd) {
         String[] tagToAdd = userInputAdd.split(",");
+
+        StringBuilder tagAdd = new StringBuilder();
+
         for (String tag: tagToAdd) {
-            if (!this.existTag.contains(tag)) {
-                this.existTag.add(tag);
-                this.renameAdd(tag);
-            }
+            tagAdd = tagAdd.append(tag).append(" @");
         }
+
+        tagAdd.replace(tagAdd.length() - 2, tagAdd.length(), "");
+        this.renameAdd(tagAdd.toString());
     }
 
     /**

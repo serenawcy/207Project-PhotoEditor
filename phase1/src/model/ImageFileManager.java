@@ -65,16 +65,15 @@ public class ImageFileManager {
         }
     }
 
-//    /**
-//     * Adds record to this StudentManager.
-//     * @param record a record to be added.
-//     */
-//    public void add(Student record) {
-//        students.put(record.getID(), record);
-//
-//        // Log the addition of a student.
-//        logger.log(Level.FINE, "Added a new student " + record.toString());
-//    }
+    /**
+     * Adds ImageFile to this ImageFileManager.
+     * @param newImageFile a new ImageFile to be added.
+     */
+    public void add(ImageFile newImageFile) {
+        imageFileList.add(newImageFile);
+    }
+
+    
 
 
 }

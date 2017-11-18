@@ -206,12 +206,12 @@ public class ImageFile {
         return existTag;
     }
 
-//    /**
-//     * Return whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
-//     * @param imageFile other ImageFile object which compare with this ImageFile object
-//     * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
-//     */
-//    public boolean equals(ImageFile imageFile) {
-//        return Objects.equals(this.file.getAbsolutePath(), imageFile.file.getAbsolutePath());
-//    }
+    /**
+     * Return whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
+     * @param imageFile other ImageFile object which compare with this ImageFile object
+     * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
+     */
+    public boolean equals(ImageFile imageFile) {
+        return Objects.equals(this.file.getAbsolutePath(), imageFile.file.getAbsolutePath());
+    }
 }

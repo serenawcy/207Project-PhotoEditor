@@ -120,10 +120,11 @@ public class ImageFile implements Serializable{
                 + newImageName + "." + this.getSuffix(this.file));
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
+        this.file = renameFile;
         boolean success = this.file.renameTo(renameFile);
         if (success) {
             this.setImage(this.file);
-            this.oldName.add(renameFile.getName());
+            this.oldName.add(this.file.getName());
         }
     }
 

@@ -40,7 +40,7 @@ public class ImageFile implements Serializable{
         this.existTag = new ArrayList<>();
         this.oldName = new ArrayList<>();
 
-        this.oldName.add(this.originalName + "." + this.getSuffix(this.file));
+        this.oldName.add(this.file.getName());
 
         FileHandler fileHandler = new FileHandler("./logHistory.txt");
         logFileExist = true;

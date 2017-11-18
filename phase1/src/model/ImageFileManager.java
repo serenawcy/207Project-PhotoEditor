@@ -13,6 +13,7 @@ import java.util.logging.Level;
 //import java.util.logging.Level;
 
 public class ImageFileManager {
+
     private static ArrayList<ImageFile> imageFileList = new ArrayList<ImageFile>();
 
     /**
@@ -73,7 +74,10 @@ public class ImageFileManager {
         imageFileList.add(newImageFile);
     }
 
-    
+    public static ArrayList<ImageFile> getImageFileList() {
+        return imageFileList;
+    }
+
 
 
 }

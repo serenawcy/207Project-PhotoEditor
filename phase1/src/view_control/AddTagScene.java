@@ -30,13 +30,13 @@ class AddTagScene {
         done.setOnAction(
                 e -> {
                     String tags = tagInput.getText();
-//                    System.out.println(tags);
                     try {
                         inputFile.addTag(tags);
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                     tagInput.clear();
+                    
                 });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);

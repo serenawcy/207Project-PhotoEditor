@@ -25,7 +25,7 @@ public class ImageFile {
     /**
      * Create a new empty ImageFile.
      * @param file the File object which used to construct ImageFile
-     * @throws IOException
+     * @throws IOException throw a IOException
      */
     public ImageFile(File file) throws IOException {
 

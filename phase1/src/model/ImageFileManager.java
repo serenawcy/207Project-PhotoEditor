@@ -1,10 +1,11 @@
 package model;
 
 
-////import java.io.IOException;
-//import java.io.File;
+import java.io.IOException;
+import java.io.File;
 //import java.io.IOException;
 import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -46,6 +47,34 @@ public class ImageFileManager {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Writes the imageFileList to file at filePath.
+     * @param filePath the file to write the records to
+     * @throws IOException
+     */
+    public void writeToFile(String filePath) throws IOException{
+        try {
+            OutputStream file = new FileOutputStream(filePath);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
+            output.writeObject(imageFileList);
+            output.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+//    /**
+//     * Adds record to this StudentManager.
+//     * @param record a record to be added.
+//     */
+//    public void add(Student record) {
+//        students.put(record.getID(), record);
+//
+//        // Log the addition of a student.
+//        logger.log(Level.FINE, "Added a new student " + record.toString());
+//    }
 
 
 }

@@ -134,21 +134,21 @@ public class ImageFile {
         this.changeImageName(this.file.getName().replace(" @" + tagToDelete, ""));
     }
 
-//    /**
-//     * Get the log history of this ImageFile object.
-//     * @return the String of log history
-//     */
-//    public static String getLog() throws FileNotFoundException {
-//
-//        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
-//        String logHistory = "";
-//
-//        while (scanner.hasNextLine()) {
-//            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
-//        }
-//        scanner.close();
-//        return logHistory;
-//    }
+    /**
+     * Get the log history of this ImageFile object.
+     * @return the String of log history
+     */
+    public static String getLog() throws FileNotFoundException {
+
+        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
+        String logHistory = "";
+
+        while (scanner.hasNextLine()) {
+            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
+        }
+        scanner.close();
+        return logHistory;
+    }
 
     /**
      * Get this ImageFile object's file.

@@ -17,14 +17,19 @@ import model.ImageFile;
 import java.io.File;
 
 
+/**
+ * A manipulation scene than contains buttons for the user to manipulate the selected image.
+ */
 public class ManipulationManagerScene{
 
-    private static ImageFile imgFile;
     private static Image img;
+    private static ImageFile imgFile;
     private static ImageView imageView;
 
 
-
+    /**
+     * Display the Scene and construct the buttons.
+     */
     public static void display() {
         Stage window = new Stage();
         window.setTitle("Manipulation Scene");
@@ -43,57 +48,39 @@ public class ManipulationManagerScene{
 
 
         add.setOnAction(
-                new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent e) {
-                AddTagScene.setImageFile(imgFile);
-                AddTagScene.display();
-                }
-            }
+                e -> {
+                    AddTagScene.setImageFile(imgFile);
+                    AddTagScene.display();
+                    }
         );
         delete.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        DeleteTagScene.setImageFile(imgFile);
-                        DeleteTagScene.display();
-                    }
+                e -> {
+                    DeleteTagScene.setImageFile(imgFile);
+                    DeleteTagScene.display();
                 }
         );
         select.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        SelectTagScene.setImageFile(imgFile);
-                        SelectTagScene.display();
-                    }
+                e -> {
+                    SelectTagScene.setImageFile(imgFile);
+                    SelectTagScene.display();
                 }
         );
         move.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        MoveFileScene.setImageFile(imgFile);
-                        MoveFileScene.display();
-                    }
+                e -> {
+                    MoveFileScene.setImageFile(imgFile);
+                    MoveFileScene.display();
                 }
         );
         back.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        FileChooserScene.display();
-                        window.close();
-                    }
+                e -> {
+                    FileChooserScene.display();
+                    window.close();
                 }
         );
         rename.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        FileRenameScene.setImageFile(imgFile);
-                        FileRenameScene.display();
-                    }
+                e -> {
+                    FileRenameScene.setImageFile(imgFile);
+                    FileRenameScene.display();
                 }
 
         );
@@ -109,14 +96,24 @@ public class ManipulationManagerScene{
 
     }
 
-    public static void setImage(Image image){
-        img = image;
+    /**
+     * Set the Image that user selected onto the scene.
+     * @param image the image that the user selected.
+     */
+
+    // 这里的image parameter 可以去掉了  PASS IN 给我一个IMAGEFILE -> getimage method
+    public static void setImage(){
+        img = imgFile.getImage();
         imageView = new ImageView(img);
         imageView.setFitHeight(300);
         imageView.setFitWidth(300);
  //       imageView.setPreserveRatio(true);
     }
 
+    /**
+     * Pass in the file
+     * @param imageFile the
+     */
     public static void setFile(ImageFile imageFile){
         imgFile = imageFile;
     }

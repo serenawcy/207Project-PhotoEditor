@@ -40,13 +40,13 @@ class FileRenameScene {
     }
 
     done.setOnAction(
-        e -> {
-          try {
-            buttonClicked();
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
+            e -> {
+              try {
+                buttonClicked();
+              } catch (IOException e1) {
+                e1.printStackTrace();
+              }
+            });
     goBack.setOnAction(e -> window.close());
 
     VBox layout = new VBox(10);
@@ -81,25 +81,25 @@ class FileRenameScene {
     }
   }
 
-    //        for (String tag: tags){
-    //            try {
-    //                String FileInfo = tag.substring(0, tag.lastIndexOf("."));
-    //                String[] tagCollection = FileInfo.split("@");
-    //
-    //                if (tagCollection.length > 1) {
-    //                    tagsSelected.addAll(Arrays.asList(tagCollection).subList(1,
-    // tagCollection.length));
-    //                }
-    //            }catch (Exception e) {
-    //                e.printStackTrace();
-    //            }
-    //            listView.getItems().remove(tag);
-    //        }
-    //        String newName = tags.get(0);
-    //        String[] separate = newName.split("@");
-    //        System.out.println(separate[0]);
-    //        inputFile.changeImageName(separate[0]);
-    //        return tagsSelected;
+  //        for (String tag: tags){
+  //            try {
+  //                String FileInfo = tag.substring(0, tag.lastIndexOf("."));
+  //                String[] tagCollection = FileInfo.split("@");
+  //
+  //                if (tagCollection.length > 1) {
+  //                    tagsSelected.addAll(Arrays.asList(tagCollection).subList(1,
+  // tagCollection.length));
+  //                }
+  //            }catch (Exception e) {
+  //                e.printStackTrace();
+  //            }
+  //            listView.getItems().remove(tag);
+  //        }
+  //        String newName = tags.get(0);
+  //        String[] separate = newName.split("@");
+  //        System.out.println(separate[0]);
+  //        inputFile.changeImageName(separate[0]);
+  //        return tagsSelected;
 
   //    @Override
   //    public void start(Stage primaryStage) throws Exception {
@@ -109,9 +109,9 @@ class FileRenameScene {
   //        Button Delete = new Button("Delete");
   //
   //        listView = new ListView<>();
-  ////        for(String tag: Image.getTags.ReadTag()) {
-  ////            listView.getItems().add(tag);
-  ////        }
+  //          for(String tag: Image.getTags.ReadTag()) {
+  //              listView.getItems().add(tag);
+  //          }
   //        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
   //        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
   //        Delete.setOnAction(e -> buttonClicked());

@@ -27,7 +27,7 @@ class MoveFileScene {
   /** Magic number 200 */
   private static final int MAGIC200 = 200;
 
-  /** Initialize an ImageFile. */
+  /** Initialize an ImageFile */
   private static ImageFile inputFile;
 
   /** Display the Scene and construct the buttons. */
@@ -47,21 +47,21 @@ class MoveFileScene {
     goBack.setMinWidth(MAGIC200);
 
     move.setOnAction(
-        e -> {
-          String directory;
-          DirectoryChooser directoryChooser = new DirectoryChooser();
-          //          final DirectoryChooser directoryChooser = new DirectoryChooser();
-          //          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
-          File selectedDirectory = directoryChooser.showDialog(moveToStage);
-          if (selectedDirectory != null) {
-            directory = selectedDirectory.getAbsolutePath();
-            try {
-              inputFile.changeDirectory(directory);
-            } catch (Exception e1) {
-              e1.printStackTrace();
-            }
-          }
-        });
+            e -> {
+              String directory;
+              DirectoryChooser directoryChooser = new DirectoryChooser();
+              //          final DirectoryChooser directoryChooser = new DirectoryChooser();
+              //          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
+              File selectedDirectory = directoryChooser.showDialog(moveToStage);
+              if (selectedDirectory != null) {
+                directory = selectedDirectory.getAbsolutePath();
+                try {
+                  inputFile.changeDirectory(directory);
+                } catch (Exception e1) {
+                  e1.printStackTrace();
+                }
+              }
+            });
 
     goBack.setOnAction(e -> moveToStage.close());
 

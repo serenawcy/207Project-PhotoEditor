@@ -20,7 +20,7 @@ public class DeleteTagScene {
     private static ListView<String> listView;
     private static ImageFile inputFile;
 
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        launch(args);
 //    }
     public static void display(){
@@ -37,8 +37,7 @@ public class DeleteTagScene {
         for(String tag: inputFile.getExistTag()) {
             listView.getItems().add(tag);
         }
-//        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
-//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         Delete.setOnAction(e -> buttonClicked());
         Back.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);

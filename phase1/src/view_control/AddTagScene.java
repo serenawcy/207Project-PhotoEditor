@@ -23,7 +23,7 @@ class AddTagScene {
   /** Magic number 20 */
   private static final int MAGIC20 = 20;
 
-  /** Initialize an ImageFile. */
+  /** Initialize an ImageFile */
   private static ImageFile inputFile;
 
   /** Display the Scene and construct the buttons. */
@@ -42,17 +42,17 @@ class AddTagScene {
     TextField tagInput = new TextField();
 
     done.setOnAction(
-        e -> {
-          String tags = tagInput.getText();
-          if (!Objects.equals(tags, "")) {
-            try {
-              inputFile.addTag(tags);
-            } catch (IOException e1) {
-              e1.printStackTrace();
-            }
-            tagInput.clear();
-          }
-        });
+            e -> {
+              String tags = tagInput.getText();
+              if (!Objects.equals(tags, "")) {
+                try {
+                  inputFile.addTag(tags);
+                } catch (IOException e1) {
+                  e1.printStackTrace();
+                }
+                tagInput.clear();
+              }
+            });
 
     goBack.setOnAction(e -> addScene.close());
 

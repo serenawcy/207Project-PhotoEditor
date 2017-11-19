@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class ImageFile implements Serializable {
     /**
-     * A File object represented by file
+     * A File object represented by file.
      */
     private File file;
 
@@ -62,7 +62,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get the name of a File object without suffix
+     * Get the name of a File object without suffix.
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
      */
@@ -72,7 +72,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get the suffix of a File object
+     * Get the suffix of a File object.
      * @param file the File object to get its suffix
      * @return the suffix of the File object
      */
@@ -180,14 +180,13 @@ public class ImageFile implements Serializable {
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-    public ArrayList<String> getLog() {
-//        StringBuilder allHistory = new StringBuilder();
-//        for (String his: history)
-//        {
-//            allHistory.append(his);
-//        }
-//        return allHistory.toString();
-        return history;
+    public String getLog() {
+        StringBuilder allHistory = new StringBuilder();
+        for (String his: history)
+        {
+            allHistory.append(his);
+        }
+        return allHistory.toString();
     }
 
     /**

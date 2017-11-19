@@ -9,7 +9,7 @@ Yuhan Shao #1002281327:
 1. Discussed the general design of the whole project with other group members.
 2. Wrote out the diagram and the scenes we need for the project.
 3. Responsible for the whole ImageFile.java which is the part of the backend.
-4. Debugged the ImageFile class.
+4. Debugged the ImageFile class and the the other classes with the group members.
 
 Jiayao Lin #1002936683:
 1. Discussed the design of the whole project with all the group members.

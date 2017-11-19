@@ -18,18 +18,19 @@ import java.util.ArrayList;
 
 public class ImageFileManager {
 
-    private static ArrayList<ImageFile> imageFileList = new ArrayList<ImageFile>();
+    /**
+     * A list that contains all opened ImageFile instances
+     */
+    private static ArrayList<ImageFile> imageFileList = new ArrayList<>();
 
     /**
      * Creates a new empty StudentManager.
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException: throw a IOException
+     * @throws ClassNotFoundException: throw a ClassNotFoundException
      */
     public ImageFileManager(String filePath) throws ClassNotFoundException, IOException {
-        imageFileList = new ArrayList<ImageFile>();
+        imageFileList = new ArrayList<>();
 
-        // Reads serializable objects from file.
-        // Populates the record list using stored data, if it exists.
         File file = new File(filePath);
         if (file.exists()) {
             readFromFile(filePath);
@@ -38,10 +39,14 @@ public class ImageFileManager {
         }
     }
 
-    public void readFromFile(String path) throws ClassNotFoundException {
-
+    /**
+     * Writes the imageFileList to file at filePath.
+     * @param filePath the file to write the records to
+     * @throws ClassNotFoundException: throw a ClassNotFoundException
+     */
+    private void readFromFile(String filePath) throws ClassNotFoundException {
         try {
-            InputStream file = new FileInputStream(path);
+            InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
@@ -56,7 +61,7 @@ public class ImageFileManager {
     /**
      * Writes the imageFileList to file at filePath.
      * @param filePath the file to write the records to
-     * @throws IOException
+     * @throws IOException: throw a IOException
      */
     public static void writeToFile(String filePath) throws IOException{
         try {
@@ -78,10 +83,10 @@ public class ImageFileManager {
         imageFileList.add(newImageFile);
     }
 
+    /**
+     * Get imageFileList from this ImageFileManager.
+     */
     public static ArrayList<ImageFile> getImageFileList() {
         return imageFileList;
     }
-
-
-
 }

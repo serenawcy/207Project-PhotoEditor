@@ -76,13 +76,11 @@ class FileRenameScene {
       String[] tagWant = nameToChange.split("@");
       Collections.addAll(tagWanted, tagWant);
       tagWanted.remove(0);
-      if (!inputFile.getOldName().contains(nameToChange)) {
-        inputFile.changeImageName(nameToChange);
-      }
-      if (tagWanted.size() != 0) {
-        inputFile.changeTagHistory(tagWanted);
-      }
+      inputFile.changeImageName(nameToChange);
+      inputFile.changeTagHistory(tagWanted);
     }
+  }
+
     //        for (String tag: tags){
     //            try {
     //                String FileInfo = tag.substring(0, tag.lastIndexOf("."));
@@ -102,7 +100,6 @@ class FileRenameScene {
     //        System.out.println(separate[0]);
     //        inputFile.changeImageName(separate[0]);
     //        return tagsSelected;
-  }
 
   //    @Override
   //    public void start(Stage primaryStage) throws Exception {

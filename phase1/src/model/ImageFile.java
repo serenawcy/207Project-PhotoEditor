@@ -39,6 +39,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Create a new empty ImageFile.
+     *
      * @param file the File object which used to construct ImageFile
      * @throws IOException throw a IOException
      */
@@ -63,6 +64,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get the name of a File object without suffix
+     *
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
      */
@@ -73,6 +75,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get the suffix of a File object
+     *
      * @param file the File object to get its suffix
      * @return the suffix of the File object
      */
@@ -83,6 +86,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Add user input tag name if it does not exist and rename this ImageFile.
+     *
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
      */
     public void addTag(String userInputAdd) throws IOException {
@@ -90,7 +94,7 @@ public class ImageFile implements Serializable {
 
         StringBuilder tagAdd = new StringBuilder();
 
-        for (String tag: tagToAdd) {
+        for (String tag : tagToAdd) {
             this.existTag.add(tag);
             tagAdd = tagAdd.append(tag).append(" @");
         }
@@ -101,6 +105,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Delete user input tag name and rename this ImageFile.
+     *
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
     public void deleteTag(String tagToDelete) throws IOException {
@@ -110,6 +115,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
+     *
      * @param newParentDirectory new parent directory of this ImageFile object
      */
     public void changeDirectory(String newParentDirectory) throws IOException {
@@ -126,6 +132,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Change the name of this ImageFile object.
+     *
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws IOException {
@@ -141,7 +148,7 @@ public class ImageFile implements Serializable {
 
         if (success) {
             this.setImage(this.file);
-            if (!this.oldName.contains(this.file.getName())){
+            if (!this.oldName.contains(this.file.getName())) {
                 this.oldName.add(this.file.getName());
             }
             ImageFileManager.add(this);
@@ -151,6 +158,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Rename this ImageFile by adding a tag.
+     *
      * @param tagToAdd the tag name need to be added
      */
     private void renameAdd(String tagToAdd) throws IOException {
@@ -159,6 +167,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Rename this ImageFile by deleting a tag.
+     *
      * @param tagToDelete the tag name need to be deleted
      */
     private void renameDelete(String tagToDelete) throws IOException {
@@ -168,6 +177,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Update the existTag.
+     *
      * @param tagsToRename the ArrayList of tags to be renamed
      */
     public void changeTagHistory(ArrayList<String> tagsToRename) throws IOException {
@@ -178,6 +188,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get the log history of this ImageFile object.
+     *
      * @return the String of log history
      */
     public ArrayList<String> getLog() {
@@ -192,6 +203,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get this ImageFile object's file.
+     *
      * @return the file of this ImageFile object
      */
     public File getFile() {
@@ -199,7 +211,8 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     *  Set this ImageFile object's file.
+     * Set this ImageFile object's file.
+     *
      * @param file the new File to be the file of this ImageFile object
      */
     public void setFile(File file) {
@@ -208,6 +221,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get this ImageFile object's originalName.
+     *
      * @return the originalName of this ImageFile object
      */
     public String getOriginalName() {
@@ -216,6 +230,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get this ImageFile object's oldName.
+     *
      * @return the oldName of this ImageFile object
      */
     public ArrayList<String> getOldName() {
@@ -224,6 +239,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get this ImageFile object's image.
+     *
      * @return the image of this ImageFile object
      */
     public static Image getImage() {
@@ -231,7 +247,8 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     *  Set this ImageFile object's image.
+     * Set this ImageFile object's image.
+     *
      * @param newFile the new File to be the image of this ImageFile object
      */
     private void setImage(File newFile) {
@@ -240,6 +257,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Get this ImageFile object's existTag.
+     *
      * @return the existTag of this ImageFile object
      */
     public ArrayList<String> getExistTag() {
@@ -248,6 +266,7 @@ public class ImageFile implements Serializable {
 
     /**
      * Return whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
+     *
      * @param imageFile other ImageFile object which compare with this ImageFile object
      * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
      */

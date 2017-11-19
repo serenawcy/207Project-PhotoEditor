@@ -6,34 +6,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
 import model.ImageFile;
 import model.ImageFileManager;
 
 public final class FileChooserScene extends Application {
 
 
-    private Scene fileChooserScene;
     private static Stage fileChooserStage;
-//
-//    private static String serPath = "./serializedImageFiles.ser";
-//    private static ImageFileManager imageFileManager = new ImageFileManager(serPath);
 
     @Override
     public void start(final Stage stage) throws FileNotFoundException {
         FileChooserScene.fileChooserStage = stage;
-        stage.setTitle("Image Manager");
+        stage.setTitle("Choose An Image");
 
         FileChooser fileChooser = new FileChooser();
 
@@ -61,8 +53,8 @@ public final class FileChooserScene extends Application {
 
                             }
                             if(!checkFileExist){
-                                imageFileManager.add(inputFile);
-                                imageFileManager.writeToFile(serPath);
+                                ImageFileManager.add(inputFile);
+                                ImageFileManager.writeToFile(serPath);
                             }
                             ManipulationManagerScene.setFile(inputFile);
                             ManipulationManagerScene.display();
@@ -73,9 +65,6 @@ public final class FileChooserScene extends Application {
                         }
                     }
                 });
-
-
-
 
         quit.setOnAction(event -> fileChooserStage.close());
 
@@ -95,19 +84,14 @@ public final class FileChooserScene extends Application {
         rootGroup.getChildren().addAll(inputGridPane);
         rootGroup.setPadding(new Insets(12, 12, 12, 12));
 
-        fileChooserScene = new Scene(rootGroup);
+        Scene fileChooserScene = new Scene(rootGroup);
         fileChooserStage.setScene(fileChooserScene);
         fileChooserStage.show();
-
-
-
     }
 
     public static void main(String[] args) {
         Application.launch(args);
     }
-
-
 
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("View Pictures");

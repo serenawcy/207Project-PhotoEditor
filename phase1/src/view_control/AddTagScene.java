@@ -8,6 +8,7 @@ import javafx.geometry.*;
 import model.ImageFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 class AddTagScene {
 
@@ -32,12 +33,14 @@ class AddTagScene {
     done.setOnAction(
         e -> {
           String tags = tagInput.getText();
+          if (!Objects.equals(tags, "")){
             try {
                 inputFile.addTag(tags);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             tagInput.clear();
+          }
         });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);
@@ -53,7 +56,6 @@ class AddTagScene {
 
         Scene tagScene = new Scene(addTagLayout);
         addScene.setScene(tagScene);
-//        addScene.show();
         addScene.showAndWait();
     }
 

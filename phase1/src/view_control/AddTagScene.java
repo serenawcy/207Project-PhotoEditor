@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 import model.ImageFile;
 
+import java.io.IOException;
+
 class AddTagScene {
 
     private static ImageFile inputFile;
@@ -30,8 +32,12 @@ class AddTagScene {
     done.setOnAction(
         e -> {
           String tags = tagInput.getText();
-          inputFile.addTag(tags);
-          tagInput.clear();
+            try {
+                inputFile.addTag(tags);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            tagInput.clear();
         });
         goBack.setOnAction(e -> {
             //            ManipulationManagerScene.setFile(inputFile);

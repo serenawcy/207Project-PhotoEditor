@@ -6,13 +6,35 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ImageFile implements Serializable{
+public class ImageFile implements Serializable {
+    /**
+     * A File object represented by file
+     */
     private File file;
+
+    /**
+     * A Image object represented by image
+     */
     private static Image image;
+
+    /**
+     * The original name of this ImageFile object
+     */
     private String originalName;
+
+    /**
+     * An ArrayList of String of the exist Tag
+     */
     private ArrayList<String> existTag;
+
+    /**
+     * An ArrayList of String of the old names of this ImageFile object
+     */
     private ArrayList<String> oldName;
 
+    /**
+     * An ArrayList of String of the log history of this ImageFile object
+     */
     private ArrayList<String> history;
 
     /**
@@ -211,7 +233,7 @@ public class ImageFile implements Serializable{
      *  Set this ImageFile object's image.
      * @param newFile the new File to be the image of this ImageFile object
      */
-    public void setImage(File newFile) {
+    private void setImage(File newFile) {
         image = new Image(newFile.toURI().toString());
     }
 

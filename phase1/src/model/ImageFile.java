@@ -192,8 +192,13 @@ public class ImageFile implements Serializable{
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-    public ArrayList<String> getLog() {
-        return history;
+    public String getLog() {
+        StringBuilder allHistory = new StringBuilder();
+        for (String his: history)
+        {
+            allHistory.append(his);
+        }
+        return allHistory.toString();
     }
 
     /**

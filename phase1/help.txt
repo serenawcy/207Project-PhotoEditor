@@ -1,0 +1,8 @@
+# Find the directory where you cloned our git repository
+# Then copy and paste the following instructions into the terminal
+
+cd group_0546
+cd phase1
+cd src
+javac view_control/FileChooserScene.java
+java view_control.FileChooserScene

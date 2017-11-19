@@ -129,9 +129,9 @@ public class ImageFile implements Serializable{
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);
         this.file = renameFile;
-//        this.absoluteAddress = this.file.getAbsolutePath();
-        System.out.println("changeImageName's path: " + this.file.getAbsolutePath());
-        if (success) {
+    //        this.absoluteAddress = this.file.getAbsolutePath();
+    //        System.out.println("changeImageName's path: " + this.file.getAbsolutePath());
+    if (success) {
 //            this.setImage(this.file);
             this.oldName.add(this.file.getName());
             ImageFileManager.add(this);
@@ -242,15 +242,16 @@ public class ImageFile implements Serializable{
      * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
      */
     public boolean equals(ImageFile imageFile) {
-        boolean checkEqual = false;
-        System.out.println("我们的CLASS:" + this.file.getAbsolutePath());
-        if (((imageFile.getFile()).getAbsolutePath()).equals(this.file.getAbsolutePath())){
-            checkEqual = true;
-        }
-        if (checkEqual){
-            System.out.println("in");
-        }
-        return checkEqual;
+//        boolean checkEqual = false;
+//        System.out.println("我们的CLASS:" + this.file.getAbsolutePath());
+//        if (((imageFile.getFile()).getAbsolutePath()).equals(this.file.getAbsolutePath())){
+//            checkEqual = true;
+//        }
+//        if (checkEqual){
+//            System.out.println("in");
+//        }
+//        return checkEqual;
+        return (imageFile.getFile().getAbsolutePath()).equals(this.file.getAbsolutePath());
 
     }
 }

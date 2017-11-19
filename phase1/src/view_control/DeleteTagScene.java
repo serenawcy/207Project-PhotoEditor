@@ -49,7 +49,7 @@ public class DeleteTagScene {
         layout.setPadding(new Insets(20, 20, 20, 20));
         layout.getChildren().addAll(listView, Delete, Back);
 
-        Scene scene = new Scene(layout, 300, 250);
+        Scene scene = new Scene(layout, 350, 400);
         window.setScene(scene);
         window.show();
 

@@ -53,7 +53,7 @@ public class ManipulationManagerScene{
         goBack.setMinWidth(120);
 
         VBox logLayout = new VBox(20);
-        logTextScene = new Scene(logLayout, 600, 300);
+        logTextScene = new Scene(logLayout, 1000, 600);
 
 //        ScrollBar sc = new ScrollBar();
 //        sc.setLayoutX(logTextScene.getWidth() - sc.getWidth());
@@ -120,6 +120,7 @@ public class ManipulationManagerScene{
 
         getLog.setOnAction(
                 e -> {
+                    logLayout.getChildren().remove(logHistory);
                     logHistory = new Text(imgFile.getLog());
                     logLayout.getChildren().add(logHistory);
                     window.setScene(logTextScene);
@@ -130,7 +131,7 @@ public class ManipulationManagerScene{
         getImage();
         layout1.getChildren().addAll(add, delete, select, move, rename, getLog, back, imageView);
         layout1.setAlignment(Pos.CENTER);
-        Scene general = new Scene(layout1, 400, 600);
+        Scene general = new Scene(layout1, 400, 680);
         goBack.setOnAction(event ->  window.setScene(general));
 
         window.setScene(general);

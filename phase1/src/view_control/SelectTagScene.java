@@ -47,7 +47,7 @@ public class SelectTagScene {
             //            ManipulationManagerScene.setFile(inputFile);
             window.close();
         });
-        Scene scene = new Scene(layout, 500, 250);
+        Scene scene = new Scene(layout, 550, 600);
         window.setScene(scene);
         window.show();
     }

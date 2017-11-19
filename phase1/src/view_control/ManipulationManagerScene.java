@@ -1,21 +1,20 @@
 package view_control;
 
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.ImageFile;
-
-
-
 import java.io.File;
+import javafx.scene.control.ScrollBar;
+
+import javax.swing.*;
 import java.io.IOException;
 
 
@@ -24,7 +23,6 @@ import java.io.IOException;
  */
 public class ManipulationManagerScene{
 
-    private static Image img;
     private static ImageFile imgFile;
     private static ImageView imageView;
     private static Text logHistory = new Text();
@@ -34,7 +32,7 @@ public class ManipulationManagerScene{
     /**
      * Display the Scene and construct the buttons.
      */
-    public static void display() {
+    static void display() {
         Stage window = new Stage();
         window.setTitle("Manipulation Scene");
         Button add = new Button("Add New Tag");
@@ -55,14 +53,40 @@ public class ManipulationManagerScene{
         goBack.setMinWidth(120);
 
         VBox logLayout = new VBox(20);
-        logLayout.getChildren().add(goBack);
         logTextScene = new Scene(logLayout, 600, 300);
+
+//        ScrollBar sc = new ScrollBar();
+//        sc.setLayoutX(logTextScene.getWidth() - sc.getWidth());
+//        sc.setMin(0);
+//        sc.setOrientation(Orientation.VERTICAL);
+//        sc.setPrefHeight(180);
+//        sc.setMax(300);
+//        sc.setUnitIncrement(5.0);
+//        sc.setBlockIncrement(20.0);
+//        sc.valueProperty().addListener((ov, old_val, new_val) -> {
+//            logLayout.setLayoutY(-new_val.doubleValue());
+//        });
+//
+//        logLayout.getChildren().addAll(goBack,sc);
+
+
+//        logLayout.getChildren().addAll(goBack);
+//        ScrollPane scrollPane = new ScrollPane(logLayout);
+//        scrollPane.setFitToHeight(true);
+//        ScrollBar s1 = new ScrollBar();
+//        s1.setOrientation(Orientation.VERTICAL);
+//        logLayout.getChildren().addAll(goBack, logHistory);
+        logLayout.getChildren().addAll(goBack);
+//        hbar.addAdjustmentListener(new MyAdjustmentListener());
+//        vbar.addAdjustmentListener(new MyAdjustmentListener());
+
         add.setOnAction(
                 e -> {
                     AddTagScene.setImageFile(imgFile);
                     AddTagScene.display();
                     }
         );
+
         delete.setOnAction(
                 e -> {
                     DeleteTagScene.setImageFile(imgFile);
@@ -92,19 +116,12 @@ public class ManipulationManagerScene{
                     FileRenameScene.setImageFile(imgFile);
                     FileRenameScene.display();
                 }
-
         );
 
         getLog.setOnAction(
                 e -> {
-                    if (ImageFile.isLogFileExist()) {
-                        try {
-                            logHistory = new Text(ImageFile.getLog());
-                            logLayout.getChildren().add(logHistory);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
+                    logHistory = new Text(imgFile.getLog());
+                    logLayout.getChildren().add(logHistory);
                     window.setScene(logTextScene);
                 });
 
@@ -118,8 +135,6 @@ public class ManipulationManagerScene{
 
         window.setScene(general);
         window.show();
-
-
     }
 
     /**
@@ -127,8 +142,8 @@ public class ManipulationManagerScene{
      */
 
     // 这里的image parameter 可以去掉了  PASS IN 给我一个IMAGEFILE -> getimage method
-    public static void getImage(){
-        img = imgFile.getImage();
+    private static void getImage(){
+        Image img = ImageFile.getImage();
         imageView = new ImageView(img);
         imageView.setFitHeight(300);
         imageView.setFitWidth(300);

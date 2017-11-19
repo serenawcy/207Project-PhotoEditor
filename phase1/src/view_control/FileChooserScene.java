@@ -105,8 +105,10 @@ public final class FileChooserScene extends Application {
         fileChooserStage.show();
     }
 
-    /** Choose an Image with jpg, png, bmp, gif, jepg format only from user's computer. */
-    private static void configureFileChooser(final FileChooser fileChooser) {
+  // File Chooser adapted from ORACLE:
+  // https://docs.oracle.com/javafx/2/ui_controls/file-chooser.html
+  /** Choose an Image with jpg, png, bmp, gif, jepg format only from user's computer. */
+  private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("View Pictures");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser

@@ -46,22 +46,22 @@ class MoveFileScene {
     move.setMinWidth(MAGIC200);
     goBack.setMinWidth(MAGIC200);
 
+    // Directory Chooser adapted from ORACLE:
+    // https://docs.oracle.com/javafx/2/ui_controls/file-chooser.html
     move.setOnAction(
-            e -> {
-              String directory;
-              DirectoryChooser directoryChooser = new DirectoryChooser();
-              //          final DirectoryChooser directoryChooser = new DirectoryChooser();
-              //          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
-              File selectedDirectory = directoryChooser.showDialog(moveToStage);
-              if (selectedDirectory != null) {
-                directory = selectedDirectory.getAbsolutePath();
-                try {
-                  inputFile.changeDirectory(directory);
-                } catch (Exception e1) {
-                  e1.printStackTrace();
-                }
-              }
-            });
+        e -> {
+          String directory;
+          DirectoryChooser directoryChooser = new DirectoryChooser();
+          File selectedDirectory = directoryChooser.showDialog(moveToStage);
+          if (selectedDirectory != null) {
+            directory = selectedDirectory.getAbsolutePath();
+            try {
+              inputFile.changeDirectory(directory);
+            } catch (Exception e1) {
+              e1.printStackTrace();
+            }
+          }
+        });
 
     goBack.setOnAction(e -> moveToStage.close());
 

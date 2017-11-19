@@ -19,96 +19,108 @@ import model.ImageFileManager;
 
 public final class FileChooserScene extends Application {
 
+  /** Magic number 120 */
+  private static final int MAGIC120 = 120;
 
-    private static Stage fileChooserStage;
+  /** Magic number 6 */
+  private static final int MAGIC6 = 6;
 
-    @Override
-    public void start(final Stage stage) throws FileNotFoundException {
-        FileChooserScene.fileChooserStage = stage;
-        stage.setTitle("Choose An Image");
+  /** Magic number 12 */
+  private static final int MAGIC12 = 12;
 
-        FileChooser fileChooser = new FileChooser();
+  /** Initialize an Stage. */
+  private static Stage fileChooserStage;
 
-        Button openButton = new Button("Open a Picture");
-        Button quit = new Button("Quit");
-        Button goBack = new Button("Go Back");
+  public static void main(String[] args) {
+    Application.launch(args);
+  }
 
-        openButton.setOnAction(
-                e -> {
-                    configureFileChooser(fileChooser);
-                    File file = fileChooser.showOpenDialog(stage);
-                    if (file != null) {
-                        String serPath = "./serializedImageFiles.ser";
-                        try {
-                            boolean checkFileExist = false;
-                            ImageFile inputFile = new ImageFile(file);
-                            ImageFileManager imageFileManager = new ImageFileManager(serPath);
-                            ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
+  /**
+   * A FileChooserScene scene than contains buttons for the user to select an Image File from their
+   * computers.
+   */
+  @Override
+  public void start(final Stage stage) throws FileNotFoundException {
+    FileChooserScene.fileChooserStage = stage;
+    stage.setTitle("Choose An Image");
 
-                            for(ImageFile imgfile: imageFiles){
-                                if(imgfile.equals(inputFile)){
-                                    inputFile = imgfile;
-                                    checkFileExist = true;
-                                }
+    FileChooser fileChooser = new FileChooser();
 
-                            }
-                            if(!checkFileExist){
-                                ImageFileManager.add(inputFile);
-                                ImageFileManager.writeToFile(serPath);
-                            }
-                            ManipulationManagerScene.setFile(inputFile);
-                            ManipulationManagerScene.display();
-                            fileChooserStage.close();
+    Button openButton = new Button("Open a Picture");
+    Button quit = new Button("Quit");
+    Button goBack = new Button("Go Back");
 
-                        } catch (ClassNotFoundException | IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                });
+    openButton.setOnAction(
+        e -> {
+          configureFileChooser(fileChooser);
+          File file = fileChooser.showOpenDialog(stage);
+          if (file != null) {
+            String serPath = "./serializedImageFiles.ser";
+            try {
+              boolean checkFileExist = false;
+              ImageFile inputFile = new ImageFile(file);
+//              ImageFileManager imageFileManager = new ImageFileManager(serPath);
+              ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
 
-        quit.setOnAction(event -> fileChooserStage.close());
+              for (ImageFile imgfile : imageFiles) {
+                if (imgfile.equals(inputFile)) {
+                  inputFile = imgfile;
+                  checkFileExist = true;
+                }
+              }
+              if (!checkFileExist) {
+                ImageFileManager.add(inputFile);
+                ImageFileManager.writeToFile(serPath);
+              }
+              ManipulationManagerScene.setFile(inputFile);
+              ManipulationManagerScene.display();
+              fileChooserStage.close();
 
-        //resize the button
-        openButton.setMinWidth(120);
-        quit.setMinWidth(120);
-        goBack.setMinWidth(120);
+            } catch (IOException e1) {
+              e1.printStackTrace();
+            }
+          }
+        });
 
-        final GridPane inputGridPane = new GridPane();
-        GridPane.setConstraints(openButton, 0, 0);
-        GridPane.setConstraints(quit, 2, 0);
-        inputGridPane.setHgap(6);
-        inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(openButton, quit);
+    quit.setOnAction(event -> fileChooserStage.close());
 
-        final Pane rootGroup = new VBox(12);
-        rootGroup.getChildren().addAll(inputGridPane);
-        rootGroup.setPadding(new Insets(12, 12, 12, 12));
+    // resize the button
+    openButton.setMinWidth(MAGIC120);
+    quit.setMinWidth(MAGIC120);
+    goBack.setMinWidth(MAGIC120);
 
-        Scene fileChooserScene = new Scene(rootGroup);
-        fileChooserStage.setScene(fileChooserScene);
-        fileChooserStage.show();
-    }
+    final GridPane inputGridPane = new GridPane();
+    GridPane.setConstraints(openButton, 0, 0);
+    GridPane.setConstraints(quit, 2, 0);
+    inputGridPane.setHgap(MAGIC6);
+    inputGridPane.setVgap(MAGIC6);
+    inputGridPane.getChildren().addAll(openButton, quit);
 
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
+    final Pane rootGroup = new VBox(MAGIC12);
+    rootGroup.getChildren().addAll(inputGridPane);
+    rootGroup.setPadding(new Insets(MAGIC12, MAGIC12, MAGIC12, MAGIC12));
 
-    private static void configureFileChooser(final FileChooser fileChooser) {
-        fileChooser.setTitle("View Pictures");
-        fileChooser.setInitialDirectory(
-                new File(System.getProperty("user.home"))
-        );
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
-        );
-    }
+    Scene fileChooserScene = new Scene(rootGroup);
+    fileChooserStage.setScene(fileChooserScene);
+    fileChooserStage.show();
+  }
 
-    static void display(){
-        fileChooserStage.show();
-    }
+  /** Choose an Image with jpg, png, bmp, gif, jepg format only from user's computer. */
+  private static void configureFileChooser(final FileChooser fileChooser) {
+    fileChooser.setTitle("View Pictures");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    fileChooser
+        .getExtensionFilters()
+        .addAll(
+            new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+            new FileChooser.ExtensionFilter("PNG", "*.png"),
+            new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+            new FileChooser.ExtensionFilter("GIF", "*.gif"),
+            new FileChooser.ExtensionFilter("JPEG", "*.jpeg"));
+  }
 
+  /** Display the Scene. */
+  static void display() {
+    fileChooserStage.show();
+  }
 }

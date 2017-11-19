@@ -13,72 +13,74 @@ import model.ImageFile;
 
 import java.io.File;
 
-public class MoveFileScene {
+class MoveFileScene {
 
-    private static ImageFile inputFile;
+  /** Magic number 10 */
+  private static final int MAGIC10 = 10;
 
-//    private static Stage moveTo;
-//    private static Stage moveToStage;
+  /** Magic number 20 */
+  private static final int MAGIC20 = 20;
 
-    static void display() {
-        Stage moveToStage = new Stage();
-        moveToStage.initModality(Modality.APPLICATION_MODAL);
-        moveToStage.setTitle("Select a directory");
-        moveToStage.setMinWidth(250);
-        Label MoveInstruction = new Label();
-        MoveInstruction.setText("Please select a directory that you want the Image to move");
+  /** Magic number 250 */
+  private static final int MAGIC250 = 250;
 
-        //Create two buttons
-        Button move = new Button("Select Directory");
-        Button goBack = new Button("Go back Last Page");
+  /** Magic number 200 */
+  private static final int MAGIC200 = 200;
 
-        move.setMinWidth(200);
-        goBack.setMinWidth(200);
+  /** Initialize an ImageFile. */
+  private static ImageFile inputFile;
+
+  /** Display the Scene and construct the buttons. */
+  static void display() {
+    Stage moveToStage = new Stage();
+    moveToStage.initModality(Modality.APPLICATION_MODAL);
+    moveToStage.setTitle("Select a directory");
+    moveToStage.setMinWidth(MAGIC250);
+    Label MoveInstruction = new Label();
+    MoveInstruction.setText("Please select a directory that you want the Image to move");
+
+    // Create two buttons
+    Button move = new Button("Select Directory");
+    Button goBack = new Button("Go back Last Page");
+
+    move.setMinWidth(MAGIC200);
+    goBack.setMinWidth(MAGIC200);
 
     move.setOnAction(
         e -> {
-          //                    String directoryPath = moveDirectory();
           String directory;
-          final DirectoryChooser directoryChooser = new DirectoryChooser();
-          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
+          DirectoryChooser directoryChooser = new DirectoryChooser();
+          //          final DirectoryChooser directoryChooser = new DirectoryChooser();
+          //          final File selectedDirectory = directoryChooser.showDialog(moveToStage);
+          File selectedDirectory = directoryChooser.showDialog(moveToStage);
           if (selectedDirectory != null) {
-              directory = selectedDirectory.getAbsolutePath();
-//            System.out.println(directory);
-              try {
-                  inputFile.changeDirectory(directory);
-              } catch (Exception e1) {
-                  e1.printStackTrace();
-              }
+            directory = selectedDirectory.getAbsolutePath();
+            try {
+              inputFile.changeDirectory(directory);
+            } catch (Exception e1) {
+              e1.printStackTrace();
+            }
           }
-
         });
 
-        goBack.setOnAction(e -> {
-            moveToStage.close();
-        });
+    goBack.setOnAction(e -> moveToStage.close());
 
-        VBox addTagLayout = new VBox(10);
-        addTagLayout.setPadding(new Insets(20, 20, 20, 20));
-        addTagLayout.getChildren().addAll(MoveInstruction, move, goBack);
-        addTagLayout.setAlignment(Pos.CENTER);
+    VBox addTagLayout = new VBox(MAGIC10);
+    addTagLayout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
+    addTagLayout.getChildren().addAll(MoveInstruction, move, goBack);
+    addTagLayout.setAlignment(Pos.CENTER);
 
-        Scene tagScene = new Scene(addTagLayout);
-        moveToStage.setScene(tagScene);
-//        moveToStage.show();
-        moveToStage.showAndWait();
-    }
+    Scene tagScene = new Scene(addTagLayout);
+    moveToStage.setScene(tagScene);
+    moveToStage.showAndWait();
+  }
 
-    static void setImageFile(ImageFile imageFile){
-        inputFile = imageFile;
-    }
-
-//    private static String moveDirectory() {
-//        String directory;
-//        final DirectoryChooser directoryChooser = new DirectoryChooser();
-//        final File selectedDirectory = directoryChooser.showDialog(moveTo);
-//        if (selectedDirectory != null) {
-//            directory = selectedDirectory.getAbsolutePath();
-//            return directory;
-//        }
-//    }
+  /**
+   * Set the ImageFile
+   *
+   * @param imageFile the ImageFile
+   */
+  static void setImageFile(ImageFile imageFile) {
+    inputFile = imageFile;
+  }
 }

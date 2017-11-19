@@ -1,1 +1,12 @@
 Chenyue Wang:
+
+
+
+
+
+
+Yuhan Shao:
+1. Discussed the general design of the whole project with other group members.
+2. Wrote out the diagram and the scenes we need for the project.
+3. Responsible for the whole ImageFile.java.
+4. Debugged the ImageFile class.

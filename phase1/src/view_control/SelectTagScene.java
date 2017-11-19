@@ -1,6 +1,5 @@
 package view_control;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,89 +8,74 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class SelectTagScene {
+class SelectTagScene {
 
-    //    Stage window;
-//    Scene scene;
-//    Button button;
+
+    /** Initialize an ImageFile */
     private static ImageFile inputFile;
 
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    /** Magic Number 10 */
+    private static final int MAGIC10 = 10;
 
-    public static void display(){
+    /** Magic Number 20 */
+    private static final int MAGIC20 = 20;
+
+    /** Magic Number 120 */
+    private static final int MAGIC120 = 120;
+
+    /** Magic Number 550 */
+    private static final int MAGIC550 = 550;
+
+    /** Magic Number 600 */
+    private static final int MAGIC600 = 600;
+
+    /** Display the Scene and construct the buttons. */
+    static void display(){
         Stage window = new Stage();
         window.setTitle("Select Old Tag(s)");
         window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to rename the photo for");
-        Button Submit = new Button("Rename");
-        Button Back = new Button("Go back");
-        Submit.setMinWidth(120);
-        Back.setMinWidth(120);
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20, 20, 20, 20));
+        Button submit = new Button("Rename");
+        Button back = new Button("Go back");
+        submit.setMinWidth(MAGIC120);
+        back.setMinWidth(MAGIC120);
+        VBox layout = new VBox(MAGIC10);
+        layout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
         layout.getChildren().add(label);
-        ArrayList checkBox = new ArrayList(); //Type is CheckBox box1 = new CheckBox();
+        ArrayList<CheckBox> checkBox = new ArrayList<>(); //Type is CheckBox box1 = new CheckBox();
         for (String tag : inputFile.getExistTag()) {
             CheckBox box = new CheckBox(tag);
             checkBox.add(box);
             layout.getChildren().add(box); //Display
         }
-        layout.getChildren().add(Submit);
-        layout.getChildren().add(Back);
-        Submit.setOnAction(e -> handleOptions(checkBox));
-        Back.setOnAction(e -> {
-            //            ManipulationManagerScene.setFile(inputFile);
-            window.close();
-        });
-        Scene scene = new Scene(layout, 550, 600);
+        layout.getChildren().add(submit);
+        layout.getChildren().add(back);
+        submit.setOnAction(e -> handleOptions((checkBox)));
+        back.setOnAction(e -> window.close());
+        Scene scene = new Scene(layout, MAGIC550, MAGIC600);
         window.setScene(scene);
         window.show();
     }
 
 
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        Stage window = new Stage();
-//        window.setTitle("Select Old Tag(s)");
-//        window.initModality(Modality.APPLICATION_MODAL);
-//        Label label = new Label("Please check the tag(s) you want to rename the photo for");
-//        Button Submit = new Button("Submit");
-//        VBox layout = new VBox(10);
-//        layout.setPadding(new Insets(20, 20, 20, 20));
-//        ArrayList checkBox = new ArrayList(); //Type is CheckBox box1 = new CheckBox();
-//        for (String tag : inputFile.getTagManager().readTags()) {
-//            CheckBox box = new CheckBox(tag);
-//            checkBox.add(box);
-//            layout.getChildren().add(box); //Display
-//        }
-//        Submit.setOnAction(e -> handleOptions(checkBox));
-//        Scene scene = new Scene(layout, 300, 250);
-//        window.setScene(scene);
-//        window.show();
-//    }
-
-    //Handle checkbox options
     private static void  handleOptions(ArrayList<CheckBox> checkBox) {
 
-        StringBuilder CurrentName = new StringBuilder();
-        CurrentName.append(inputFile.getOriginalName());
+        StringBuilder currentName = new StringBuilder();
+        currentName.append(inputFile.getOriginalName());
         ArrayList<String> deleteTag = new ArrayList<>();
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
-                CurrentName.append("@").append(box.getText());
+                currentName.append("@").append(box.getText());
             } else {
                 deleteTag.add(box.getText());
             }
 
         }
         try {
-            inputFile.changeImageName(CurrentName.toString());
+            inputFile.changeImageName(currentName.toString());
             for (String a: deleteTag) {
                 inputFile.deleteTag(a);
             }
@@ -100,8 +84,13 @@ public class SelectTagScene {
         }
     }
 
-
-    public static void setImageFile(ImageFile imageFile) {
+    /**
+     * Set the ImageFile
+     *
+     * @param imageFile the ImageFile
+     */
+    
+    static void setImageFile(ImageFile imageFile) {
         inputFile = imageFile;
     }
 

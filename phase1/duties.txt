@@ -1,9 +1,8 @@
-Chenyue Wang:
-
-
-
-
-
+Chenyue Wang #1003048052:
+1. Discussed the general design of the whole project with other group members.
+2. Responsible for back-end part in out project(ImageFileManager.java)
+3. Debugged the ImageFile class and the the other classes with the group members.
+4. Wrote help.txt
 
 Yuhan Shao #1002281327:
 1. Discussed the general design of the whole project with other group members.

@@ -53,11 +53,12 @@ public final class FileChooserScene extends Application {
             if (file != null) {
                 String serPath = "./serializedImageFiles.ser";
                 try {
+                    System.out.println("User的照片"+ file.getAbsolutePath());
                     boolean checkFileExist = false;
                     ImageFile inputFile = new ImageFile(file);
                     ImageFileManager imageFileManager = new ImageFileManager(serPath);
                     ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
-
+                    System.out.println(imageFiles + "ahahaha");
                     for(ImageFile imgfile: imageFiles){
                         if(imgfile.equals(inputFile)){
                             inputFile = imgfile;
@@ -66,8 +67,8 @@ public final class FileChooserScene extends Application {
 
                     }
                     if(!checkFileExist){
-                        imageFileManager.add(inputFile);
-                        imageFileManager.writeToFile(serPath);
+                        ImageFileManager.add(inputFile);
+                        ImageFileManager.writeToFile(serPath);
                     }
                     ManipulationManagerScene.setFile(inputFile);
                     ManipulationManagerScene.display();

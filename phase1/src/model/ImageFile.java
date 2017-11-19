@@ -34,6 +34,7 @@ public class ImageFile implements Serializable{
             this.originalName = this.file.getName().substring(0, target - 1);
         }
 
+        this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
         this.oldName = new ArrayList<>();
 
@@ -132,7 +133,8 @@ public class ImageFile implements Serializable{
 
         Date time = new Date();
 
-        history.add(time + "Renamed this image file from " + this.file.getName() + " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
+        history.add(time + "Renamed this image file from " + this.file.getName() +
+                " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);

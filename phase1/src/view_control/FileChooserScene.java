@@ -24,9 +24,8 @@ import model.ImageFileManager;
 public final class FileChooserScene extends Application {
 
 
-    private Scene logTextScene, fileChooserScene;
+    private Scene fileChooserScene;
     private static Stage fileChooserStage;
-    private static Text logHistory = new Text();
 //
 //    private static String serPath = "./serializedImageFiles.ser";
 //    private static ImageFileManager imageFileManager = new ImageFileManager(serPath);
@@ -39,64 +38,43 @@ public final class FileChooserScene extends Application {
         FileChooser fileChooser = new FileChooser();
 
         Button openButton = new Button("Open a Picture");
-        Button getLog = new Button("Get log history");
         Button quit = new Button("Quit");
         Button goBack = new Button("Go Back");
-        VBox logLayout = new VBox(20);
 
-    openButton.setOnAction(
-        new EventHandler<ActionEvent>() {
-          @Override
-          public void handle(final ActionEvent e) {
-            configureFileChooser(fileChooser);
-            File file = fileChooser.showOpenDialog(stage);
-            if (file != null) {
-                String serPath = "./serializedImageFiles.ser";
-                try {
-                    System.out.println("User的照片"+ file.getAbsolutePath());
-                    boolean checkFileExist = false;
-                    ImageFile inputFile = new ImageFile(file);
-                    ImageFileManager imageFileManager = new ImageFileManager(serPath);
-                    ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
-                    System.out.println(imageFiles + "ahahaha");
-                    for(ImageFile imgfile: imageFiles){
-                        if(imgfile.equals(inputFile)){
-                            inputFile = imgfile;
-                            checkFileExist = true;
-                        }
+        openButton.setOnAction(
+                e -> {
+                    configureFileChooser(fileChooser);
+                    File file = fileChooser.showOpenDialog(stage);
+                    if (file != null) {
+                        String serPath = "./serializedImageFiles.ser";
+                        try {
+                            boolean checkFileExist = false;
+                            ImageFile inputFile = new ImageFile(file);
+                            ImageFileManager imageFileManager = new ImageFileManager(serPath);
+                            ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
 
-                    }
-                    if(!checkFileExist){
-                        ImageFileManager.add(inputFile);
-                        ImageFileManager.writeToFile(serPath);
-                    }
-                    ManipulationManagerScene.setFile(inputFile);
-                    ManipulationManagerScene.display();
-                    fileChooserStage.close();
+                            for(ImageFile imgfile: imageFiles){
+                                if(imgfile.equals(inputFile)){
+                                    inputFile = imgfile;
+                                    checkFileExist = true;
+                                }
 
-                } catch (ClassNotFoundException | IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-          }
-        });
-
-        getLog.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
-                        if (ImageFile.isLogFileExist()) {
-                            try {
-                                logHistory = new Text(ImageFile.getLog());
-//                System.out.println(logHistory);
-                                logLayout.getChildren().add(logHistory);
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
                             }
+                            if(!checkFileExist){
+                                imageFileManager.add(inputFile);
+                                imageFileManager.writeToFile(serPath);
+                            }
+                            ManipulationManagerScene.setFile(inputFile);
+                            ManipulationManagerScene.display();
+                            fileChooserStage.close();
+
+                        } catch (ClassNotFoundException | IOException e1) {
+                            e1.printStackTrace();
                         }
-                        fileChooserStage.setScene(logTextScene);
                     }
                 });
+
+
 
 
         quit.setOnAction(event -> fileChooserStage.close());
@@ -105,15 +83,13 @@ public final class FileChooserScene extends Application {
         openButton.setMinWidth(120);
         quit.setMinWidth(120);
         goBack.setMinWidth(120);
-        getLog.setMinWidth(120);
 
         final GridPane inputGridPane = new GridPane();
         GridPane.setConstraints(openButton, 0, 0);
-        GridPane.setConstraints(getLog, 1, 0);
         GridPane.setConstraints(quit, 2, 0);
         inputGridPane.setHgap(6);
         inputGridPane.setVgap(6);
-        inputGridPane.getChildren().addAll(openButton, getLog, quit);
+        inputGridPane.getChildren().addAll(openButton, quit);
 
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(inputGridPane);
@@ -124,17 +100,14 @@ public final class FileChooserScene extends Application {
         fileChooserStage.show();
 
 
-        //The Log Scene
-        goBack.setOnAction(event ->  fileChooserStage.setScene(fileChooserScene));
-//        Text logHistory = new Text(ImageFile.getLog());
-//        VBox logLayout = new VBox(20);
-        logLayout.getChildren().add(goBack);
-        logTextScene = new Scene(logLayout, 600, 300);
+
     }
 
     public static void main(String[] args) {
         Application.launch(args);
     }
+
+
 
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("View Pictures");

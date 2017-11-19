@@ -62,9 +62,9 @@ public final class FileChooserScene extends Application {
                             ImageFileManager imageFileManager = new ImageFileManager(serPath);
                             ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
 
-                            for (ImageFile imgfile : imageFiles) {
-                                if (imgfile.equals(inputFile)) {
-                                    inputFile = imgfile;
+                            for (ImageFile imgFile : imageFiles) {
+                                if (imgFile.equals(inputFile)) {
+                                    inputFile = imgFile;
                                     checkFileExist = true;
                                 }
                             }
@@ -76,9 +76,7 @@ public final class FileChooserScene extends Application {
                             ManipulationManagerScene.display();
                             fileChooserStage.close();
 
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        } catch (ClassNotFoundException e1) {
+                        } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
                     }

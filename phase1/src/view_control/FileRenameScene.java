@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import model.ImageFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,7 +45,11 @@ public class FileRenameScene {
 
 //        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         done.setOnAction(e -> {
-            inputFile.changeTagHistory(buttonClicked());
+            try {
+                inputFile.changeTagHistory(buttonClicked());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
         });
         goBack.setOnAction(e -> {
@@ -62,7 +67,7 @@ public class FileRenameScene {
 
     }
 
-    private static ArrayList<String> buttonClicked() {
+    private static ArrayList<String> buttonClicked() throws IOException {
         ObservableList<String> names;
         ArrayList<String> nameSelected = new ArrayList<>();
         ArrayList<String> tagWanted = new ArrayList<>();
@@ -80,8 +85,10 @@ public class FileRenameScene {
         String[] tagWant = nameToChange.split("@");
         Collections.addAll(tagWanted, tagWant);
         tagWanted.remove(0);
+        if (!inputFile.getOldName().contains(nameToChange)){
+            inputFile.changeImageName(nameToChange);
+        }
 
-        inputFile.changeImageName(nameToChange);
 
         return tagWanted;
 //        for (String tag: tags){

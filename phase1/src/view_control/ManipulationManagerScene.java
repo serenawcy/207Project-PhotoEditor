@@ -9,12 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.ImageFile;
 
 
 
 import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -25,6 +27,8 @@ public class ManipulationManagerScene{
     private static Image img;
     private static ImageFile imgFile;
     private static ImageView imageView;
+    private static Text logHistory = new Text();
+    private static Scene logTextScene;
 
 
     /**
@@ -45,8 +49,14 @@ public class ManipulationManagerScene{
         back.setMinWidth(120);
         Button rename = new Button("Rename");
         rename.setMinWidth(120);
+        Button getLog = new Button("Get Log History");
+        getLog.setMinWidth(120);
+        Button goBack = new Button("Go Back");
+        goBack.setMinWidth(120);
 
-
+        VBox logLayout = new VBox(20);
+        logLayout.getChildren().add(goBack);
+        logTextScene = new Scene(logLayout, 600, 300);
         add.setOnAction(
                 e -> {
                     AddTagScene.setImageFile(imgFile);
@@ -85,12 +95,27 @@ public class ManipulationManagerScene{
 
         );
 
+        getLog.setOnAction(
+                e -> {
+                    if (ImageFile.isLogFileExist()) {
+                        try {
+                            logHistory = new Text(ImageFile.getLog());
+                            logLayout.getChildren().add(logHistory);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    window.setScene(logTextScene);
+                });
+
 
         VBox layout1 = new VBox(20);
         getImage();
-        layout1.getChildren().addAll(add, delete, select, move, rename, back, imageView);
+        layout1.getChildren().addAll(add, delete, select, move, rename, getLog, back, imageView);
         layout1.setAlignment(Pos.CENTER);
         Scene general = new Scene(layout1, 400, 600);
+        goBack.setOnAction(event ->  window.setScene(general));
+
         window.setScene(general);
         window.show();
 

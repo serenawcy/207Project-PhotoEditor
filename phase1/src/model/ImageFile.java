@@ -117,9 +117,11 @@ public class ImageFile implements Serializable{
         boolean success = this.file.renameTo(renameFile);
         this.file = renameFile;
 
-    if (success) {
+        if (success) {
             this.setImage(this.file);
-            this.oldName.add(this.file.getName());
+            if (!this.oldName.contains(this.file.getName())){
+                this.oldName.add(this.file.getName());
+            }
             ImageFileManager.add(this);
             ImageFileManager.writeToFile("./serializedImageFiles.ser");
         }

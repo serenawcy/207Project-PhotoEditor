@@ -12,10 +12,8 @@ public class ImageFile implements Serializable{
     private String originalName;
     private ArrayList<String> existTag;
     private ArrayList<String> oldName;
-    private static boolean logFileExist;
 
     private ArrayList<String> history;
-    // private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
 
     /**
      * Create a new empty ImageFile.
@@ -39,18 +37,6 @@ public class ImageFile implements Serializable{
         this.oldName = new ArrayList<>();
 
         this.oldName.add(this.file.getName());
-
-//        FileHandler fileHandler = new FileHandler("./logHistory.txt");
-//        logFileExist = true;
-//        fileHandler.setLevel(Level.FINE);
-//        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
-//
-//        logger.setLevel(Level.ALL);
-//        logger.addHandler(fileHandler);
-    }
-
-    public static boolean isLogFileExist() {
-        return logFileExist;
     }
 
     /**
@@ -58,7 +44,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
      */
-    public String getNameWithoutSuffix(File file) {
+    private String getNameWithoutSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[0];
     }
@@ -68,7 +54,7 @@ public class ImageFile implements Serializable{
      * @param file the File object to get its suffix
      * @return the suffix of the File object
      */
-    public String getSuffix(File file) {
+    private String getSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
         return separate[1];
     }
@@ -121,15 +107,6 @@ public class ImageFile implements Serializable{
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws IOException {
-//        Logger logger = Logger.getLogger(ImageFile.class.getName());
-//
-//        FileHandler fileHandler = new FileHandler("./logHistory.txt");
-//        logFileExist = true;
-//        fileHandler.setLevel(Level.FINE);
-//        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
-//
-//        logger.setLevel(Level.ALL);
-//        logger.addHandler(fileHandler);
 
         Date time = new Date();
 
@@ -139,10 +116,9 @@ public class ImageFile implements Serializable{
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);
         this.file = renameFile;
-    //        this.absoluteAddress = this.file.getAbsolutePath();
-    //        System.out.println("changeImageName's path: " + this.file.getAbsolutePath());
+
     if (success) {
-//            this.setImage(this.file);
+            this.setImage(this.file);
             this.oldName.add(this.file.getName());
             ImageFileManager.add(this);
             ImageFileManager.writeToFile("./serializedImageFiles.ser");
@@ -170,25 +146,11 @@ public class ImageFile implements Serializable{
      * Update the existTag.
      * @param tagsToRename the ArrayList of tags to be renamed
      */
-    public void changeTagHistory(ArrayList<String> tagsToRename) {
+    public void changeTagHistory(ArrayList<String> tagsToRename) throws IOException {
         this.existTag = tagsToRename;
+        ImageFileManager.add(this);
+        ImageFileManager.writeToFile("./serializedImageFiles.ser");
     }
-
-//    /**
-//     * Get the log history of this ImageFile object.
-//     * @return the String of log history
-//     */
-//    public static String getLog() throws FileNotFoundException {
-//
-//        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
-//        String logHistory = "";
-//
-//        while (scanner.hasNextLine()) {
-//            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
-//        }
-//        scanner.close();
-//        return logHistory;
-//    }
 
     /**
      * Get the log history of this ImageFile object.

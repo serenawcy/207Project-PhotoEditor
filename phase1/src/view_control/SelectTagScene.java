@@ -8,6 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class SelectTagScene {
@@ -52,57 +53,44 @@ class SelectTagScene {
         }
         layout.getChildren().add(submit);
         layout.getChildren().add(back);
-        submit.setOnAction(e -> handleOptions((checkBox)));
+        submit.setOnAction(e -> {
+            try {
+                handleOptions((checkBox));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
         back.setOnAction(e -> window.close());
         Scene scene = new Scene(layout, MAGIC550, MAGIC600);
         window.setScene(scene);
         window.show();
     }
 
-//    public void start(Stage primaryStage) throws Exception {
-//        Stage window = new Stage();
-//        window.setTitle("Select Old Tag(s)");
-//        window.initModality(Modality.APPLICATION_MODAL);
-//        Label label = new Label("Please check the tag(s) you want to rename the photo for");
-//        Button Submit = new Button("Submit");
-//        VBox layout = new VBox(10);
-//        layout.setPadding(new Insets(20, 20, 20, 20));
-//        ArrayList checkBox = new ArrayList(); //Type is CheckBox box1 = new CheckBox();
-//        for (String tag : inputFile.getTagManager().readTags()) {
-//            CheckBox box = new CheckBox(tag);
-//            checkBox.add(box);
-//            layout.getChildren().add(box); //Display
-//        }
-//        Submit.setOnAction(e -> handleOptions(checkBox));
-//        Scene scene = new Scene(layout, 300, 250);
-//        window.setScene(scene);
-//        window.show();
-//    }
 
-    //Handle checkbox options
-
-    private static void  handleOptions(ArrayList<CheckBox> checkBox) {
+    private static void  handleOptions(ArrayList<CheckBox> checkBox) throws IOException {
 
         StringBuilder currentName = new StringBuilder();
         currentName.append(inputFile.getOriginalName());
         ArrayList<String> deleteTag = new ArrayList<>();
+        boolean checkDelete = true;
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
                 currentName.append("@").append(box.getText());
+                checkDelete = false;
             } else {
                 deleteTag.add(box.getText());
+                checkDelete = true;
             }
-
         }
-        try {
+        if (!checkDelete){
             inputFile.changeImageName(currentName.toString());
-            for (String a: deleteTag) {
+        } else {
+            for (String a : deleteTag) {
                 inputFile.deleteTag(a);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
 
     /**

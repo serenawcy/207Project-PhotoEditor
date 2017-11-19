@@ -59,7 +59,7 @@ public final class FileChooserScene extends Application {
                         try {
                             boolean checkFileExist = false;
                             ImageFile inputFile = new ImageFile(file);
-//              ImageFileManager imageFileManager = new ImageFileManager(serPath);
+                            ImageFileManager imageFileManager = new ImageFileManager(serPath);
                             ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
 
                             for (ImageFile imgfile : imageFiles) {
@@ -77,6 +77,8 @@ public final class FileChooserScene extends Application {
                             fileChooserStage.close();
 
                         } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
                     }

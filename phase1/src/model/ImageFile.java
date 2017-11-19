@@ -4,11 +4,7 @@ import javafx.scene.image.Image;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
 
 public class ImageFile implements Serializable{
     private File file;
@@ -18,7 +14,8 @@ public class ImageFile implements Serializable{
     private ArrayList<String> oldName;
     private static boolean logFileExist;
 
-    private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
+    private ArrayList<String> history;
+    // private static final Logger logger = Logger.getLogger(ImageFile.class.getName());
 
     /**
      * Create a new empty ImageFile.
@@ -42,13 +39,13 @@ public class ImageFile implements Serializable{
 
         this.oldName.add(this.file.getName());
 
-        FileHandler fileHandler = new FileHandler("./logHistory.txt");
-        logFileExist = true;
-        fileHandler.setLevel(Level.FINE);
-        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
-
-        logger.setLevel(Level.ALL);
-        logger.addHandler(fileHandler);
+//        FileHandler fileHandler = new FileHandler("./logHistory.txt");
+//        logFileExist = true;
+//        fileHandler.setLevel(Level.FINE);
+//        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
+//
+//        logger.setLevel(Level.ALL);
+//        logger.addHandler(fileHandler);
     }
 
     public static boolean isLogFileExist() {
@@ -123,8 +120,19 @@ public class ImageFile implements Serializable{
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws IOException {
-        logger.log(Level.FINE, "Renamed this image file from " + this.file.getName() + " to "
-                + newImageName + "." + this.getSuffix(this.file));
+//        Logger logger = Logger.getLogger(ImageFile.class.getName());
+//
+//        FileHandler fileHandler = new FileHandler("./logHistory.txt");
+//        logFileExist = true;
+//        fileHandler.setLevel(Level.FINE);
+//        fileHandler.setFormatter(new java.util.logging.SimpleFormatter());
+//
+//        logger.setLevel(Level.ALL);
+//        logger.addHandler(fileHandler);
+
+        Date time = new Date();
+
+        history.add(time + "Renamed this image file from " + this.file.getName() + " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);
@@ -164,20 +172,28 @@ public class ImageFile implements Serializable{
         this.existTag = tagsToRename;
     }
 
+//    /**
+//     * Get the log history of this ImageFile object.
+//     * @return the String of log history
+//     */
+//    public static String getLog() throws FileNotFoundException {
+//
+//        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
+//        String logHistory = "";
+//
+//        while (scanner.hasNextLine()) {
+//            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
+//        }
+//        scanner.close();
+//        return logHistory;
+//    }
+
     /**
      * Get the log history of this ImageFile object.
      * @return the String of log history
      */
-    public static String getLog() throws FileNotFoundException {
-
-        Scanner scanner = new Scanner(new FileInputStream("./logHistory.txt"));
-        String logHistory = "";
-
-        while (scanner.hasNextLine()) {
-            logHistory = logHistory.concat(scanner.nextLine().concat("\n"));
-        }
-        scanner.close();
-        return logHistory;
+    public ArrayList<String> getLog() {
+        return history;
     }
 
     /**
@@ -242,16 +258,6 @@ public class ImageFile implements Serializable{
      * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
      */
     public boolean equals(ImageFile imageFile) {
-//        boolean checkEqual = false;
-//        System.out.println("我们的CLASS:" + this.file.getAbsolutePath());
-//        if (((imageFile.getFile()).getAbsolutePath()).equals(this.file.getAbsolutePath())){
-//            checkEqual = true;
-//        }
-//        if (checkEqual){
-//            System.out.println("in");
-//        }
-//        return checkEqual;
         return (imageFile.getFile().getAbsolutePath()).equals(this.file.getAbsolutePath());
-
     }
 }

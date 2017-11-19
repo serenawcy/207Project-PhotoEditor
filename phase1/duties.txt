@@ -10,3 +10,9 @@ Yuhan Shao:
 2. Wrote out the diagram and the scenes we need for the project.
 3. Responsible for the whole ImageFile.java.
 4. Debugged the ImageFile class.
+
+Jiayao Lin #1002936683:
+1. Discussed the design of the whole project with all the group members.
+2. JavaFx Scene display(FileChooserScene, AddTagScene, MoveFile,ect.), connected the displayed scenes with the
+model data that my group members offered.
+3. Debugged with all the group members together.

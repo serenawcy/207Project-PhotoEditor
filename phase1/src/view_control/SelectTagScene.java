@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SelectTagScene {
@@ -79,15 +80,21 @@ public class SelectTagScene {
 
         StringBuilder CurrentName = new StringBuilder();
         CurrentName.append(inputFile.getOriginalName());
+        ArrayList<String> deleteTag = new ArrayList<>();
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
                 CurrentName.append("@").append(box.getText());
+            } else {
+                deleteTag.add(box.getText());
             }
 
         }
         try {
             inputFile.changeImageName(CurrentName.toString());
+            for (String a: deleteTag) {
+                inputFile.deleteTag(a);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

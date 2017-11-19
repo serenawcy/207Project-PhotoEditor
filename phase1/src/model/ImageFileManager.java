@@ -58,7 +58,7 @@ public class ImageFileManager {
      * @param filePath the file to write the records to
      * @throws IOException
      */
-    public void writeToFile(String filePath) throws IOException{
+    public static void writeToFile(String filePath) throws IOException{
         try {
             OutputStream file = new FileOutputStream(filePath);
             OutputStream buffer = new BufferedOutputStream(file);
@@ -74,7 +74,7 @@ public class ImageFileManager {
      * Adds ImageFile to this ImageFileManager.
      * @param newImageFile a new ImageFile to be added.
      */
-    public void add(ImageFile newImageFile) {
+    public static void add(ImageFile newImageFile) {
         imageFileList.add(newImageFile);
     }
 

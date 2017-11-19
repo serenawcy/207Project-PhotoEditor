@@ -79,7 +79,7 @@ public class ImageFile implements Serializable{
      * Add user input tag name if it does not exist and rename this ImageFile.
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
      */
-    public void addTag(String userInputAdd) {
+    public void addTag(String userInputAdd) throws IOException {
         String[] tagToAdd = userInputAdd.split(",");
 
         StringBuilder tagAdd = new StringBuilder();
@@ -97,7 +97,7 @@ public class ImageFile implements Serializable{
      * Delete user input tag name and rename this ImageFile.
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
-    public void deleteTag(String tagToDelete) {
+    public void deleteTag(String tagToDelete) throws IOException {
         this.existTag.remove(tagToDelete);
         this.renameDelete(tagToDelete);
     }
@@ -106,11 +106,13 @@ public class ImageFile implements Serializable{
      * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
      * @param newParentDirectory new parent directory of this ImageFile object
      */
-    public void changeDirectory(String newParentDirectory) {
+    public void changeDirectory(String newParentDirectory) throws IOException {
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
         this.file = new File(dir, file.getName());
+        ImageFileManager.add(this);
+        ImageFileManager.writeToFile("./serializedImageFiles.ser");
         if (success) {
             this.setImage(this.file);
         }
@@ -120,16 +122,20 @@ public class ImageFile implements Serializable{
      * Change the name of this ImageFile object.
      * @param newImageName new name of this ImageFile object
      */
-    public void changeImageName(String newImageName) {
+    public void changeImageName(String newImageName) throws IOException {
         logger.log(Level.FINE, "Renamed this image file from " + this.file.getName() + " to "
                 + newImageName + "." + this.getSuffix(this.file));
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);
         this.file = renameFile;
+//        this.absoluteAddress = this.file.getAbsolutePath();
+        System.out.println("changeImageName's path: " + this.file.getAbsolutePath());
         if (success) {
-            this.setImage(this.file);
+//            this.setImage(this.file);
             this.oldName.add(this.file.getName());
+            ImageFileManager.add(this);
+            ImageFileManager.writeToFile("./serializedImageFiles.ser");
         }
     }
 
@@ -137,7 +143,7 @@ public class ImageFile implements Serializable{
      * Rename this ImageFile by adding a tag.
      * @param tagToAdd the tag name need to be added
      */
-    private void renameAdd(String tagToAdd) {
+    private void renameAdd(String tagToAdd) throws IOException {
         this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
     }
 
@@ -145,7 +151,7 @@ public class ImageFile implements Serializable{
      * Rename this ImageFile by deleting a tag.
      * @param tagToDelete the tag name need to be deleted
      */
-    private void renameDelete(String tagToDelete) {
+    private void renameDelete(String tagToDelete) throws IOException {
         String suffix = this.getSuffix(this.file);
         this.changeImageName(this.file.getName().replace(" @" + tagToDelete, "").replaceFirst("." + suffix, ""));
     }
@@ -236,6 +242,15 @@ public class ImageFile implements Serializable{
      * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
      */
     public boolean equals(ImageFile imageFile) {
-        return Objects.equals(this.file.getAbsolutePath(), imageFile.file.getAbsolutePath());
+        boolean checkEqual = false;
+        System.out.println("我们的CLASS:" + this.file.getAbsolutePath());
+        if (((imageFile.getFile()).getAbsolutePath()).equals(this.file.getAbsolutePath())){
+            checkEqual = true;
+        }
+        if (checkEqual){
+            System.out.println("in");
+        }
+        return checkEqual;
+
     }
 }

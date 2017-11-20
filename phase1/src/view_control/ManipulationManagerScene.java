@@ -7,19 +7,40 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.ImageFile;
 
-/** A manipulation scene than contains buttons for the user to manipulate the selected image. */
 public class ManipulationManagerScene {
 
+    /** Initialize a new ImageFile Object */
     private static ImageFile imgFile;
+
+    /** Initialize a new ImageView Object */
     private static ImageView imageView;
 
-    //  private static Text logHistory = new Text();
+    /** Initialize a new Scene to display the log text */
     private static Scene logTextScene;
+
+    /** Initialize a listView for the logTextScene to display the log text */
     private static ListView<String> listView = new ListView<>();
+
+    /** Magic number 600 */
+    private static final int MAGIC600 = 600;
+
+    /** Magic number 1000 */
+    private static final int MAGIC1000 = 1000;
+
+    /** Magic number 680 */
+    private static final int MAGIC680 = 680;
+
+    /** Magic number 20 */
+    private static final int MAGIC20 = 20;
+
+    /** Magic number 400 */
+    private static final int MAGIC400 = 400;
+
+    /** Magic number 300 */
+    private static final int MAGIC300 = 300;
 
     /** Display the Scene and construct the buttons. */
     static void display() {
@@ -42,8 +63,8 @@ public class ManipulationManagerScene {
         Button goBack = new Button("Go Back");
         goBack.setMinWidth(120);
 
-        VBox logLayout = new VBox(20);
-        logTextScene = new Scene(logLayout, 1000, 600);
+        VBox logLayout = new VBox(MAGIC20);
+        logTextScene = new Scene(logLayout, MAGIC1000, MAGIC600);
 
         add.setOnAction(
                 e -> {
@@ -90,17 +111,11 @@ public class ManipulationManagerScene {
                     window.setScene(logTextScene);
                 });
 
-        //            ListView<String> listView = new ListView<>();
-        //            for(String logHistory: imgFile.getLog()) {
-        //                listView.getItems().add(logHistory);
-        //            }
-        //            logLayout.getChildren().addAll(goBack, listView);
-
-        VBox layout1 = new VBox(20);
+        VBox generalLayout = new VBox(MAGIC20);
         getImage();
-        layout1.getChildren().addAll(add, delete, select, move, rename, getLog, back, imageView);
-        layout1.setAlignment(Pos.CENTER);
-        Scene general = new Scene(layout1, 400, 680);
+        generalLayout.getChildren().addAll(add, delete, select, move, rename, getLog, back, imageView);
+        generalLayout.setAlignment(Pos.CENTER);
+        Scene general = new Scene(generalLayout, MAGIC400, MAGIC680);
         goBack.setOnAction(event -> window.setScene(general));
 
         window.setScene(general);
@@ -108,19 +123,15 @@ public class ManipulationManagerScene {
     }
 
     /** Get the Image that user selected and show it onto the scene. */
-
-    // 这里的image parameter 可以去掉了  PASS IN 给我一个IMAGEFILE -> getimage method
     private static void getImage() {
         Image img = ImageFile.getImage();
         imageView = new ImageView(img);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(300);
-        //       imageView.setPreserveRatio(true);
+        imageView.setFitHeight(MAGIC300);
+        imageView.setFitWidth(MAGIC300);
     }
 
     /**
      * Pass in the file
-     *
      * @param imageFile the
      */
     public static void setFile(ImageFile imageFile) {

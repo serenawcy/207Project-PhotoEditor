@@ -1,58 +1,73 @@
 package view_control;
-import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import model.ImageFile;
 
-import java.io.File;
-import java.util.ArrayList;
 
-public class DeleteTagScene {
 
-    private static ListView<String> listView;
+class DeleteTagScene {
+
+    /** Initialize an ImageFile */
     private static ImageFile inputFile;
 
-    //    public static void main(String[] args) {
-//        launch(args);
-//    }
-    public static void display(){
+
+    /** Initialize an ListView of string to display the current tags. */
+    private static ListView<String> listView;
+
+    /** Magic number 350 */
+    private static final int MAGIC350 = 350;
+
+    /** Magic number 120 */
+    private static final int MAGIC120 = 120;
+
+    /** Magic number 10 */
+    private static final int MAGIC10 = 10;
+
+    /** Magic number 20 */
+    private static final int MAGIC20 = 20;
+
+    /** Magic number 400 */
+    private static final int MAGIC400 = 400;
+
+    /** Display the Scene and construct the buttons. */
+    static void display(){
         Stage window = new Stage();
         window.setTitle("Delete Tag(s)");
         window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to delete");
-        Button Delete = new Button("Delete");
-        Button Back = new Button("Go back");
-        Delete.setMinWidth(120);
-        Back.setMinWidth(120);
+        Button delete = new Button("Delete");
+        Button back = new Button("Go back");
+        delete.setMinWidth(MAGIC120);
+        back.setMinWidth(MAGIC120);
 
         listView = new ListView<>();
         for(String tag: inputFile.getExistTag()) {
             listView.getItems().add(tag);
         }
 
-        Delete.setOnAction(e -> buttonClicked());
-        Back.setOnAction(e -> {
-            //            ManipulationManagerScene.setFile(inputFile);
-            window.close();
-        });
+        delete.setOnAction(e -> buttonClicked());
+        back.setOnAction(e -> window.close());
 
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(listView, Delete, Back);
+        VBox layout = new VBox(MAGIC10);
+        layout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
+        layout.getChildren().addAll(label, listView, delete, back);
 
-        Scene scene = new Scene(layout, 350, 400);
+        Scene scene = new Scene(layout, MAGIC350, MAGIC400);
         window.setScene(scene);
         window.show();
 
     }
+
+    /**
+     * Delete the selected tags once button has been delete clicked.
+     */
 
     private static void buttonClicked() {
         ObservableList<String> tags;
@@ -68,32 +83,12 @@ public class DeleteTagScene {
         }
 
     }
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        Stage window = new Stage();
-//        window.setTitle("Delete Tag(s)");
-//        Label label = new Label("Please check the tag(s) you want to delete");
-//        Button Delete = new Button("Delete");
-//
-//        listView = new ListView<>();
-////        for(String tag: Image.getTags.ReadTag()) {
-////            listView.getItems().add(tag);
-////        }
-//        listView.getItems().addAll("Iron Man", "Titanic", "Contact", "Surrogates");
-//        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-//        Delete.setOnAction(e -> buttonClicked());
-//
-//        VBox layout = new VBox(10);
-//        layout.setPadding(new Insets(20, 20, 20, 20));
-//        layout.getChildren().addAll(listView, Delete);
-//
-//        Scene scene = new Scene(layout, 300, 250);
-//        window.setScene(scene);
-//        window.show();
-//
-//    }
 
-    public static void setImageFile(ImageFile imageFile){
+    /**
+     * Set the ImageFile
+     * @param imageFile the ImageFile
+     */
+    static void setImageFile(ImageFile imageFile){
         inputFile = imageFile;
     }
 

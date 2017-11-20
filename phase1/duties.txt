@@ -15,3 +15,9 @@ Jiayao Lin #1002936683:
 2. JavaFx Scene display(FileChooserScene, AddTagScene, MoveFile,ect.), connected the displayed scenes with the
 model data that my group members offered.
 3. Debugged with all the group members together.
+
+Dingyi Yu  #1002077753:
+1. Discussed the design of the whole project with all the group members.
+2. JavaFx Scene display(DeleteTagScene, FileRenameScene, SelectTagScene, ManipulationManagerScene,ect.),
+   connected the displayed scenes with the model data that other group members offered.
+3. Debugged with all the group members together.

@@ -84,6 +84,25 @@ public class ImageFile implements Serializable {
         return separate[1];
     }
 
+//    /**
+//     * Add user input tag name if it does not exist and rename this ImageFile.
+//     *
+//     * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
+//     */
+//    public void addTag(String userInputAdd) throws IOException {
+//        String[] tagToAdd = userInputAdd.split(",");
+//
+//        StringBuilder tagAdd = new StringBuilder();
+//
+//        for (String tag : tagToAdd) {
+//            this.existTag.add(tag);
+//            tagAdd = tagAdd.append(tag).append(" @");
+//        }
+//
+//        tagAdd.replace(tagAdd.length() - 2, tagAdd.length(), "");
+//        this.renameAdd(tagAdd.toString());
+//    }
+
     /**
      * Add user input tag name if it does not exist and rename this ImageFile.
      *
@@ -95,13 +114,18 @@ public class ImageFile implements Serializable {
         StringBuilder tagAdd = new StringBuilder();
 
         for (String tag : tagToAdd) {
-            this.existTag.add(tag);
-            tagAdd = tagAdd.append(tag).append(" @");
+            if (!this.existTag.contains(tag)) {
+                this.existTag.add(tag);
+                tagAdd = tagAdd.append(tag).append(" @");
+            }
         }
 
+        if (tagAdd.length() != 0) {
         tagAdd.replace(tagAdd.length() - 2, tagAdd.length(), "");
         this.renameAdd(tagAdd.toString());
+        }
     }
+
 
     /**
      * Delete user input tag name and rename this ImageFile.

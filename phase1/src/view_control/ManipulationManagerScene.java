@@ -32,10 +32,7 @@ public class ManipulationManagerScene {
 
     /** Magic number 1000 */
     private static final int MAGIC1000 = 1000;
-
-    /** Magic number 680 */
-    private static final int MAGIC680 = 680;
-
+    
     /** Magic number 20 */
     private static final int MAGIC20 = 20;
 

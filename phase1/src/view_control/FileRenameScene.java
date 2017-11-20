@@ -19,11 +19,12 @@ class FileRenameScene {
 
     private static ListView<String> listView;
     private static ImageFile inputFile;
-    /** Magic number 250 */
-    private static final int MAGIC250 = 250;
 
-    /** Magic number 300 */
-    private static final int MAGIC300 = 300;
+    /** Magic number 500 */
+    private static final int MAGIC500 = 500;
+
+    /** Magic number 600 */
+    private static final int MAGIC600 = 600;
 
     /** Magic number 10 */
     private static final int MAGIC10 = 10;
@@ -65,7 +66,7 @@ class FileRenameScene {
         layout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
         layout.getChildren().addAll(label, listView, done, goBack);
 
-        Scene scene = new Scene(layout, MAGIC300, MAGIC250);
+        Scene scene = new Scene(layout, MAGIC500, MAGIC600);
         window.setScene(scene);
         window.show();
       }

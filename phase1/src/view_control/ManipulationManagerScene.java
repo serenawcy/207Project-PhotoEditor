@@ -32,7 +32,7 @@ public class ManipulationManagerScene {
 
     /** Magic number 1000 */
     private static final int MAGIC1000 = 1000;
-    
+
     /** Magic number 20 */
     private static final int MAGIC20 = 20;
 
@@ -48,26 +48,29 @@ public class ManipulationManagerScene {
     /** Magic number 15 */
     private static final int MAGIC15 = 15;
 
+    /** Magic number 120 */
+    private static final int MAGIC120 = 120;
+
     /** Display the Scene and construct the buttons. */
     static void display() {
         Stage window = new Stage();
-        window.setTitle("Manipulation Scene");
+        window.setTitle("Image Editor");
         Button add = new Button("Add New Tag");
-        add.setMinWidth(120);
+        add.setMinWidth(MAGIC120);
         Button delete = new Button("Delete Tag");
-        delete.setMinWidth(120);
+        delete.setMinWidth(MAGIC120);
         Button select = new Button("Select Old Tag");
-        select.setMinWidth(120);
+        select.setMinWidth(MAGIC120);
         Button move = new Button("Move To");
-        move.setMinWidth(120);
+        move.setMinWidth(MAGIC120);
         Button back = new Button("Back");
-        back.setMinWidth(120);
+        back.setMinWidth(MAGIC120);
         Button rename = new Button("Rename");
-        rename.setMinWidth(120);
+        rename.setMinWidth(MAGIC120);
         Button getLog = new Button("Get Log History");
-        getLog.setMinWidth(120);
+        getLog.setMinWidth(MAGIC120);
         Button goBack = new Button("Go Back");
-        goBack.setMinWidth(120);
+        goBack.setMinWidth(MAGIC120);
 
         VBox logLayout = new VBox(MAGIC20);
         logTextScene = new Scene(logLayout, MAGIC1000, MAGIC600);

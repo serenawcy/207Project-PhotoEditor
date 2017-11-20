@@ -1,11 +1,14 @@
 package view_control;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.ImageFile;
@@ -41,6 +44,12 @@ public class ManipulationManagerScene {
 
     /** Magic number 300 */
     private static final int MAGIC300 = 300;
+
+    /** Magic number 10 */
+    private static final int MAGIC10 = 10;
+
+    /** Magic number 15 */
+    private static final int MAGIC15 = 15;
 
     /** Display the Scene and construct the buttons. */
     static void display() {
@@ -113,9 +122,23 @@ public class ManipulationManagerScene {
 
         VBox generalLayout = new VBox(MAGIC20);
         getImage();
-        generalLayout.getChildren().addAll(add, delete, select, move, rename, getLog, back, imageView);
+        final GridPane inputGridPane = new GridPane();
+        GridPane.setConstraints(add, 4, 2);
+        GridPane.setConstraints(delete, 4, 4);
+        GridPane.setConstraints(select, 4, 6);
+        GridPane.setConstraints(rename, 8, 2);
+        GridPane.setConstraints(move, 8, 4);
+        GridPane.setConstraints(getLog, 8, 6);
+        inputGridPane.setHgap(MAGIC10);
+        inputGridPane.setVgap(MAGIC10);
+        inputGridPane.getChildren().addAll(add, delete, select, rename, move, getLog);
+
+        final Pane rootGroup = new VBox(MAGIC20);
+        rootGroup.getChildren().addAll(inputGridPane);
+        rootGroup.setPadding(new Insets(MAGIC15, MAGIC15, MAGIC15, MAGIC15));
+        generalLayout.getChildren().addAll(rootGroup, imageView, back);
         generalLayout.setAlignment(Pos.CENTER);
-        Scene general = new Scene(generalLayout, MAGIC400, MAGIC680);
+        Scene general = new Scene(generalLayout, MAGIC400, MAGIC600);
         goBack.setOnAction(event -> window.setScene(general));
 
         window.setScene(general);

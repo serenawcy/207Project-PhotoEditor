@@ -51,6 +51,18 @@ public class ManipulationManagerScene {
     /** Magic number 120 */
     private static final int MAGIC120 = 120;
 
+    /** Magic number 2 */
+    private static final int MAGIC2 = 2;
+
+    /** Magic number 4 */
+    private static final int MAGIC4 = 4;
+
+    /** Magic number 6 */
+    private static final int MAGIC6 = 6;
+
+    /** Magic number 8 */
+    private static final int MAGIC8 = 8;
+
     /** Display the Scene and construct the buttons. */
     static void display() {
         Stage window = new Stage();
@@ -123,12 +135,12 @@ public class ManipulationManagerScene {
         VBox generalLayout = new VBox(MAGIC20);
         getImage();
         final GridPane inputGridPane = new GridPane();
-        GridPane.setConstraints(add, 4, 2);
-        GridPane.setConstraints(delete, 4, 4);
-        GridPane.setConstraints(select, 4, 6);
-        GridPane.setConstraints(rename, 8, 2);
-        GridPane.setConstraints(move, 8, 4);
-        GridPane.setConstraints(getLog, 8, 6);
+        GridPane.setConstraints(add, MAGIC4, MAGIC2);
+        GridPane.setConstraints(delete, MAGIC4, MAGIC4);
+        GridPane.setConstraints(select, MAGIC4, MAGIC6);
+        GridPane.setConstraints(rename, MAGIC8, MAGIC2);
+        GridPane.setConstraints(move, MAGIC8, MAGIC4);
+        GridPane.setConstraints(getLog, MAGIC8, MAGIC6);
         inputGridPane.setHgap(MAGIC10);
         inputGridPane.setVgap(MAGIC10);
         inputGridPane.getChildren().addAll(add, delete, select, rename, move, getLog);

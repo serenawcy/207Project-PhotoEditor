@@ -77,25 +77,22 @@ class SelectTagScene {
         StringBuilder currentName = new StringBuilder();
         currentName.append(inputFile.getOriginalName());
         ArrayList<String> deleteTag = new ArrayList<>();
-        boolean checkDelete = true;
+        boolean checkDelete = false;
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
                 currentName.append(" @").append(box.getText());
-                checkDelete = false;
+                checkDelete = true;
             } else {
                 deleteTag.add(box.getText());
-                checkDelete = true;
             }
         }
-        if (!checkDelete){
+        if (checkDelete){
             inputFile.changeImageName(currentName.toString());
-        } else {
-            for (String a : deleteTag) {
+            for(String a : deleteTag){
                 inputFile.deleteTag(a);
             }
         }
-
     }
 
     /**

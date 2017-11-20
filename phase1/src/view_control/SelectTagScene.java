@@ -81,7 +81,7 @@ class SelectTagScene {
 
         for (CheckBox box : checkBox) {
             if (box.isSelected()) {
-                currentName.append("@").append(box.getText());
+                currentName.append(" @").append(box.getText());
                 checkDelete = false;
             } else {
                 deleteTag.add(box.getText());

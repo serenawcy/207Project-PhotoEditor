@@ -63,7 +63,7 @@ public class ImageFileManager {
      * @param filePath the file to write the records to
      * @throws IOException: throw a IOException
      */
-    public static void writeToFile(String filePath) throws IOException{
+    private static void writeToFile(String filePath) throws IOException{
         try {
             OutputStream file = new FileOutputStream(filePath);
             OutputStream buffer = new BufferedOutputStream(file);
@@ -91,7 +91,8 @@ public class ImageFileManager {
         return imageFileList;
     }
 
-    public static void delete(ImageFile oldImageFile) {
+    static void delete(ImageFile oldImageFile) throws IOException {
         imageFileList.remove(oldImageFile);
+        writeToFile("./serializedImageFiles.ser");
     }
 }

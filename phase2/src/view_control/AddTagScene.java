@@ -44,13 +44,14 @@ class AddTagScene {
         done.setOnAction(
                 e -> {
                     String tags = tagInput.getText();
-                    if (!Objects.equals(tags, "")) {
+                    if (!Objects.equals(tags, "" ) && inputFile != null) {
                         try {
                             inputFile.addTag(tags);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                         tagInput.clear();
+                        ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
                     }
                 });
 
@@ -77,4 +78,3 @@ class AddTagScene {
         inputFile = imageFile;
     }
 }
-

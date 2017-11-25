@@ -8,11 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.ImageFile;
@@ -36,7 +35,7 @@ public class ManipulationManagerScene extends Application {
     /** Initialize a logListView for the logTextScene to display the log text */
     private static ListView<String> logListView = new ListView<>();
 
-    private static GridPane inputGridPane = new GridPane();
+    private static BorderPane inputGridPane = new BorderPane();
 
     private static VBox generalLayout = new VBox(20);
 
@@ -83,6 +82,12 @@ public class ManipulationManagerScene extends Application {
     private static ListView<String> imgListView = new ListView<>();
 
     private static Stage window = new Stage();
+
+    private StackPane paneCenter = new StackPane();
+
+    private static ListView<String> tagsView = new ListView<>();
+
+
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -227,41 +232,19 @@ public class ManipulationManagerScene extends Application {
             }
         });
 
-        //        VBox generalLayout = new VBox(MAGIC20);
-        //        final GridPane inputGridPane = new GridPane();
-        GridPane.setConstraints(add, 3, 0);
-        GridPane.setConstraints(delete, 3, 1);
-        GridPane.setConstraints(selectOldTag, 3, 2);
-        GridPane.setConstraints(rename, 3, 3);
-        GridPane.setConstraints(move, 3, 4);
-        GridPane.setConstraints(getLog, 3, 5);
-        GridPane.setConstraints(openButton, 0, 0);
-        GridPane.setConstraints(selectImgFile, 0, 2);
-        GridPane.setConstraints(imgListView, 0, 1);
-        GridPane.setConstraints(imageView, 4, 4);
-
-        inputGridPane.setHgap(MAGIC10);
-        inputGridPane.setVgap(MAGIC10);
-        inputGridPane
-                .getChildren()
-                .addAll(
-                        add,
-                        delete,
-                        selectOldTag,
-                        rename,
-                        move,
-                        getLog,
-                        openButton,
-                        selectImgFile,
-                        imgListView,
-                        imageView);
-
-        final Pane rootGroup = new VBox(MAGIC20);
-        rootGroup.getChildren().addAll(inputGridPane);
-        rootGroup.setPadding(new Insets(MAGIC15, MAGIC15, MAGIC15, MAGIC15));
-        generalLayout.getChildren().addAll(rootGroup, quit);
-        generalLayout.setAlignment(Pos.CENTER);
-        Scene general = new Scene(generalLayout, 800, 800);
+        inputGridPane.setPrefSize(800,800);
+        ToolBar toolbar = new ToolBar();
+        toolbar.getItems().addAll(openButton,selectImgFile, add, delete, selectOldTag,rename,move,getLog);
+        ToolBar toolbarBottom = new ToolBar();
+        toolbarBottom.getItems().add(path);
+        paneCenter.setStyle("-fx-background-color: #f5f5dc");
+        inputGridPane.setCenter(paneCenter);
+        inputGridPane.setTop(toolbar);
+        inputGridPane.setLeft(imgListView);
+        inputGridPane.setRight(tagsView);
+        inputGridPane.setBottom(toolbarBottom);
+        generalLayout.getChildren().addAll(inputGridPane, quit);
+        final Scene general = new Scene(generalLayout, 1350, 1000);
         goBack.setOnAction(event -> window.setScene(general));
 
         window.setScene(general);
@@ -269,14 +252,15 @@ public class ManipulationManagerScene extends Application {
     }
 
     /** Get the Image that user selected and show it onto the scene. */
-    private static void setImage() {
-        inputGridPane.getChildren().remove(imageView);
+    private void setImage() {
+        BorderPane.clearConstraints(imageView);
         Image img = new Image(imgFile.getFile().toURI().toString());
         imageView = new ImageView(img);
-        imageView.setFitHeight(MAGIC300);
-        imageView.setFitWidth(MAGIC300);
-        inputGridPane.getChildren().add(imageView);
-        GridPane.setConstraints(imageView, 4, 4);
+        imageView.setFitHeight(500);
+        imageView.setFitWidth(550);
+
+        paneCenter.getChildren().add(imageView);
+        StackPane.setMargin(imageView,new Insets(50,10,50,50));
     }
 
     /**
@@ -285,14 +269,17 @@ public class ManipulationManagerScene extends Application {
      * @param imageFile the
      */
     private static void setFile(ImageFile imageFile) throws IOException {
-        inputGridPane.getChildren().remove(path);
+ //       inputGridPane.getChildren().remove(path);
         imgFile = imageFile;
         path.setText(imgFile.getFile().getAbsolutePath());
-        inputGridPane.getChildren().add(path);
-        GridPane.setConstraints(path, 5, 4);
+        for (String tags: imgFile.getExistTag()){
+            tagsView.getItems().add(tags);
+        }
+//        inputGridPane.getChildren().add(path);
+ //       GridPane.setConstraints(path, 5, 4);
     }
 
-    private static void buttonClicked() throws IOException {
+    private void buttonClicked() throws IOException {
         ObservableList<String> names;
         names = imgListView.getSelectionModel().getSelectedItems();
         String selectedFile = "";
@@ -311,18 +298,23 @@ public class ManipulationManagerScene extends Application {
     }
 
     static void setImageListView(ArrayList<ImageFile> imgList) {
-        inputGridPane.getChildren().remove(imgListView);
+ //       inputGridPane.getChildren().remove(imgListView);
         imgListView.getItems().clear();
         for (ImageFile file : imgList) {
             imgListView.getItems().add(file.getFile().getName());
         }
-        inputGridPane.getChildren().add(imgListView);
 
-        inputGridPane.getChildren().remove(path);
+  //      inputGridPane.getChildren().add(imgListView);
+
+  //      inputGridPane.getChildren().remove(path);
         if(imgFile != null) {
             path.setText(imgFile.getFile().getAbsolutePath());
-            inputGridPane.getChildren().add(path);
-            GridPane.setConstraints(path, 5, 4);
+            tagsView.getItems().clear();
+            for (String tags: imgFile.getExistTag()){
+                tagsView.getItems().add(tags);
+            }
+//            inputGridPane.getChildren().add(path);
+//            GridPane.setConstraints(path, 5, 4);
         }
     }
 }

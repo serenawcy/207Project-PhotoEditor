@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.image.Image;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,12 +11,7 @@ public class ImageFile implements Serializable {
     private File file;
 
     /**
-     * A Image object represented by image
-     */
-    private static Image image;
-
-    /**
-     * The original name of this ImageFile object
+     * The original name of this ImageFile object without tags
      */
     private String originalName;
 
@@ -46,18 +39,23 @@ public class ImageFile implements Serializable {
     public ImageFile(File file) throws IOException {
 
         this.file = file;
-        image = new Image(file.toURI().toString());
+       // image = new Image(file.toURI().toString());
+
+        this.history = new ArrayList<>();
+        this.existTag = new ArrayList<>();
+        this.oldName = new ArrayList<>();
 
         if (!this.file.getName().contains("@")) {
             this.originalName = this.getNameWithoutSuffix(this.file);
         } else {
             Integer target = this.file.getName().indexOf("@");
             this.originalName = this.file.getName().substring(0, target - 1);
-        }
 
-        this.history = new ArrayList<>();
-        this.existTag = new ArrayList<>();
-        this.oldName = new ArrayList<>();
+            String[] originalTag = this.getNameWithoutSuffix(this.file).split("@");
+            for (int i = 1; i < originalTag.length; i++) {
+                this.existTag.add(originalTag[i].trim());
+            }
+        }
 
         this.oldName.add(this.file.getName());
     }
@@ -124,14 +122,14 @@ public class ImageFile implements Serializable {
      * @param newParentDirectory new parent directory of this ImageFile object
      */
     public void changeDirectory(String newParentDirectory) throws IOException {
+        ImageFile saveCurrent = this;
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
         this.file = new File(dir, file.getName());
-        ImageFileManager.add(this);
-        ImageFileManager.writeToFile("./serializedImageFiles.ser");
-        if (success) {
-            this.setImage(this.file);
+        if (success){
+            ImageFileManager.delete(saveCurrent);
+            ImageFileManager.add(this);
         }
     }
 
@@ -141,7 +139,7 @@ public class ImageFile implements Serializable {
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws IOException {
-
+        ImageFile saveCurrent = this;
         Date time = new Date();
 
         history.add(time + "Renamed this image file from " + this.file.getName() +
@@ -152,12 +150,11 @@ public class ImageFile implements Serializable {
         this.file = renameFile;
 
         if (success) {
-            this.setImage(this.file);
             if (!this.oldName.contains(this.file.getName())) {
                 this.oldName.add(this.file.getName());
             }
+            ImageFileManager.delete(saveCurrent);
             ImageFileManager.add(this);
-            ImageFileManager.writeToFile("./serializedImageFiles.ser");
         }
     }
 
@@ -186,9 +183,10 @@ public class ImageFile implements Serializable {
      * @param tagsToRename the ArrayList of tags to be renamed
      */
     public void changeTagHistory(ArrayList<String> tagsToRename) throws IOException {
+        ImageFile saveCurrent = this;
         this.existTag = tagsToRename;
+        ImageFileManager.delete(saveCurrent);
         ImageFileManager.add(this);
-        ImageFileManager.writeToFile("./serializedImageFiles.ser");
     }
 
     /**
@@ -197,12 +195,6 @@ public class ImageFile implements Serializable {
      * @return the String of log history
      */
     public ArrayList<String> getLog() {
-//        StringBuilder allHistory = new StringBuilder();
-//        for (String his: history)
-//        {
-//            allHistory.append(his);
-//        }
-//        return allHistory.toString();
         return history;
     }
 
@@ -213,15 +205,6 @@ public class ImageFile implements Serializable {
      */
     public File getFile() {
         return file;
-    }
-
-    /**
-     * Set this ImageFile object's file.
-     *
-     * @param file the new File to be the file of this ImageFile object
-     */
-    public void setFile(File file) {
-        this.file = file;
     }
 
     /**
@@ -240,24 +223,6 @@ public class ImageFile implements Serializable {
      */
     public ArrayList<String> getOldName() {
         return oldName;
-    }
-
-    /**
-     * Get this ImageFile object's image.
-     *
-     * @return the image of this ImageFile object
-     */
-    public static Image getImage() {
-        return image;
-    }
-
-    /**
-     * Set this ImageFile object's image.
-     *
-     * @param newFile the new File to be the image of this ImageFile object
-     */
-    private void setImage(File newFile) {
-        image = new Image(newFile.toURI().toString());
     }
 
     /**

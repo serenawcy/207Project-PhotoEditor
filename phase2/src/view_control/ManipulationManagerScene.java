@@ -103,27 +103,31 @@ public class ManipulationManagerScene extends Application {
 
         window.setTitle("Image Editor");
         Button add = new Button("Add New Tag");
-        add.setMinWidth(MAGIC120);
+        add.setMinWidth(60);
         Button delete = new Button("Delete Tag");
-        delete.setMinWidth(MAGIC120);
+        delete.setMinWidth(60);
         Button selectOldTag = new Button("Select Old Tag");
-        selectOldTag.setMinWidth(MAGIC120);
+        selectOldTag.setMinWidth(60);
         Button move = new Button("Move To");
-        move.setMinWidth(MAGIC120);
+        move.setMinWidth(60);
         Button quit = new Button("Quit The Program");
-        quit.setMinWidth(MAGIC120);
+        quit.setMinWidth(60);
         Button rename = new Button("Rename");
-        rename.setMinWidth(MAGIC120);
+        rename.setMinWidth(60);
         Button getLog = new Button("Get Log History");
-        getLog.setMinWidth(MAGIC120);
+        getLog.setMinWidth(60);
         Button goBack = new Button("Go Back");
         goBack.setMinWidth(MAGIC120);
         Button openButton = new Button("Choose A Directory");
-        openButton.setMinWidth(MAGIC120);
-
+        openButton.setMinWidth(60);
         Button selectImgFile = new Button("Select Image");
-        openButton.setMinWidth(MAGIC120);
         selectImgFile.setMinWidth(MAGIC120);
+        Button updateTagHistory = new Button("Add To History");
+        updateTagHistory.setMinWidth(60);
+        Button deleteTagHistory = new Button("Remove From History");
+        deleteTagHistory.setMinWidth(60);
+        Button addTagToFile = new Button("Add to Image Tag");
+        addTagToFile.setMinWidth(60);
 
         VBox logLayout = new VBox(MAGIC20);
         logTextScene = new Scene(logLayout, 1349, 1000);
@@ -230,8 +234,23 @@ public class ManipulationManagerScene extends Application {
             }
         });
 
+        updateTagHistory.setOnAction(
+                (ActionEvent e) -> {
+                    AddToTagSet.setImageFile(imgFile);
+                    AddToTagSet.display();
+                });
+
+        deleteTagHistory.setOnAction((ActionEvent event) -> {
+            deleteTagHistoryButtonClicked();
+        });
+
+        addTagToFile.setOnAction((ActionEvent event) -> {
+            addTagToFileButtonClicked();
+        });
+
+
         inputGridPane.setPrefSize(MAGIC800,MAGIC800);
-        Label currentTags = new Label("Current Tags");
+        Label currentTags = new Label("Tag History");
         Pane pathArea = new Pane();
         pathArea.setPrefSize(MAGIC200,MAGIC30);
         pathArea.getChildren().add(path);
@@ -242,9 +261,11 @@ public class ManipulationManagerScene extends Application {
         ToolBar toolbarBottom = new ToolBar();
 
         FlowPane divisionBottom = new FlowPane();
-        divisionBottom.setMaxWidth(120);
+        divisionBottom.setMaxWidth(100);
+//        FlowPane divisionBottomRight = new FlowPane();
+//        divisionBottomRight.setMaxWidth(5);
 
-        toolbarBottom.getItems().addAll(quit, divisionBottom, add, delete, selectOldTag,rename,move,getLog);
+        toolbarBottom.getItems().addAll(quit, divisionBottom, add, delete, selectOldTag,rename,move,getLog,updateTagHistory,deleteTagHistory, addTagToFile);
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
         inputGridPane.setCenter(paneCenter);
@@ -321,4 +342,13 @@ public class ManipulationManagerScene extends Application {
             }
         }
     }
+
+    private void deleteTagHistoryButtonClicked() {
+
+    }
+
+    private void addTagToFileButtonClicked() {
+
+    }
+
 }

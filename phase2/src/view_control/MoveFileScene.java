@@ -50,15 +50,17 @@ class MoveFileScene {
         // https://docs.oracle.com/javafx/2/ui_controls/file-chooser.html
         move.setOnAction(
                 e -> {
-                    String directory;
-                    DirectoryChooser directoryChooser = new DirectoryChooser();
-                    File selectedDirectory = directoryChooser.showDialog(moveToStage);
-                    if (selectedDirectory != null) {
-                        directory = selectedDirectory.getAbsolutePath();
-                        try {
-                            inputFile.changeDirectory(directory);
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
+                    if(inputFile != null) {
+                        String directory;
+                        DirectoryChooser directoryChooser = new DirectoryChooser();
+                        File selectedDirectory = directoryChooser.showDialog(moveToStage);
+                        if (selectedDirectory != null) {
+                            directory = selectedDirectory.getAbsolutePath();
+                            try {
+                                inputFile.changeDirectory(directory);
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
                         }
                     }
                 });
@@ -84,4 +86,3 @@ class MoveFileScene {
         inputFile = imageFile;
     }
 }
-

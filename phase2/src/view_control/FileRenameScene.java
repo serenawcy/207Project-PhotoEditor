@@ -48,8 +48,10 @@ class FileRenameScene {
 
         listView = new ListView<>();
 
-        for (String tag : inputFile.getOldName()) {
-            listView.getItems().add(tag);
+        if(inputFile != null) {
+            for (String tag : inputFile.getOldName()) {
+                listView.getItems().add(tag);
+            }
         }
 
         done.setOnAction(
@@ -95,7 +97,9 @@ class FileRenameScene {
             tagWanted.remove(0);
             inputFile.changeImageName(nameToChange);
             inputFile.changeTagHistory(tagWanted);
+            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
         }
+
     }
 
     /**

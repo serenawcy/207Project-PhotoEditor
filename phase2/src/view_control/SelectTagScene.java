@@ -46,10 +46,13 @@ class SelectTagScene {
         layout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
         layout.getChildren().add(selectInstruction);
         ArrayList<CheckBox> checkBox = new ArrayList<>(); //Type is CheckBox box1 = new CheckBox();
-        for (String tag : inputFile.getExistTag()) {
-            CheckBox box = new CheckBox(tag);
-            checkBox.add(box);
-            layout.getChildren().add(box); //Display
+
+        if(inputFile != null) {
+            for (String tag : inputFile.getExistTag()) {
+                CheckBox box = new CheckBox(tag);
+                checkBox.add(box);
+                layout.getChildren().add(box); //Display
+            }
         }
         layout.getChildren().add(submit);
         layout.getChildren().add(back);
@@ -73,24 +76,27 @@ class SelectTagScene {
      * @throws IOException IOException will be thrown.
      */
     private static void  handleOptions(ArrayList<CheckBox> checkBox) throws IOException {
+        if (inputFile != null) {
+            StringBuilder currentName = new StringBuilder();
+            currentName.append(inputFile.getOriginalName());
+            ArrayList<String> deleteTag = new ArrayList<>();
+            boolean checkDelete = false;
 
-        StringBuilder currentName = new StringBuilder();
-        currentName.append(inputFile.getOriginalName());
-        ArrayList<String> deleteTag = new ArrayList<>();
-        boolean checkDelete = false;
-
-        for (CheckBox box : checkBox) {
-            if (box.isSelected()) {
-                currentName.append(" @").append(box.getText());
-                checkDelete = true;
-            } else {
-                deleteTag.add(box.getText());
+            for (CheckBox box : checkBox) {
+                if (box.isSelected()) {
+                    currentName.append(" @").append(box.getText());
+                    checkDelete = true;
+                } else {
+                    deleteTag.add(box.getText());
+                }
             }
-        }
-        if (checkDelete){
-            inputFile.changeImageName(currentName.toString());
-            for(String a : deleteTag){
-                inputFile.deleteTag(a);
+            if (checkDelete) {
+                inputFile.changeImageName(currentName.toString());
+                for (String a : deleteTag) {
+                    System.out.println(a);
+                    inputFile.deleteTag(a);
+                }
+                ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
             }
         }
     }

@@ -48,11 +48,14 @@ class DeleteTagScene {
         back.setMinWidth(MAGIC120);
 
         listView = new ListView<>();
-        for(String tag: inputFile.getExistTag()) {
-            listView.getItems().add(tag);
+        if(inputFile != null) {
+            for (String tag : inputFile.getExistTag()) {
+                listView.getItems().add(tag);
+            }
         }
 
         delete.setOnAction(e -> buttonClicked());
+
         back.setOnAction(e -> window.close());
 
         VBox layout = new VBox(MAGIC10);
@@ -79,6 +82,7 @@ class DeleteTagScene {
                 e.printStackTrace();
             }
             listView.getItems().remove(tag);
+            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
 
         }
 

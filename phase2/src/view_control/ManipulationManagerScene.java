@@ -290,6 +290,7 @@ public class ManipulationManagerScene extends Application {
         if (!selectedFile.equals("")) {
             for (ImageFile imageFile : imgFiles) {
                 if (imageFile.getFile().getName().equals(selectedFile)) {
+                    tagsView.getItems().clear();
                     setFile(imageFile);
                     setImage();
                 }

@@ -126,7 +126,7 @@ public class ManipulationManagerScene extends Application {
         selectImgFile.setMinWidth(MAGIC120);
 
         VBox logLayout = new VBox(MAGIC20);
-        logTextScene = new Scene(logLayout, MAGIC1350, MAGIC1000);
+        logTextScene = new Scene(logLayout, 1349, 1000);
 
         add.setOnAction(
                 (ActionEvent e) -> {
@@ -242,9 +242,9 @@ public class ManipulationManagerScene extends Application {
         ToolBar toolbarBottom = new ToolBar();
 
         FlowPane divisionBottom = new FlowPane();
-        divisionBottom.setMaxWidth(MAGIC250);
+        divisionBottom.setMaxWidth(120);
 
-        toolbarBottom.getItems().addAll(divisionBottom, add, delete, selectOldTag,rename,move,getLog);
+        toolbarBottom.getItems().addAll(quit, divisionBottom, add, delete, selectOldTag,rename,move,getLog);
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
         inputGridPane.setCenter(paneCenter);
@@ -254,7 +254,7 @@ public class ManipulationManagerScene extends Application {
         inputGridPane.setBottom(toolbarBottom);
         inputGridPane.getChildren().add(currentTags);
 
-        generalLayout.getChildren().addAll(inputGridPane, quit);
+        generalLayout.getChildren().addAll(inputGridPane);
         final Scene general = new Scene(generalLayout, MAGIC1350, MAGIC1000);
         goBack.setOnAction((ActionEvent event) -> window.setScene(general));
 

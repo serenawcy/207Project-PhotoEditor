@@ -79,8 +79,9 @@ public class ImageFileManager {
      * Adds ImageFile to this ImageFileManager.
      * @param newImageFile a new ImageFile to be added.
      */
-    public static void add(ImageFile newImageFile) {
+    public static void add(ImageFile newImageFile) throws IOException {
         imageFileList.add(newImageFile);
+        writeToFile("./serializedImageFiles.ser");
     }
 
     /**
@@ -88,5 +89,9 @@ public class ImageFileManager {
      */
     public static ArrayList<ImageFile> getImageFileList() {
         return imageFileList;
+    }
+
+    public static void delete(ImageFile oldImageFile) {
+        imageFileList.remove(oldImageFile);
     }
 }

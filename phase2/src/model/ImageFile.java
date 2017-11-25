@@ -39,7 +39,6 @@ public class ImageFile implements Serializable {
     public ImageFile(File file) throws IOException {
 
         this.file = file;
-       // image = new Image(file.toURI().toString());
 
         this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
@@ -49,7 +48,7 @@ public class ImageFile implements Serializable {
             this.originalName = this.getNameWithoutSuffix(this.file);
         } else {
             Integer target = this.file.getName().indexOf("@");
-            this.originalName = this.file.getName().substring(0, target - 1);
+            this.originalName = this.file.getName().substring(0, target).trim();
 
             String[] originalTag = this.getNameWithoutSuffix(this.file).split("@");
             for (int i = 1; i < originalTag.length; i++) {
@@ -68,7 +67,7 @@ public class ImageFile implements Serializable {
      */
     private String getNameWithoutSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
-        return separate[0];
+        return separate[0].trim();
     }
 
     /**
@@ -79,7 +78,7 @@ public class ImageFile implements Serializable {
      */
     private String getSuffix(File file) {
         String[] separate = file.getName().split("\\.(?=[^.]+$)");
-        return separate[1];
+        return separate[1].trim();
     }
 
     /**
@@ -93,9 +92,9 @@ public class ImageFile implements Serializable {
         StringBuilder tagAdd = new StringBuilder();
 
         for (String tag : tagToAdd) {
-            if (!this.existTag.contains(tag)) {
-                this.existTag.add(tag);
-                tagAdd = tagAdd.append(tag).append(" @");
+            if (!this.existTag.contains(tag.trim())) {
+                this.existTag.add(tag.trim());
+                tagAdd = tagAdd.append(tag.trim()).append(" @");
             }
         }
 

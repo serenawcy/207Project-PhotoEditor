@@ -80,8 +80,14 @@ public class TagManager {
      * @param newTag a new ImageFile to be added.
      */
     public static void add(String newTag) throws IOException {
-        tagList.add(newTag);
-        writeToFile("./serializedTagFiles.ser");
+        String[] tagToAdd = newTag.split(",");
+
+        for (String tag : tagToAdd) {
+            if (!tagList.contains(tag.trim())) {
+                tagList.add(tag.trim());
+                writeToFile("./serializedTagFiles.ser");
+            }
+        }
     }
 
     /**

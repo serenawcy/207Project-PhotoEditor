@@ -97,7 +97,7 @@ public class TagManager {
         return tagList;
     }
 
-    static void delete(String oldTag) throws IOException {
+    public static void delete(String oldTag) throws IOException {
         tagList.remove(oldTag);
         writeToFile("./serializedTagFiles.ser");
     }

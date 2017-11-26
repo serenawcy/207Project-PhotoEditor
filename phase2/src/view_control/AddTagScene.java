@@ -6,6 +6,8 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 import model.ImageFile;
+import model.TagManager;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -47,11 +49,13 @@ class AddTagScene {
                     if (!Objects.equals(tags, "" ) && inputFile != null) {
                         try {
                             inputFile.addTag(tags);
+                            TagManager.add(tags);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                         tagInput.clear();
                         ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                        ManipulationManagerScene.setTagSetView();
                     }
                 });
 

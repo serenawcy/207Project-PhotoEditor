@@ -110,17 +110,6 @@ class ImageFileTest {
 
         assertTrue(file.getOldName().size() == 1);
         assertTrue(file.getOldName().contains("dogTEST.jpeg"));
-
-        file.addTag("Husky");
-        assertTrue(file.getOldName().size() == 2);
-        assertTrue(file.getOldName().contains("dogTEST.jpeg"));
-        assertTrue(file.getOldName().contains("dogTEST @Husky.jpeg"));
-
-        file.addTag("Samoyed,Alaska");
-        assertTrue(file.getOldName().size() == 3);
-        assertTrue(file.getOldName().contains("dogTEST.jpeg"));
-        assertTrue(file.getOldName().contains("dogTEST @Husky.jpeg"));
-        assertTrue(file.getOldName().contains("dogTEST @Husky @Samoyed @Alaska.jpeg"));
     }
 
     @Test

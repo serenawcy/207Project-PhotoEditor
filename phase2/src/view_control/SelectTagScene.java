@@ -93,7 +93,6 @@ class SelectTagScene {
             if (checkDelete) {
                 inputFile.changeImageName(currentName.toString());
                 for (String a : deleteTag) {
-                    System.out.println(a);
                     inputFile.deleteTag(a);
                 }
                 ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);

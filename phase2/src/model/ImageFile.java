@@ -32,6 +32,11 @@ public class ImageFile implements Serializable {
     private ArrayList<String> history;
 
     /**
+     * An ArrayList of String of all the log history of this ImageFile object
+     */
+    private static ArrayList<String> allHistory;
+
+    /**
      * Create a new empty ImageFile.
      *
      * @param file the File object which used to construct ImageFile
@@ -40,6 +45,8 @@ public class ImageFile implements Serializable {
     public ImageFile(File file) throws IOException {
 
         this.file = file;
+
+        allHistory = new ArrayList<>();
 
         this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
@@ -146,6 +153,9 @@ public class ImageFile implements Serializable {
         history.add(time + "Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
+        allHistory.add(time + "Renamed this image file from " + this.file.getName() +
+                " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
+
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
         boolean success = this.file.renameTo(renameFile);
         this.file = renameFile;
@@ -198,10 +208,19 @@ public class ImageFile implements Serializable {
     /**
      * Get the log history of this ImageFile object.
      *
-     * @return the String of log history
+     * @return the ArrayList of String of log history
      */
     public ArrayList<String> getLog() {
         return history;
+    }
+
+    /**
+     * Get all the log history of this ImageFile object.
+     *
+     * @return the ArrayList of String of log history
+     */
+    public static ArrayList<String> getAllLog() {
+        return allHistory;
     }
 
     /**

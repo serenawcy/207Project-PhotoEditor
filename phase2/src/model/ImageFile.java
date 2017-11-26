@@ -53,6 +53,7 @@ public class ImageFile implements Serializable {
             String[] originalTag = this.getNameWithoutSuffix(this.file).split("@");
             for (int i = 1; i < originalTag.length; i++) {
                 this.existTag.add(originalTag[i].trim());
+                TagManager.add(originalTag[i].trim());
             }
         }
 

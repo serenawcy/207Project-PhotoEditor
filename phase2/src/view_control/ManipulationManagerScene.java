@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -150,6 +147,9 @@ public class ManipulationManagerScene extends Application {
         Button goBack = new Button("Go Back");
         goBack.setMinWidth(100);
 
+        Button back = new Button("Go Back");
+        back.setMinWidth(100);
+
         Button openButton = new Button("Choose A Directory");
         openButton.setMinWidth(100);
 
@@ -177,7 +177,7 @@ public class ManipulationManagerScene extends Application {
         VBox allLogLayout = new VBox(MAGIC20);
         allLogTextScene = new Scene(allLogLayout, 1349,1000);
 
-
+        tagsView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         add.setOnAction(
                 (ActionEvent e) -> {
                     AddTagScene.setImageFile(imgFile);
@@ -209,7 +209,7 @@ public class ManipulationManagerScene extends Application {
                 });
 
         logLayout.getChildren().add(goBack);
-        allLogLayout.getChildren().add(goBack);
+        allLogLayout.getChildren().add(back);
 
         getLog.setOnAction(
                 (ActionEvent e) -> {
@@ -363,6 +363,7 @@ public class ManipulationManagerScene extends Application {
         generalLayout.getChildren().addAll(inputGridPane, quit);
         final Scene general = new Scene(generalLayout, MAGIC1350, MAGIC1000);
         goBack.setOnAction((ActionEvent event) -> window.setScene(general));
+        back.setOnAction((ActionEvent event) -> window.setScene(general));
 
         window.setScene(general);
         window.show();
@@ -447,10 +448,19 @@ public class ManipulationManagerScene extends Application {
     }
 
     private void addTagToFileButtonClicked() throws IOException {
+
+//        String temp = "";
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
         if(tags.size() >= 1 && imgFile != null){
-            String tag = tags.get(0);
-            imgFile.addTag(tag);
+            for (String tag : tags){
+                imgFile.addTag(tag);
+//                temp += tag + "\n";
+//                System.out.println(tag);
+            }
+//      System.out.println(temp);
+
+//            String tag = tags.get(0);
+//            imgFile.addTag(tag);
             setImageListView(imgFiles);
         }
 

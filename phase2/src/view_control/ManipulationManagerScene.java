@@ -151,8 +151,8 @@ public class ManipulationManagerScene extends Application {
         Button selectImgFile = new Button("Select Image");
         selectImgFile.setMinWidth(MAGIC120);
 
-       // Button updateTagHistory = new Button("Add To History");
-       // updateTagHistory.setMinWidth(60);
+        // Button updateTagHistory = new Button("Add To History");
+        // updateTagHistory.setMinWidth(60);
         Button deleteTagHistory = new Button("Remove From History");
         deleteTagHistory.setMinWidth(60);
 
@@ -231,28 +231,28 @@ public class ManipulationManagerScene extends Application {
                                     || file.getName().toLowerCase().endsWith(".jpeg")
                                     || file.getName().toLowerCase().endsWith(".gif")
                                     || file.getName().toLowerCase().endsWith(".png")) {
-                                    boolean checkFileExist = false;
-                                    ImageFile inputFile = null;
+                                boolean checkFileExist = false;
+                                ImageFile inputFile = null;
+                                try {
+                                    inputFile = new ImageFile(file);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
+
+                                for (ImageFile imgFile : imageFiles) {
+                                    if (imgFile.equals(inputFile)) {
+                                        inputFile = imgFile;
+                                        checkFileExist = true;
+                                    }
+                                }
+                                if (!checkFileExist) {
                                     try {
-                                        inputFile = new ImageFile(file);
+                                        ImageFileManager.add(inputFile);
                                     } catch (IOException e1) {
                                         e1.printStackTrace();
                                     }
-                                    ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
-
-                                    for (ImageFile imgFile : imageFiles) {
-                                        if (imgFile.equals(inputFile)) {
-                                            inputFile = imgFile;
-                                            checkFileExist = true;
-                                        }
-                                    }
-                                    if (!checkFileExist) {
-                                        try {
-                                            ImageFileManager.add(inputFile);
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        }
-                                    }
+                                }
                                 directoryImageFile.add(inputFile);
                             }
                             imgFiles = directoryImageFile;
@@ -349,7 +349,7 @@ public class ManipulationManagerScene extends Application {
      * @param imageFile the
      */
     private static void setFile(ImageFile imageFile) throws IOException {
- //       inputGridPane.getChildren().remove(path);
+        //       inputGridPane.getChildren().remove(path);
         imgFile = imageFile;
         path.setText(imgFile.getFile().getAbsolutePath());
 //        for (String tags: imgFile.getExistTag()){
@@ -401,19 +401,18 @@ public class ManipulationManagerScene extends Application {
     }
 
     private void deleteTagHistoryButtonClicked() throws IOException {
-            ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
-            if(tags.size() >= 1) {
-                String name = tags.get(0);
-                TagManager.delete(name);
-                setTagSetView();
-            }
+        ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
+        if(tags.size() >= 1) {
+            String name = tags.get(0);
+            TagManager.delete(name);
+            setTagSetView();
+        }
     }
 
     private void addTagToFileButtonClicked() throws IOException {
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
         if(tags.size() >= 1 && imgFile != null){
             String tag = tags.get(0);
-            System.out.println(tag);
             imgFile.addTag(tag);
             setImageListView(imgFiles);
         }

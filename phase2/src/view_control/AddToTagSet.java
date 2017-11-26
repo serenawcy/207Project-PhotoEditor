@@ -57,25 +57,25 @@ class AddToTagSet {
         // Form a Text area
         TextField tagInput = new TextField();
 
-        done.setOnAction(
-                e -> {
-                    String serPath = "./serializedTagFiles.ser";
-                    try {
-                        TagManager tagManager = new TagManager(serPath);
-                    } catch (ClassNotFoundException | IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    String tags = tagInput.getText();
-                    if (!Objects.equals(tags, "" ) && inputFile != null) {
-                        try {
-                            TagManager.add(tags);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        tagInput.clear();
-                        ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-                    }
-                });
+    done.setOnAction(
+        e -> {
+          //                    String serPath = "./serializedTagFiles.ser";
+          //                    try {
+          //                        TagManager tagManager = new TagManager(serPath);
+          //                    } catch (ClassNotFoundException | IOException e1) {
+          //                        e1.printStackTrace();
+          //                    }
+          String tags = tagInput.getText();
+          if (!Objects.equals(tags, "")) {
+            try {
+              TagManager.add(tags);
+            } catch (IOException e1) {
+              e1.printStackTrace();
+            }
+            tagInput.clear();
+            ManipulationManagerScene.setTagSetView();
+          }
+        });
 
         goBack.setOnAction(e -> addScene.close());
 
@@ -91,12 +91,5 @@ class AddToTagSet {
         addScene.showAndWait();
     }
 
-    /**
-     * Set the ImageFile
-     *
-     * @param imageFile the ImageFile
-     */
-    static void setImageFile(ImageFile imageFile) {
-        inputFile = imageFile;
-    }
+
 }

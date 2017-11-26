@@ -26,10 +26,10 @@ public class ImageFile implements Serializable {
      */
     private ArrayList<String> oldName;
 
-//    /**
-//     * An ArrayList of String of the log history of this ImageFile object
-//     */
-//    private ArrayList<String> history;
+    /**
+     * An ArrayList of String of the log history of this ImageFile object
+     */
+    private ArrayList<String> history;
 
     /**
      * An ArrayList of String of all the log history of this ImageFile object
@@ -48,7 +48,7 @@ public class ImageFile implements Serializable {
 
         allHistory = new ArrayList<>();
 
-        //this.history = new ArrayList<>();
+        this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
         this.oldName = new ArrayList<>();
 
@@ -150,8 +150,8 @@ public class ImageFile implements Serializable {
         ImageFile saveCurrent = this;
         Date time = new Date();
 
-//        history.add(time + "Renamed this image file from " + this.file.getName() +
-//                " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
+        history.add(time + "Renamed this image file from " + this.file.getName() +
+                " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
         allHistory.add(time + "Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
@@ -205,14 +205,14 @@ public class ImageFile implements Serializable {
         ImageFileManager.add(this);
     }
 
-//    /**
-//     * Get the log history of this ImageFile object.
-//     *
-//     * @return the ArrayList of String of log history
-//     */
-//    public ArrayList<String> getLog() {
-//        return history;
-//    }
+    /**
+     * Get the log history of this ImageFile object.
+     *
+     * @return the ArrayList of String of log history
+     */
+    public ArrayList<String> getLog() {
+        return history;
+    }
 
     /**
      * Get all the log history of this ImageFile object.

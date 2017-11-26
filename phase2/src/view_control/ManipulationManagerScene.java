@@ -141,8 +141,8 @@ public class ManipulationManagerScene extends Application {
         Button rename = new Button("Rename");
         rename.setMinWidth(100);
 
-//        Button getLog = new Button("Get Log History");
-//        getLog.setMinWidth(100);
+        Button getLog = new Button("Get Log History");
+        getLog.setMinWidth(100);
 
         Button goBack = new Button("Go Back");
         goBack.setMinWidth(100);
@@ -211,19 +211,19 @@ public class ManipulationManagerScene extends Application {
         logLayout.getChildren().add(goBack);
         allLogLayout.getChildren().add(back);
 
-//        getLog.setOnAction(
-//                (ActionEvent e) -> {
-//                    logLayout.getChildren().remove(logListView);
-//                    logListView.getItems().clear();
-//
-//                    if (imgFile != null) {
-//                        for (String logHistory : imgFile.getLog()) {
-//                            logListView.getItems().add(logHistory);
-//                        }
-//                    }
-//                    logLayout.getChildren().add(logListView);
-//                    window.setScene(logTextScene);
-//                });
+        getLog.setOnAction(
+                (ActionEvent e) -> {
+                    logLayout.getChildren().remove(logListView);
+                    logListView.getItems().clear();
+
+                    if (imgFile != null) {
+                        for (String logHistory : imgFile.getLog()) {
+                            logListView.getItems().add(logHistory);
+                        }
+                    }
+                    logLayout.getChildren().add(logListView);
+                    window.setScene(logTextScene);
+                });
 
         getAllLog.setOnAction(
                 (ActionEvent e) -> {
@@ -235,13 +235,8 @@ public class ManipulationManagerScene extends Application {
 //                            logListView.getItems().add(logHistory);
 //                        }
 //                    }
-                    if (imgFile != null) {
-                        for (String logHistory : ImageFile.getAllLog()) {
-                            allLogListView.getItems().add(logHistory);
-                        }
-                        allLogLayout.getChildren().add(allLogListView);
-                        window.setScene(allLogTextScene);
-                    }
+                    allLogLayout.getChildren().add(allLogListView);
+                    window.setScene(allLogTextScene);
                 });
 
         openButton.setOnAction(
@@ -345,7 +340,7 @@ public class ManipulationManagerScene extends Application {
 //        FlowPane divisionBottomRight = new FlowPane();
 //        divisionBottomRight.setMaxWidth(5);
 
-        toolbarBottom.getItems().addAll(getAllLog, add, delete, selectOldTag,rename,move, addToTagSet,
+        toolbarBottom.getItems().addAll(getLog, add, delete, selectOldTag,rename,move, addToTagSet,
                 deleteTagHistory, addToImageFile);
 
         add.setTranslateX(120);

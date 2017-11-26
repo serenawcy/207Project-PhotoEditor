@@ -166,12 +166,21 @@ public class ImageFile implements Serializable {
      */
     private void renameDelete(String tagToDelete) throws IOException {
         StringBuilder newName = new StringBuilder(this.getOriginalName());
-        for (String tag : this.existTag) {
+        for (String tag: this.existTag) {
             if (!Objects.equals(tag, tagToDelete)) {
                 newName.append(" @").append(tag);
             }
         }
         this.changeImageName(newName.toString());
+    }
+
+    /**
+     * Rename this ImageFile by adding a tag.
+     *
+     * @param tagToAdd the tag name need to be added
+     */
+    private void renameAdd(String tagToAdd) throws IOException {
+        this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
     }
 
     /**

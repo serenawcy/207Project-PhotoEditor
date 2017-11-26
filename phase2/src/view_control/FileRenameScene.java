@@ -93,8 +93,11 @@ class FileRenameScene {
             String nameGet = nameSelected.get(0);
             String nameToChange = nameGet.substring(0, nameGet.lastIndexOf("."));
             String[] tagWant = nameToChange.split("@");
-            Collections.addAll(tagWanted, tagWant);
+            for (String tag: tagWant) {
+                tagWanted.add(tag.trim());
+            }
             tagWanted.remove(0);
+
             inputFile.changeImageName(nameToChange);
             inputFile.changeTagHistory(tagWanted);
             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);

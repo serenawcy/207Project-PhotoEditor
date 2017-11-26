@@ -3,6 +3,7 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class ImageFile implements Serializable {
     /**
@@ -127,7 +128,7 @@ public class ImageFile implements Serializable {
 
         boolean success = file.renameTo(new File(dir, file.getName()));
         this.file = new File(dir, file.getName());
-        if (success){
+        if (success) {
             ImageFileManager.delete(saveCurrent);
             ImageFileManager.add(this);
         }
@@ -159,22 +160,18 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Rename this ImageFile by adding a tag.
-     *
-     * @param tagToAdd the tag name need to be added
-     */
-    private void renameAdd(String tagToAdd) throws IOException {
-        this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
-    }
-
-    /**
      * Rename this ImageFile by deleting a tag.
      *
      * @param tagToDelete the tag name need to be deleted
      */
     private void renameDelete(String tagToDelete) throws IOException {
-        String suffix = this.getSuffix(this.file);
-        this.changeImageName(this.file.getName().replace(" @" + tagToDelete, "").replaceFirst("." + suffix, ""));
+        StringBuilder newName = new StringBuilder(this.getOriginalName());
+        for (String tag : this.existTag) {
+            if (!Objects.equals(tag, tagToDelete)) {
+                newName.append(" @").append(tag);
+            }
+        }
+        this.changeImageName(newName.toString());
     }
 
     /**

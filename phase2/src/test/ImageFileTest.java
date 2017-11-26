@@ -75,16 +75,16 @@ class ImageFileTest {
         assertEquals(file.getExistTag(), tagsToRename);
     }
 
-    @Test
-    void testImageFileGetLog() throws IOException {
-        File outFile = new File("/dogTEST.jpeg");
-        ImageFile file = new ImageFile(outFile);
-
-        file.addTag("Husky");
-        file.addTag("Alaska");
-
-        assertTrue(file.getLog().size() == 2);
-    }
+    //@Test
+//    void testImageFileGetLog() throws IOException {
+//        File outFile = new File("/dogTEST.jpeg");
+//        ImageFile file = new ImageFile(outFile);
+//
+//        file.addTag("Husky");
+//        file.addTag("Alaska");
+//
+//        assertTrue(file.getLog().size() == 2);
+//    }
 
     @Test
     void testImageFileGetOriginalName() throws IOException {

@@ -49,7 +49,6 @@ public class TagManager {
             InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
-
             //deserialize the list
             tagList = (ArrayList<String>)input.readObject();
             input.close();

@@ -18,6 +18,7 @@ import model.ImageFile;
 import model.ImageFileManager;
 import model.TagManager;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,8 +34,12 @@ public class ManipulationManagerScene extends Application {
     /** Initialize a new Scene to display the log text */
     private static Scene logTextScene;
 
+    private static Scene allLogTextScene;
+
     /** Initialize a logListView for the logTextScene to display the log text */
     private static ListView<String> logListView = new ListView<>();
+
+    private static ListView<String> allLogListView = new ListView<>();
 
     private static BorderPane inputGridPane = new BorderPane();
 
@@ -121,51 +126,57 @@ public class ManipulationManagerScene extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         window.setTitle("Image Editor");
-        Button add = new Button("Add New Tag");
-        add.setMinWidth(60);
+        Button add = new Button("Add Tag");
+        add.setMinWidth(100);
 
         Button delete = new Button("Delete Tag");
-        delete.setMinWidth(60);
+        delete.setMinWidth(100);
 
         Button selectOldTag = new Button("Select Old Tag");
-        selectOldTag.setMinWidth(60);
+        selectOldTag.setMinWidth(100);
 
         Button move = new Button("Move To");
-        move.setMinWidth(60);
+        move.setMinWidth(100);
 
         Button quit = new Button("Quit The Program");
-        quit.setMinWidth(60);
+        quit.setMinWidth(100);
 
         Button rename = new Button("Rename");
-        rename.setMinWidth(60);
+        rename.setMinWidth(100);
 
         Button getLog = new Button("Get Log History");
-        getLog.setMinWidth(60);
+        getLog.setMinWidth(100);
 
         Button goBack = new Button("Go Back");
-        goBack.setMinWidth(MAGIC120);
+        goBack.setMinWidth(100);
 
         Button openButton = new Button("Choose A Directory");
-        openButton.setMinWidth(60);
+        openButton.setMinWidth(100);
 
         Button selectImgFile = new Button("Select Image");
-        selectImgFile.setMinWidth(MAGIC120);
+        selectImgFile.setMinWidth(100);
 
         // Button updateTagHistory = new Button("Add To History");
         // updateTagHistory.setMinWidth(60);
         Button deleteTagHistory = new Button("Remove From History");
-        deleteTagHistory.setMinWidth(60);
+        deleteTagHistory.setMinWidth(100);
 
         Button addToTagSet = new Button("Add to Tag Set");
-        addToTagSet.setMinWidth(60);
+        addToTagSet.setMinWidth(100);
 
         Button addToImageFile = new Button("Add to Image File");
-        addToImageFile.setMinWidth(60);
+        addToImageFile.setMinWidth(100);
+
+        Button getAllLog = new Button(("Get All Log History"));
 
         setTagSetView();
 
         VBox logLayout = new VBox(MAGIC20);
         logTextScene = new Scene(logLayout, 1349, 1000);
+
+        VBox allLogLayout = new VBox(MAGIC20);
+        allLogTextScene = new Scene(allLogLayout, 1349,1000);
+
 
         add.setOnAction(
                 (ActionEvent e) -> {
@@ -198,6 +209,7 @@ public class ManipulationManagerScene extends Application {
                 });
 
         logLayout.getChildren().add(goBack);
+        allLogLayout.getChildren().add(goBack);
 
         getLog.setOnAction(
                 (ActionEvent e) -> {
@@ -211,6 +223,20 @@ public class ManipulationManagerScene extends Application {
                     }
                     logLayout.getChildren().add(logListView);
                     window.setScene(logTextScene);
+                });
+
+        getAllLog.setOnAction(
+                (ActionEvent e) -> {
+                    allLogLayout.getChildren().remove(allLogListView);
+                    allLogListView.getItems().clear();
+
+//                    if (imgFile != null) {
+//                        for (String logHistory : imgFile.getLog()) {
+//                            logListView.getItems().add(logHistory);
+//                        }
+//                    }
+                    allLogLayout.getChildren().add(allLogListView);
+                    window.setScene(allLogTextScene);
                 });
 
         openButton.setOnAction(
@@ -303,17 +329,28 @@ public class ManipulationManagerScene extends Application {
         pathArea.getChildren().add(path);
         pathArea.setTranslateX(MAGIC200);
         ToolBar toolbar = new ToolBar();
-        toolbar.getItems().addAll(openButton,selectImgFile, pathArea ,tagHistory);
-        tagHistory.setTranslateX(MAGIC650);
+        toolbar.getItems().addAll(openButton,selectImgFile, getAllLog, pathArea ,tagHistory);
+        tagHistory.setTranslateX(600);
         ToolBar toolbarBottom = new ToolBar();
+
+
 
         FlowPane divisionBottom = new FlowPane();
         divisionBottom.setMaxWidth(100);
 //        FlowPane divisionBottomRight = new FlowPane();
 //        divisionBottomRight.setMaxWidth(5);
 
-        toolbarBottom.getItems().addAll(quit, divisionBottom, add, delete, selectOldTag,rename,move,getLog,
-                addToImageFile, deleteTagHistory, addToTagSet);
+        toolbarBottom.getItems().addAll(getLog, add, delete, selectOldTag,rename,move, addToTagSet,
+                deleteTagHistory, addToImageFile);
+
+        add.setTranslateX(120);
+        delete.setTranslateX(140);
+        selectOldTag.setTranslateX(160);
+        rename.setTranslateX(180);
+        move.setTranslateX(200);
+        addToTagSet.setTranslateX(220);
+        deleteTagHistory.setTranslateX(300);
+        addToImageFile.setTranslateX(300);
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
         inputGridPane.setCenter(paneCenter);
@@ -323,7 +360,7 @@ public class ManipulationManagerScene extends Application {
         inputGridPane.setBottom(toolbarBottom);
         inputGridPane.getChildren().add(tagHistory);
 
-        generalLayout.getChildren().addAll(inputGridPane);
+        generalLayout.getChildren().addAll(inputGridPane, quit);
         final Scene general = new Scene(generalLayout, MAGIC1350, MAGIC1000);
         goBack.setOnAction((ActionEvent event) -> window.setScene(general));
 

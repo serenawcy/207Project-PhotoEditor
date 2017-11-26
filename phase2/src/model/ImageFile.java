@@ -219,7 +219,7 @@ public class ImageFile implements Serializable {
      *
      * @return the ArrayList of String of log history
      */
-    public ArrayList<String> getAllLog() {
+    public static ArrayList<String> getAllLog() {
         return allHistory;
     }
 

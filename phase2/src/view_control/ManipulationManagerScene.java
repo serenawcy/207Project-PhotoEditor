@@ -164,6 +164,11 @@ public class ManipulationManagerScene extends Application {
         Button selectImgFile = new Button("Select Image");
         selectImgFile.setMinWidth(100);
 
+        // ***************** NEW FEATURE'S BUTTON *****************
+        Button imgContainTag = new Button("Show Image with Tag");
+        imgContainTag.setMinWidth(100);
+        // ***************** NEW FEATURE'S BUTTON *****************
+
         // Button updateTagHistory = new Button("Add To History");
         // updateTagHistory.setMinWidth(60);
         Button deleteTagHistory = new Button("Remove From History");
@@ -336,6 +341,32 @@ public class ManipulationManagerScene extends Application {
             }
         });
 
+        // ***************** NEW FEATURE'S ACTION *****************
+        imgContainTag.setOnAction(
+                event -> {
+                    ObservableList<String> chooseTags = tagsView.getSelectionModel().getSelectedItems();
+                    ArrayList<String> fileTags = new ArrayList<>();
+                    ArrayList<ImageFile> chooseFile = new ArrayList<>();
+
+                    if (chooseTags.size() >= 1) {
+                        for (ImageFile file : imgFiles) {
+                            if (file.getExistTag().containsAll(chooseTags)) {
+                                chooseFile.add(file);
+                            }
+                        }
+
+//              for (String tag : tagsName) {
+//                  System.out.println(tag);
+//              }
+
+                        ContainTagScene.setImageFilesWithTags(chooseFile);
+                        System.out.println(chooseFile.size());
+                        ContainTagScene.display();
+                    }
+                });
+
+        // ***************** NEW FEATURE'S ACTION *****************
+
 
         inputGridPane.setPrefSize(MAGIC800,MAGIC800);
         Label tagHistory = new Label("Tag History");
@@ -355,7 +386,7 @@ public class ManipulationManagerScene extends Application {
 //        divisionBottomRight.setMaxWidth(5);
 
         toolbarBottom.getItems().addAll(getLog, add, delete, selectOldTag,rename,move, addToTagSet,
-                deleteTagHistory, addToImageFile);
+                deleteTagHistory, addToImageFile, imgContainTag);
 
         add.setTranslateX(120);
         delete.setTranslateX(140);

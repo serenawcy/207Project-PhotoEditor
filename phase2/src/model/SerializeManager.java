@@ -63,15 +63,10 @@ public abstract class SerializeManager<T> {
      * Adds ImageFile to this ImageFileManager.
      * @param newItem a new ImageFile to be added.
      */
-    public abstract void add(T newItem, String path) throws IOException;
-//        String[] tagToAdd = newTag.split(",");
-//
-//        for (String tag : tagToAdd) {
-//            if (!managerList.contains(tag.trim())) {
-//                managerList.add(tag.trim());
-//                writeToFile(path);
-//            }
-//        }
+    public void add(T newItem, String path) throws IOException{
+        managerList.add(newItem);
+        writeToFile(path);
+    }
 
 
     /**

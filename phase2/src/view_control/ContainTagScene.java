@@ -1,6 +1,7 @@
 package view_control;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -16,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class ContainTagScene {
@@ -61,15 +64,27 @@ class ContainTagScene {
 
 
         listView = new ListView<>();
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                buttonClicked();
+            }
+        });
+
         for (ImageFile file : imgFiles) {
             listView.getItems().add(file.getFile().getName());
         }
 
         ToolBar toolbar = new ToolBar();
-        toolbar.getItems().addAll(select, back);
+        toolbar.getItems().add(back);
         select.setOnAction(e -> buttonClicked());
 
-        back.setOnAction(e -> window.close());
+        back.setOnAction(e -> {
+            paneCenter.getChildren().remove(imageView);
+            window.close();
+                }
+        );
+
 
         inputGridPane.setCenter(paneCenter);
         inputGridPane.setLeft(listView);
@@ -77,10 +92,10 @@ class ContainTagScene {
 
         VBox layout = new VBox(MAGIC10);
         layout.setPadding(new Insets(MAGIC20, MAGIC20, MAGIC20, MAGIC20));
-        layout.getChildren().addAll(select, back, inputGridPane);
+        layout.getChildren().add(inputGridPane);
 
 
-        Scene scene = new Scene(layout, 700, 700);
+        Scene scene = new Scene(layout, 950, 700);
         window.setScene(scene);
         window.show();
     }
@@ -107,17 +122,16 @@ class ContainTagScene {
 
     }
 
-    private static void setImage(ImageFile file) {
-
+    static void setImage(ImageFile file) {
+        paneCenter.getChildren().remove(imageView);
         if (file != null) {
-            BorderPane.clearConstraints(imageView);
+//            BorderPane.clearConstraints(imageView);
             Image img = new Image(file.getFile().toURI().toString());
             imageView = new ImageView(img);
             imageView.setFitHeight(400);
             imageView.setFitWidth(400);
-
             paneCenter.getChildren().add(imageView);
             StackPane.setMargin(imageView, new Insets(50, MAGIC10, 50, 50));
-        }
     }
+}
 }

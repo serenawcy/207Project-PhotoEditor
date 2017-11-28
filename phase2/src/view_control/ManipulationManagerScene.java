@@ -357,7 +357,8 @@ public class ManipulationManagerScene extends Application {
                             }
                         }
                         ContainTagScene.setImageFilesWithTags(chooseFile);
-                        System.out.println(chooseFile.size());
+                        ContainTagScene.setImage(null);
+//                        System.out.println(chooseFile.size());
                         ContainTagScene.display();
                     }
                 });

@@ -525,7 +525,13 @@ public class ManipulationManagerScene extends Application {
             tagManager.delete(name, tagManagerPath);
             setTagSetView();
         }
-    }
+        // *********** 多选的delete 不行 *************
+//        for (String tag: tags){
+//            tagManager.delete(tag, tagManagerPath);
+//            setTagSetView();
+//        }
+        // *********** 多选的delete 不行 *************
+        }
 
     private void addTagToFileButtonClicked() throws IOException {
 

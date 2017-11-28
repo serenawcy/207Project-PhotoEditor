@@ -61,7 +61,7 @@ public class ImageFile implements Serializable {
             String[] originalTag = this.getNameWithoutSuffix(this.file).split("@");
             for (int i = 1; i < originalTag.length; i++) {
                 this.existTag.add(originalTag[i].trim());
-                TagManager.add(originalTag[i].trim());
+               // TagManager.add(originalTag[i].trim());
             }
         }
 
@@ -130,14 +130,14 @@ public class ImageFile implements Serializable {
      * @param newParentDirectory new parent directory of this ImageFile object
      */
     public void changeDirectory(String newParentDirectory) throws IOException {
-        ImageFile saveCurrent = this;
+       // ImageFile saveCurrent = this;
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
         this.file = new File(dir, file.getName());
         if (success) {
-            ImageFileManager.delete(saveCurrent);
-            ImageFileManager.add(this);
+            //ImageFileManager.delete(saveCurrent);
+            //ImageFileManager.add(this);
         }
     }
 
@@ -147,7 +147,7 @@ public class ImageFile implements Serializable {
      * @param newImageName new name of this ImageFile object
      */
     public void changeImageName(String newImageName) throws IOException {
-        ImageFile saveCurrent = this;
+       // ImageFile saveCurrent = this;
         Date time = new Date();
 
         history.add(time + "Renamed this image file from " + this.file.getName() +
@@ -164,8 +164,8 @@ public class ImageFile implements Serializable {
             if (!this.oldName.contains(this.file.getName())) {
                 this.oldName.add(this.file.getName());
             }
-            ImageFileManager.delete(saveCurrent);
-            ImageFileManager.add(this);
+           // ImageFileManager.delete(saveCurrent);
+           // ImageFileManager.add(this);
         }
     }
 
@@ -199,10 +199,10 @@ public class ImageFile implements Serializable {
      * @param tagsToRename the ArrayList of tags to be renamed
      */
     public void changeTagHistory(ArrayList<String> tagsToRename) throws IOException {
-        ImageFile saveCurrent = this;
+       // ImageFile saveCurrent = this;
         this.existTag = tagsToRename;
-        ImageFileManager.delete(saveCurrent);
-        ImageFileManager.add(this);
+        //ImageFileManager.delete(saveCurrent);
+        //ImageFileManager.add(this);
     }
 
     /**

@@ -345,7 +345,6 @@ public class ManipulationManagerScene extends Application {
         imgContainTag.setOnAction(
                 event -> {
                     ObservableList<String> chooseTags = tagsView.getSelectionModel().getSelectedItems();
-                    ArrayList<String> fileTags = new ArrayList<>();
                     ArrayList<ImageFile> chooseFile = new ArrayList<>();
 
                     if (chooseTags.size() >= 1) {
@@ -354,10 +353,6 @@ public class ManipulationManagerScene extends Application {
                                 chooseFile.add(file);
                             }
                         }
-
-//              for (String tag : tagsName) {
-//                  System.out.println(tag);
-//              }
 
                         ContainTagScene.setImageFilesWithTags(chooseFile);
                         System.out.println(chooseFile.size());

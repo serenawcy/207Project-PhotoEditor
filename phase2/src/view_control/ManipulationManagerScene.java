@@ -3,6 +3,7 @@ package view_control;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import model.ImageFile;
 import model.ImageFileManager;
 import model.TagManager;
 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -410,7 +412,7 @@ public class ManipulationManagerScene extends Application {
 
     }
 
-    private void buttonClicked() throws IOException {
+    private static void buttonClicked() throws IOException {
         ObservableList<String> names;
         names = imgListView.getSelectionModel().getSelectedItems();
         String selectedFile = "";
@@ -433,6 +435,22 @@ public class ManipulationManagerScene extends Application {
         for (ImageFile file : imgList) {
             imgListView.getItems().add(file.getFile().getName());
         }
+        imgListView.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                try {
+                    buttonClicked();
+                    if (inputFile != null){
+                        setPath(inputFile);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        }
+
 //        if(inputFile != null) {
 //            path.setText(inputFile.getFile().getAbsolutePath());
 //            tagsView.getItems().clear();
@@ -440,7 +458,7 @@ public class ManipulationManagerScene extends Application {
 //                tagsView.getItems().add(tags);
 //            }
 //        }
-    }
+
 
     static void setPath(ImageFile inputFile) {
         pathArea.getChildren().clear();

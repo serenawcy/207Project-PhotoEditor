@@ -28,6 +28,8 @@ class AddTagScene {
     /** Initialize an ImageFile */
     private static ImageFile inputFile;
 
+//    private ImageFile inputFileSer = inputFile;
+
     /** Display the Scene and construct the buttons. */
     static void display() {
         Stage addScene = new Stage();
@@ -48,8 +50,13 @@ class AddTagScene {
                     String tags = tagInput.getText();
                     if (!Objects.equals(tags, "" ) && inputFile != null) {
                         try {
-                            inputFile.addTag(tags);
-                            TagManager.add(tags);
+                            ImageFile inputFileSer = inputFile;
+                            ImageFile saveCurrent = inputFile;
+                            inputFileSer.addTag(tags);
+                            ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                            ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                            ManipulationManagerScene.tagManager.add(tags, ManipulationManagerScene.tagManagerPath);
+                            inputFile = inputFileSer;
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -81,4 +88,6 @@ class AddTagScene {
     static void setImageFile(ImageFile imageFile) {
         inputFile = imageFile;
     }
+
+
 }

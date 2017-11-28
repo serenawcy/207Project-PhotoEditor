@@ -77,7 +77,12 @@ class DeleteTagScene {
         tags = listView.getSelectionModel().getSelectedItems();
         for (String tag: tags){
             try {
-                inputFile.deleteTag(tag);
+                ImageFile inputFileSer = inputFile;
+                ImageFile saveCurrent = inputFile;
+                inputFileSer.deleteTag(tag);
+                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                inputFile = inputFileSer;
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -75,7 +75,7 @@ class SelectTagScene {
      * @param checkBox the Checkbox that displayed on the scene
      * @throws IOException IOException will be thrown.
      */
-    private static void  handleOptions(ArrayList<CheckBox> checkBox) throws IOException {
+    private static void handleOptions(ArrayList<CheckBox> checkBox) throws IOException {
         if (inputFile != null) {
             StringBuilder currentName = new StringBuilder();
             currentName.append(inputFile.getOriginalName());
@@ -91,10 +91,15 @@ class SelectTagScene {
                 }
             }
             if (checkDelete) {
-                inputFile.changeImageName(currentName.toString());
+                ImageFile inputFileSer = inputFile;
+                ImageFile saveCurrent = inputFile;
+                inputFileSer.changeImageName(currentName.toString());
                 for (String a : deleteTag) {
-                    inputFile.deleteTag(a);
+                    inputFileSer.deleteTag(a);
                 }
+                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                inputFile = inputFileSer;
                 ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
             }
         }

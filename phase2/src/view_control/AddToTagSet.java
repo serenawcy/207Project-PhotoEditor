@@ -40,7 +40,7 @@ class AddToTagSet {
     private static final int MAGIC20 = 20;
 
     /** Initialize an ImageFile */
-    private static ImageFile inputFile;
+    private ImageFile inputFile;
 
     /** Display the Scene and construct the buttons. */
     static void display() {
@@ -68,7 +68,7 @@ class AddToTagSet {
           String tags = tagInput.getText();
           if (!Objects.equals(tags, "")) {
             try {
-              TagManager.add(tags);
+              ManipulationManagerScene.tagManager.add(tags, ManipulationManagerScene.tagManagerPath);
             } catch (IOException e1) {
               e1.printStackTrace();
             }

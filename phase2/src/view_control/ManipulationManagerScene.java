@@ -15,7 +15,6 @@ import model.ImageFile;
 import model.ImageFileManager;
 import model.TagManager;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 public class ManipulationManagerScene extends Application {
 
     /** Initialize a new ImageFile Object */
-    private static ImageFile imgFile;
+    private static ImageFile inputFile;
 
     /** Initialize a new ImageView Object */
     private static ImageView imageView = new ImageView();
@@ -89,25 +88,30 @@ public class ManipulationManagerScene extends Application {
 
     private static Stage window = new Stage();
 
-    private StackPane paneCenter = new StackPane();
+    private static StackPane paneCenter = new StackPane();
 
     private static ListView<String> tagsView = new ListView<>();
 
-    private static TagManager tagManager;
+
+    static String tagManagerPath = "./serializedTagFiles.ser";
+
+    static String imageFileManagerPath = "./serializedImageFiles.ser";
+
+    static TagManager tagManager;
 
     static {
         try {
-            tagManager = new TagManager("./serializedTagFiles.ser");
+            tagManager = new TagManager(tagManagerPath);
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private ImageFileManager imageFileManager;
+    static ImageFileManager imageFileManager;
 
     {
         try {
-            imageFileManager = new ImageFileManager("./serializedImageFiles.ser");
+            imageFileManager = new ImageFileManager(imageFileManagerPath);
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
@@ -180,23 +184,23 @@ public class ManipulationManagerScene extends Application {
         tagsView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         add.setOnAction(
                 (ActionEvent e) -> {
-                    AddTagScene.setImageFile(imgFile);
+                    AddTagScene.setImageFile(inputFile);
                     AddTagScene.display();
                 });
 
         delete.setOnAction(
                 (ActionEvent e) -> {
-                    DeleteTagScene.setImageFile(imgFile);
+                    DeleteTagScene.setImageFile(inputFile);
                     DeleteTagScene.display();
                 });
         selectOldTag.setOnAction(
                 (ActionEvent e) -> {
-                    SelectTagScene.setImageFile(imgFile);
+                    SelectTagScene.setImageFile(inputFile);
                     SelectTagScene.display();
                 });
         move.setOnAction(
                 (ActionEvent e) -> {
-                    MoveFileScene.setImageFile(imgFile);
+                    MoveFileScene.setImageFile(inputFile);
                     MoveFileScene.display();
                 });
 
@@ -204,7 +208,7 @@ public class ManipulationManagerScene extends Application {
 
         rename.setOnAction(
                 (ActionEvent e) -> {
-                    FileRenameScene.setImageFile(imgFile);
+                    FileRenameScene.setImageFile(inputFile);
                     FileRenameScene.display();
                 });
 
@@ -216,8 +220,8 @@ public class ManipulationManagerScene extends Application {
                     logLayout.getChildren().remove(logListView);
                     logListView.getItems().clear();
 
-                    if (imgFile != null) {
-                        for (String logHistory : imgFile.getLog()) {
+                    if (inputFile != null) {
+                        for (String logHistory : inputFile.getLog()) {
                             logListView.getItems().add(logHistory);
                         }
                     }
@@ -230,8 +234,8 @@ public class ManipulationManagerScene extends Application {
                     allLogLayout.getChildren().remove(allLogListView);
                     allLogListView.getItems().clear();
 
-//                    if (imgFile != null) {
-//                        for (String logHistory : imgFile.getLog()) {
+//                    if (inputFile != null) {
+//                        for (String logHistory : inputFile.getLog()) {
 //                            logListView.getItems().add(logHistory);
 //                        }
 //                    }
@@ -258,28 +262,32 @@ public class ManipulationManagerScene extends Application {
                                     || file.getName().toLowerCase().endsWith(".gif")
                                     || file.getName().toLowerCase().endsWith(".png")) {
                                 boolean checkFileExist = false;
-                                ImageFile inputFile = null;
+                                ImageFile inputImageFile = null;
                                 try {
-                                    inputFile = new ImageFile(file);
+                                    inputImageFile = new ImageFile(file);
                                 } catch (IOException e1) {
                                     e1.printStackTrace();
                                 }
-                                ArrayList<ImageFile> imageFiles = ImageFileManager.getImageFileList();
+                                ArrayList<ImageFile> imageFiles = imageFileManager.getSerializedList();
 
                                 for (ImageFile imgFile : imageFiles) {
-                                    if (imgFile.equals(inputFile)) {
-                                        inputFile = imgFile;
+                                    if (imgFile.equals(inputImageFile)) {
+                                        inputImageFile = imgFile;
                                         checkFileExist = true;
                                     }
                                 }
                                 if (!checkFileExist) {
                                     try {
-                                        ImageFileManager.add(inputFile);
+                                        ArrayList<String> autoAddTags= inputImageFile.getExistTag();
+                                        for (String tag: autoAddTags){
+                                            tagManager.add(tag, tagManagerPath);
+                                        }
+                                        imageFileManager.add(inputImageFile, imageFileManagerPath);
                                     } catch (IOException e1) {
                                         e1.printStackTrace();
                                     }
                                 }
-                                directoryImageFile.add(inputFile);
+                                directoryImageFile.add(inputImageFile);
                             }
                             imgFiles = directoryImageFile;
                             setImageListView(imgFiles);
@@ -298,7 +306,7 @@ public class ManipulationManagerScene extends Application {
 //
 //        updateTagHistory.setOnAction(
 //                (ActionEvent e) -> {
-//                    AddToTagSet.setImageFile(imgFile);
+//                    AddToTagSet.setImageFile(inputFile);
 //                    AddToTagSet.display();
 //                });
 
@@ -370,9 +378,9 @@ public class ManipulationManagerScene extends Application {
     }
 
     /** Get the Image that user selected and show it onto the scene. */
-    private void setImage() {
+   static void setImage() {
         BorderPane.clearConstraints(imageView);
-        Image img = new Image(imgFile.getFile().toURI().toString());
+        Image img = new Image(inputFile.getFile().toURI().toString());
         imageView = new ImageView(img);
         imageView.setFitHeight(MAGIC500);
         imageView.setFitWidth(MAGIC550);
@@ -386,11 +394,11 @@ public class ManipulationManagerScene extends Application {
      *
      * @param imageFile the
      */
-    private static void setFile(ImageFile imageFile) throws IOException {
+    static void setFile(ImageFile imageFile) throws IOException {
         //       inputGridPane.getChildren().remove(path);
-        imgFile = imageFile;
-        path.setText(imgFile.getFile().getAbsolutePath());
-//        for (String tags: imgFile.getExistTag()){
+        inputFile = imageFile;
+        path.setText(inputFile.getFile().getAbsolutePath());
+//        for (String tags: inputFile.getExistTag()){
 //            tagsView.getItems().add(tags);
 //        }
 
@@ -419,19 +427,19 @@ public class ManipulationManagerScene extends Application {
         for (ImageFile file : imgList) {
             imgListView.getItems().add(file.getFile().getName());
         }
-        if(imgFile != null) {
-            path.setText(imgFile.getFile().getAbsolutePath());
+        if(inputFile != null) {
+            path.setText(inputFile.getFile().getAbsolutePath());
 //            tagsView.getItems().clear();
-//            for (String tags: imgFile.getExistTag()){
+//            for (String tags: inputFile.getExistTag()){
 //                tagsView.getItems().add(tags);
 //            }
         }
     }
 
-    static void setTagSetView(){
+     static void setTagSetView(){
 //        inputGridPane.getChildren().remove(tagsView);
         tagsView.getItems().clear();
-        ArrayList<String> tagHistory = TagManager.getTagList();
+        ArrayList<String> tagHistory = tagManager.getSerializedList();
         for (String tag: tagHistory){
             tagsView.getItems().add(tag);
         }
@@ -442,7 +450,7 @@ public class ManipulationManagerScene extends Application {
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
         if(tags.size() >= 1) {
             String name = tags.get(0);
-            TagManager.delete(name);
+            tagManager.delete(name, tagManagerPath);
             setTagSetView();
         }
     }
@@ -451,19 +459,21 @@ public class ManipulationManagerScene extends Application {
 
 //        String temp = "";
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
-        if(tags.size() >= 1 && imgFile != null){
+        if(tags.size() >= 1 && inputFile != null){
             for (String tag : tags){
-                imgFile.addTag(tag);
+                ImageFile saveCurrent = inputFile;
+                inputFile.addTag(tag);
+                imageFileManager.add(inputFile, imageFileManagerPath);
+                imageFileManager.delete(saveCurrent, imageFileManagerPath);
 //                temp += tag + "\n";
 //                System.out.println(tag);
             }
 //      System.out.println(temp);
 
 //            String tag = tags.get(0);
-//            imgFile.addTag(tag);
+//            inputFile.addTag(tag);
             setImageListView(imgFiles);
         }
-
     }
 
 }

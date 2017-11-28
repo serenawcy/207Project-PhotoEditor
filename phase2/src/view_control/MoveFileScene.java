@@ -57,7 +57,12 @@ class MoveFileScene {
                         if (selectedDirectory != null) {
                             directory = selectedDirectory.getAbsolutePath();
                             try {
-                                inputFile.changeDirectory(directory);
+                                ImageFile inputFileSer = inputFile;
+                                ImageFile saveCurrent = inputFile;
+                                inputFileSer.changeDirectory(directory);
+                                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                                inputFile = inputFileSer;
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }

@@ -98,8 +98,13 @@ class FileRenameScene {
             }
             tagWanted.remove(0);
 
-            inputFile.changeImageName(nameToChange);
-            inputFile.changeTagHistory(tagWanted);
+            ImageFile inputFileSer = inputFile;
+            ImageFile saveCurrent = inputFile;
+            inputFileSer.changeImageName(nameToChange);
+            inputFileSer.changeTagHistory(tagWanted);
+            ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+            ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+            inputFile = inputFileSer;
             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
         }
 

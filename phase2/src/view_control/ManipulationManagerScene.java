@@ -191,6 +191,7 @@ public class ManipulationManagerScene extends Application {
         allLogTextScene = new Scene(allLogLayout, 1349,1000);
 
         tagsView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         add.setOnAction(
                 (ActionEvent e) -> {
                     AddTagScene.setImageFile(inputFile);
@@ -348,12 +349,13 @@ public class ManipulationManagerScene extends Application {
                     ArrayList<ImageFile> chooseFile = new ArrayList<>();
 
                     if (chooseTags.size() >= 1) {
-                        for (ImageFile file : imgFiles) {
-                            if (file.getExistTag().containsAll(chooseTags)) {
-                                chooseFile.add(file);
+                        for (String chooseTag: chooseTags) {
+                            for (ImageFile file : imgFiles) {
+                                if (file.getExistTag().contains(chooseTag)) {
+                                    chooseFile.add(file);
+                                }
                             }
                         }
-
                         ContainTagScene.setImageFilesWithTags(chooseFile);
                         System.out.println(chooseFile.size());
                         ContainTagScene.display();

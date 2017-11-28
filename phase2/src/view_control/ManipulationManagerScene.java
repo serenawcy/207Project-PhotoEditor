@@ -520,17 +520,15 @@ public class ManipulationManagerScene extends Application {
 
     private void deleteTagHistoryButtonClicked() throws IOException {
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
-        if(tags.size() >= 1) {
-            String name = tags.get(0);
-            tagManager.delete(name, tagManagerPath);
-            setTagSetView();
-        }
-        // *********** 多选的delete 不行 *************
-//        for (String tag: tags){
-//            tagManager.delete(tag, tagManagerPath);
+//        if(tags.size() >= 1) {
+//            String name = tags.get(0);
+//            tagManager.delete(name, tagManagerPath);
 //            setTagSetView();
 //        }
-        // *********** 多选的delete 不行 *************
+        for (String tag: tags){
+            tagManager.delete(tag, tagManagerPath);
+        }
+        setTagSetView();
         }
 
     private void addTagToFileButtonClicked() throws IOException {

@@ -63,6 +63,7 @@ class AddTagScene {
                         tagInput.clear();
                         ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
                         ManipulationManagerScene.setTagSetView();
+                        ManipulationManagerScene.setPath(inputFile);
                     }
                 });
 

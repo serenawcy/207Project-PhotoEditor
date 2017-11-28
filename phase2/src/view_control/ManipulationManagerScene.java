@@ -92,6 +92,8 @@ public class ManipulationManagerScene extends Application {
 
     private static ListView<String> tagsView = new ListView<>();
 
+    private static Pane pathArea = new Pane();
+
 
     static String tagManagerPath = "./serializedTagFiles.ser";
 
@@ -299,6 +301,9 @@ public class ManipulationManagerScene extends Application {
         selectImgFile.setOnAction((ActionEvent event) -> {
             try {
                 buttonClicked();
+                if (inputFile != null){
+                    setPath(inputFile);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -332,7 +337,6 @@ public class ManipulationManagerScene extends Application {
 
         inputGridPane.setPrefSize(MAGIC800,MAGIC800);
         Label tagHistory = new Label("Tag History");
-        Pane pathArea = new Pane();
         pathArea.setPrefSize(MAGIC200,MAGIC30);
         pathArea.getChildren().add(path);
         pathArea.setTranslateX(MAGIC200);
@@ -379,7 +383,8 @@ public class ManipulationManagerScene extends Application {
 
     /** Get the Image that user selected and show it onto the scene. */
    static void setImage() {
-        BorderPane.clearConstraints(imageView);
+        paneCenter.getChildren().remove(imageView);
+        if (inputFile != null){
         Image img = new Image(inputFile.getFile().toURI().toString());
         imageView = new ImageView(img);
         imageView.setFitHeight(MAGIC500);
@@ -388,6 +393,7 @@ public class ManipulationManagerScene extends Application {
         paneCenter.getChildren().add(imageView);
         StackPane.setMargin(imageView,new Insets(MAGIC50,MAGIC10,MAGIC50,MAGIC50));
     }
+   }
 
     /**
      * Pass in the file
@@ -397,7 +403,7 @@ public class ManipulationManagerScene extends Application {
     static void setFile(ImageFile imageFile) throws IOException {
         //       inputGridPane.getChildren().remove(path);
         inputFile = imageFile;
-        path.setText(inputFile.getFile().getAbsolutePath());
+//        path.setText(inputFile.getFile().getAbsolutePath());
 //        for (String tags: inputFile.getExistTag()){
 //            tagsView.getItems().add(tags);
 //        }
@@ -427,12 +433,20 @@ public class ManipulationManagerScene extends Application {
         for (ImageFile file : imgList) {
             imgListView.getItems().add(file.getFile().getName());
         }
-        if(inputFile != null) {
-            path.setText(inputFile.getFile().getAbsolutePath());
+//        if(inputFile != null) {
+//            path.setText(inputFile.getFile().getAbsolutePath());
 //            tagsView.getItems().clear();
 //            for (String tags: inputFile.getExistTag()){
 //                tagsView.getItems().add(tags);
 //            }
+//        }
+    }
+
+    static void setPath(ImageFile inputFile) {
+        pathArea.getChildren().clear();
+        if (inputFile != null) {
+            path.setText(ManipulationManagerScene.inputFile.getFile().getAbsolutePath());
+            pathArea.getChildren().add(path);
         }
     }
 

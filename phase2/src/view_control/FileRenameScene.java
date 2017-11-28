@@ -106,6 +106,7 @@ class FileRenameScene {
             ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
             inputFile = inputFileSer;
             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+            ManipulationManagerScene.setPath(inputFile);
         }
 
     }

@@ -12,6 +12,7 @@ import javafx.stage.DirectoryChooser;
 import model.ImageFile;
 
 import java.io.File;
+import java.io.IOException;
 
 class MoveFileScene {
 
@@ -66,6 +67,16 @@ class MoveFileScene {
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }
+                            ManipulationManagerScene.imgFiles.remove(inputFile);
+                            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                            try{
+                                ManipulationManagerScene.setFile(null);
+                                ManipulationManagerScene.setImage();
+                                ManipulationManagerScene.setPath(null);
+                            }catch (IOException e1){
+                                e1.printStackTrace();
+                            }
+                            moveToStage.close();
                         }
                     }
                 });

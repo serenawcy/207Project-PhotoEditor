@@ -88,6 +88,7 @@ class DeleteTagScene {
             }
             listView.getItems().remove(tag);
             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+            ManipulationManagerScene.setPath(inputFile);
 
         }
 

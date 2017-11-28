@@ -150,10 +150,10 @@ public class ImageFile implements Serializable {
        // ImageFile saveCurrent = this;
         Date time = new Date();
 
-        history.add(time + "Renamed this image file from " + this.file.getName() +
+        history.add(time + " Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
-        allHistory.add(time + "Renamed this image file from " + this.file.getName() +
+        allHistory.add(time + " Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));

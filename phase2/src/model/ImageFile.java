@@ -32,11 +32,6 @@ public class ImageFile implements Serializable {
     private ArrayList<String> history;
 
     /**
-     * An ArrayList of String of all the log history of this ImageFile object
-     */
-    private static ArrayList<String> allHistory;
-
-    /**
      * Create a new empty ImageFile.
      *
      * @param file the File object which used to construct ImageFile
@@ -45,8 +40,6 @@ public class ImageFile implements Serializable {
     public ImageFile(File file) throws IOException {
 
         this.file = file;
-
-        allHistory = new ArrayList<>();
 
         this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
@@ -95,7 +88,7 @@ public class ImageFile implements Serializable {
      *
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
      */
-    public void addTag(String userInputAdd) throws IOException {
+    public String addTag(String userInputAdd) throws IOException {
         String[] tagToAdd = userInputAdd.split(",");
 
         StringBuilder tagAdd = new StringBuilder();
@@ -109,8 +102,9 @@ public class ImageFile implements Serializable {
 
         if (tagAdd.length() != 0) {
             tagAdd.replace(tagAdd.length() - 2, tagAdd.length(), "");
-            this.renameAdd(tagAdd.toString());
+            return this.renameAdd(tagAdd.toString());
         }
+        return " ";
     }
 
 
@@ -119,9 +113,9 @@ public class ImageFile implements Serializable {
      *
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
-    public void deleteTag(String tagToDelete) throws IOException {
+    public String deleteTag(String tagToDelete) throws IOException {
         this.existTag.remove(tagToDelete);
-        this.renameDelete(tagToDelete);
+        return this.renameDelete(tagToDelete);
     }
 
     /**
@@ -146,14 +140,13 @@ public class ImageFile implements Serializable {
      *
      * @param newImageName new name of this ImageFile object
      */
-    public void changeImageName(String newImageName) throws IOException {
+    public String changeImageName(String newImageName) throws IOException {
        // ImageFile saveCurrent = this;
         Date time = new Date();
 
-        history.add(time + " Renamed this image file from " + this.file.getName() +
-                " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
+        String result = passHistory(time, this.file.getName(), newImageName, this.getSuffix(this.file));
 
-        allHistory.add(time + " Renamed this image file from " + this.file.getName() +
+        history.add(time + " Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
         File renameFile = new File(this.file.getAbsolutePath().replace(this.getNameWithoutSuffix(this.file), newImageName));
@@ -167,6 +160,7 @@ public class ImageFile implements Serializable {
            // ImageFileManager.delete(saveCurrent);
            // ImageFileManager.add(this);
         }
+        return result;
     }
 
     /**
@@ -174,14 +168,14 @@ public class ImageFile implements Serializable {
      *
      * @param tagToDelete the tag name need to be deleted
      */
-    private void renameDelete(String tagToDelete) throws IOException {
+    private String renameDelete(String tagToDelete) throws IOException {
         StringBuilder newName = new StringBuilder(this.getOriginalName());
         for (String tag: this.existTag) {
             if (!Objects.equals(tag, tagToDelete)) {
                 newName.append(" @").append(tag);
             }
         }
-        this.changeImageName(newName.toString());
+        return this.changeImageName(newName.toString());
     }
 
     /**
@@ -189,8 +183,8 @@ public class ImageFile implements Serializable {
      *
      * @param tagToAdd the tag name need to be added
      */
-    private void renameAdd(String tagToAdd) throws IOException {
-        this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
+    private String renameAdd(String tagToAdd) throws IOException {
+        return this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);
     }
 
     /**
@@ -212,15 +206,6 @@ public class ImageFile implements Serializable {
      */
     public ArrayList<String> getLog() {
         return history;
-    }
-
-    /**
-     * Get all the log history of this ImageFile object.
-     *
-     * @return the ArrayList of String of log history
-     */
-    public static ArrayList<String> getAllLog() {
-        return allHistory;
     }
 
     /**
@@ -267,5 +252,17 @@ public class ImageFile implements Serializable {
      */
     public boolean equals(ImageFile imageFile) {
         return (imageFile.getFile().getAbsolutePath()).equals(this.file.getAbsolutePath());
+    }
+
+    private String passHistory(Date time, String oldName, String newName, String suffixName){
+        String result = "";
+
+        result += time + " Renamed this image file from " + oldName + " to " + newName + "." + suffixName + "\n";
+
+        return result;
+    }
+
+    public void resetExistTag(String tagToDelete) {
+        this.existTag.remove(tagToDelete);
     }
 }

@@ -7,6 +7,8 @@ public abstract class SerializeManager<T> {
 
     public ArrayList<T> managerList= new ArrayList<>();
 
+    private boolean checkWrite;
+
 
     /**
      * Creates a new empty StudentManager.
@@ -18,7 +20,9 @@ public abstract class SerializeManager<T> {
 
         File file = new File(filePath);
         if (file.exists()) {
-            readFromFile(filePath);
+            {
+                readFromFile(filePath);
+            }
         } else {
             file.createNewFile();
         }
@@ -33,9 +37,9 @@ public abstract class SerializeManager<T> {
         try {
             InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
-            ObjectInput input = new ObjectInputStream(buffer);
+           ObjectInput input = new ObjectInputStream(buffer);
             //deserialize the list
-            managerList = (ArrayList<T>)input.readObject();
+            managerList = (ArrayList<T>) input.readObject();
             input.close();
         } catch (IOException ex) {
             ex.printStackTrace();

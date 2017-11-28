@@ -100,10 +100,11 @@ class FileRenameScene {
 
             ImageFile inputFileSer = inputFile;
             ImageFile saveCurrent = inputFile;
-            inputFileSer.changeImageName(nameToChange);
+            String logHistory = inputFileSer.changeImageName(nameToChange);
             inputFileSer.changeTagHistory(tagWanted);
             ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
             ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+            ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
             inputFile = inputFileSer;
             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
             ManipulationManagerScene.setPath(inputFile);

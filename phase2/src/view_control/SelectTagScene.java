@@ -93,12 +93,13 @@ class SelectTagScene {
             if (checkDelete) {
                 ImageFile inputFileSer = inputFile;
                 ImageFile saveCurrent = inputFile;
-                inputFileSer.changeImageName(currentName.toString());
+                String logHistory1 = inputFileSer.changeImageName(currentName.toString());
                 for (String a : deleteTag) {
-                    inputFileSer.deleteTag(a);
+                    inputFileSer.resetExistTag(a);
                 }
                 ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
                 ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.logManager.add(logHistory1, ManipulationManagerScene.logManagerPath);
                 inputFile = inputFileSer;
                 ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
                 ManipulationManagerScene.setPath(inputFile);

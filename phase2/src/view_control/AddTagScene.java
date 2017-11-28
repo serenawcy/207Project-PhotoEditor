@@ -52,9 +52,10 @@ class AddTagScene {
                         try {
                             ImageFile inputFileSer = inputFile;
                             ImageFile saveCurrent = inputFile;
-                            inputFileSer.addTag(tags);
+                            String logHistory = inputFileSer.addTag(tags);
                             ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
                             ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                            ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
                             ManipulationManagerScene.tagManager.add(tags, ManipulationManagerScene.tagManagerPath);
                             inputFile = inputFileSer;
                         } catch (IOException e1) {

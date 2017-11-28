@@ -79,9 +79,10 @@ class DeleteTagScene {
             try {
                 ImageFile inputFileSer = inputFile;
                 ImageFile saveCurrent = inputFile;
-                inputFileSer.deleteTag(tag);
+                String logHistory = inputFileSer.deleteTag(tag);
                 ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
                 ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
                 inputFile = inputFileSer;
             } catch (Exception e) {
                 e.printStackTrace();

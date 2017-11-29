@@ -79,7 +79,9 @@ class MoveFileScene {
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }
-                            ManipulationManagerScene.imgFiles.remove(inputFile);
+                            if (! isInSubDirectory(ManipulationManagerScene.getCurrentDirectory(), inputFile.getFile())) {
+                                ManipulationManagerScene.imgFiles.remove(inputFile);
+                            }
                             ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
                             try{
                                 ManipulationManagerScene.setFile(null);
@@ -112,5 +114,12 @@ class MoveFileScene {
      */
     static void setImageFile(ImageFile imageFile) {
         inputFile = imageFile;
+    }
+
+
+    private static boolean isInSubDirectory(File dir, File file) {
+
+        return file != null && (file.equals(dir) || isInSubDirectory(dir, file.getParentFile()));
+
     }
 }

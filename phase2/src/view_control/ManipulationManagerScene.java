@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.ImageFile;
 import model.ImageFileManager;
@@ -67,6 +68,8 @@ public class ManipulationManagerScene extends Application {
      * Initialize an generalLayout to place all elements and buttons
      */
     private static VBox generalLayout = new VBox(20);
+
+    private static File currentDirectory;
 
     /**
      * Magic number 10
@@ -428,6 +431,7 @@ public class ManipulationManagerScene extends Application {
         openButton.setOnAction(
                 (ActionEvent e) -> {
                     directoryImageFile.clear();
+                    currentDirectory = null;
                     openButtonClicked();
                     setTagSetView();
                 });
@@ -582,9 +586,9 @@ public class ManipulationManagerScene extends Application {
 //        ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
         DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        File selectedDirectory = directoryChooser.showDialog(window);
-        if (selectedDirectory != null) {
-            setAction(selectedDirectory);
+        currentDirectory = directoryChooser.showDialog(window);
+        if (currentDirectory != null) {
+            setAction(currentDirectory);
         }
             imgFiles = directoryImageFile;
 //            for (File file : selectedDirectory.listFiles()) {
@@ -768,5 +772,9 @@ public class ManipulationManagerScene extends Application {
             }
             setPath(inputFile);
         }
+    }
+
+    static File getCurrentDirectory(){
+        return currentDirectory;
     }
 }

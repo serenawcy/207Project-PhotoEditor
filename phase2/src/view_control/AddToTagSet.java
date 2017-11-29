@@ -9,40 +9,37 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.ImageFile;
 
 import java.io.IOException;
 import java.util.Objects;
 
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
-import model.ImageFile;
-import model.TagManager;
-
-import java.io.IOException;
-import java.util.Objects;
 
 class AddToTagSet {
 
-    /** Magic number 250 */
+    /**
+     * Magic number 250
+     */
     private static final int MAGIC250 = 250;
 
-    /** Magic number 100 */
+    /**
+     * Magic number 100
+     */
     private static final int MAGIC100 = 100;
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Initialize an ImageFile */
-    private ImageFile inputFile;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display() {
         Stage addScene = new Stage();
         addScene.initModality(Modality.APPLICATION_MODAL);
@@ -59,12 +56,6 @@ class AddToTagSet {
 
     done.setOnAction(
         e -> {
-          //                    String serPath = "./serializedTagFiles.ser";
-          //                    try {
-          //                        TagManager tagManager = new TagManager(serPath);
-          //                    } catch (ClassNotFoundException | IOException e1) {
-          //                        e1.printStackTrace();
-          //                    }
           String tags = tagInput.getText();
           if (!Objects.equals(tags, "")) {
             try {

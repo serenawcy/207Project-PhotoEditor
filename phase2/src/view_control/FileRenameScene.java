@@ -13,29 +13,40 @@ import model.ImageFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 class FileRenameScene {
 
     private static ListView<String> listView;
     private static ImageFile inputFile;
 
-    /** Magic number 500 */
+    /**
+     * Magic number 500
+     */
     private static final int MAGIC500 = 500;
 
-    /** Magic number 600 */
+    /**
+     * Magic number 600
+     */
     private static final int MAGIC600 = 600;
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Magic number 120 */
+    /**
+     * Magic number 120
+     */
     private static final int MAGIC120 = 120;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display() {
         Stage window = new Stage();
         window.setTitle("Rename the File");

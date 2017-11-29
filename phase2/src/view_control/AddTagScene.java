@@ -6,31 +6,41 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 import model.ImageFile;
-import model.TagManager;
 
 import java.io.IOException;
 import java.util.Objects;
 
 class AddTagScene {
 
-    /** Magic number 250 */
+    /**
+     * Magic number 250
+     */
     private static final int MAGIC250 = 250;
 
-    /** Magic number 100 */
+    /**
+     * Magic number 100
+     */
     private static final int MAGIC100 = 100;
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Initialize an ImageFile */
+    /**
+     * Initialize an ImageFile
+     */
     private static ImageFile inputFile;
 
-//    private ImageFile inputFileSer = inputFile;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display() {
         Stage addScene = new Stage();
         addScene.initModality(Modality.APPLICATION_MODAL);

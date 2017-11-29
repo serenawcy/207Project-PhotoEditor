@@ -16,22 +16,34 @@ import java.io.IOException;
 
 class MoveFileScene {
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Magic number 250 */
+    /**
+     * Magic number 250
+     */
     private static final int MAGIC250 = 250;
 
-    /** Magic number 200 */
+    /**
+     * Magic number 200
+     */
     private static final int MAGIC200 = 200;
 
-    /** Initialize an ImageFile */
+    /**
+     * Initialize an ImageFile
+     */
     private static ImageFile inputFile;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display() {
         Stage moveToStage = new Stage();
         moveToStage.initModality(Modality.APPLICATION_MODAL);

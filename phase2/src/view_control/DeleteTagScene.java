@@ -14,29 +14,45 @@ import model.ImageFile;
 
 class DeleteTagScene {
 
-    /** Initialize an ImageFile */
+    /**
+     * Initialize an ImageFile
+     */
     private static ImageFile inputFile;
 
 
-    /** Initialize an ListView of string to display the current tags. */
+    /**
+     * Initialize an ListView of string to display the current tags.
+     */
     private static ListView<String> listView;
 
-    /** Magic number 350 */
+    /**
+     * Magic number 350
+     */
     private static final int MAGIC350 = 350;
 
-    /** Magic number 120 */
+    /**
+     * Magic number 120
+     */
     private static final int MAGIC120 = 120;
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Magic number 400 */
+    /**
+     * Magic number 400
+     */
     private static final int MAGIC400 = 400;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display(){
         Stage window = new Stage();
         window.setTitle("Delete Tag(s)");

@@ -3,7 +3,6 @@ package view_control;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,110 +11,251 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.TriangleMesh;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.ImageFile;
 import model.ImageFileManager;
 import model.LogManager;
 import model.TagManager;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static java.awt.Color.RED;
-import static java.awt.Color.red;
 
 public class ManipulationManagerScene extends Application {
 
-    /** Initialize a new ImageFile Object */
+    /**
+     * Initialize a new ImageFile Object
+     */
     private static ImageFile inputFile;
 
-    /** Initialize a new ImageView Object */
+    /**
+     * Initialize a new ImageView Object
+     */
     private static ImageView imageView = new ImageView();
 
-    /** Initialize a new Scene to display the log text */
+    /**
+     * Initialize a new Scene to display the selected image's log text
+     */
     private static Scene logTextScene;
 
+    /**
+     * Initialize a new Scene to display all log text
+     */
     private static Scene allLogTextScene;
 
-    /** Initialize a logListView for the logTextScene to display the log text */
+    /**
+     * Initialize a logListView for the logTextScene to display the selected image's log text
+     */
     private static ListView<String> logListView = new ListView<>();
 
+    /**
+     * Initialize an allLogListView for the allLogTextScene to display all log text
+     */
     private static ListView<String> allLogListView = new ListView<>();
 
+    /**
+     * Initialize an inputGridPane to format the layout of manipulation scene
+     */
     private static BorderPane inputGridPane = new BorderPane();
 
+    /**
+     * Initialize an generalLayout to place all elements and buttons
+     */
     private static VBox generalLayout = new VBox(20);
 
-    /** Magic number 10 */
+    /**
+     * Magic number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic number 50 */
+    /**
+     * Magic number 0
+     */
+    private static final int MAGIC0 = 0;
+
+    /**
+     * Magic number 1
+     */
+    private static final int MAGIC1 = 1;
+
+    /**
+     * Magic number 600
+     */
+    private static final int MAGIC600 = 600;
+
+    /**
+     * Magic number 680
+     */
+    private static final int MAGIC680 = 680;
+
+    /**Magic number 700*/
+    private static final int MAGIC700 = 700;
+
+    /**
+     * Magic number 50
+     */
     private static final int MAGIC50 = 50;
 
-    /** Magic number 1000 */
-    private static final int MAGIC1000 = 1000;
-
-    /** Magic number 20 */
+    /**
+     * Magic number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Magic number 200 */
+    /**
+     * Magic number 200
+     */
     private static final int MAGIC200 = 200;
 
-    /** Magic number 30 */
-    private static final int MAGIC30 = 30;
-
-    /** Magic number 800 */
-    private static final int MAGIC800 = 800;
-
-    /** Magic number 650 */
-    private static final int MAGIC650 = 650;
-
-    /** Magic number 120 */
-    private static final int MAGIC120 = 120;
-
-    /** Magic number 250 */
+    /**
+     * Magic number 250
+     */
     private static final int MAGIC250 = 250;
 
-    /** Magic number 550 */
-    private static final int MAGIC550 = 550;
+    /**
+     * Magic number 30
+     */
+    private static final int MAGIC30 = 30;
 
-    /** Magic number 500 */
-    private static final int MAGIC500 = 500;
+    /**
+     * Magic number 70
+     */
+    private static final int MAGIC70 = 70;
 
-    /** Magic number 1350 */
+    /**
+     * Magic number 90
+     */
+    private static final int MAGIC90 = 90;
+
+    /**
+     * Magic number 95
+     */
+    private static final int MAGIC95 = 95;
+
+    /**
+     * Magic number 800
+     */
+    private static final int MAGIC800 = 800;
+
+    /**
+     * Magic number 950
+     */
+    private static final int MAGIC950 = 950;
+
+    /**
+     * Magic number 100
+     */
+    private static final int MAGIC100 = 100;
+
+    /**
+     * Magic number 150
+     */
+    private static final int MAGIC150 = 150;
+
+    /**
+     * Magic number 152
+     */
+    private static final int MAGIC152 = 152;
+
+    /**
+     * Magic number 5
+     */
+    private static final int MAGIC5 = 5;
+
+    /**
+     * Magic number 15
+     */
+    private static final int MAGIC15 = 15;
+
+    /**
+     * Magic number 3
+     */
+    private static final int MAGIC3 = 3;
+
+    /**
+     * Magic number 1000
+     */
+    private static final int MAGIC1000 = 1000;
+
+    /**
+     * Magic number 1349
+     */
+    private static final int MAGIC1349 = 1349;
+
+    /**
+     * Magic number 1350
+     */
     private static final int MAGIC1350 = 1350;
 
+    /**
+     * Magic number 400
+     */
+    private static final int MAGIC400 = 400;
+
+    /**
+     * Initialize a new label for the path of the selected image
+     */
     private static Label path = new Label();
 
+    /**
+     * Initialize a imgFiles that contains the collection of ImageFile under directory
+     */
     static ArrayList<ImageFile> imgFiles = new ArrayList<>();
 
+    /**
+     * Initialize a imgListView for the to display imgFiles
+     */
     private static ListView<String> imgListView = new ListView<>();
 
+    /**
+     * Initialize a Stage window for this scene
+     */
     private static Stage window = new Stage();
 
+    /**
+     * Initialize a StackPane paneCenter to place the imageView of the selected image
+     */
     private static StackPane paneCenter = new StackPane();
 
+    /**
+     * Initialize a tagsView to place the imageView of the selected file
+     */
     private static ListView<String> tagsView = new ListView<>();
 
+    /**
+     * Initialize a pathArea to place the path of the selected file
+     */
     private static Pane pathArea = new Pane();
 
+    /**
+     * Path to serialize the logManager
+     */
     static String logManagerPath = "./serializedLogFiles.ser";
 
+    /**
+     * Path to serialize the tagManager
+     */
     static String tagManagerPath = "./serializedTagFiles.ser";
 
+    /**
+     * Path to serialize the imageFileManager
+     */
     static String imageFileManagerPath = "./serializedImageFiles.ser";
 
+    /**
+     * A tagManager object
+     */
     static TagManager tagManager;
 
+    /**
+     * A  LogManager object
+     */
     static LogManager logManager;
 
+    /**
+     * A  imageFileManager object
+     */
     static ImageFileManager imageFileManager;
 
     static {
@@ -144,86 +284,72 @@ public class ManipulationManagerScene extends Application {
     }
 
 
-
     public static void main(String[] args) {
         Application.launch(args);
     }
 
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         window.setTitle("Image Editor");
 
         Button add = new Button("Add Tag");
-        add.setMinWidth(100);
-//        BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/icon/add.jpeg").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-//        Background background = new Background(backgroundImage);
-//        add.setBackground(background);
-
-
+        add.setMinWidth(MAGIC100);
 
         Button delete = new Button("Delete Tag");
-        delete.setMinWidth(100);
+        delete.setMinWidth(MAGIC100);
 
         Button selectOldTag = new Button("Select Old Tag");
-        selectOldTag.setMinWidth(100);
+        selectOldTag.setMinWidth(MAGIC100);
 
         Button move = new Button("Move To");
-        move.setMinWidth(100);
+        move.setMinWidth(MAGIC100);
 
         Button quit = new Button("Quit The Program");
-        quit.setMinWidth(150);
+        quit.setMinWidth(MAGIC100);
 
         Button rename = new Button("Rename");
-        rename.setMinWidth(100);
+        rename.setMinWidth(MAGIC100);
 
         Button getLog = new Button("Get Log History");
-        getLog.setMinWidth(150);
+        getLog.setMinWidth(MAGIC150);
 
         Button goBack = new Button("Go Back");
-        goBack.setMinWidth(100);
+        goBack.setMinWidth(MAGIC100);
 
         Button back = new Button("Go Back");
-        back.setMinWidth(100);
+        back.setMinWidth(MAGIC100);
 
         Button openButton = new Button("Choose A Directory");
-        openButton.setMinWidth(100);
+        openButton.setMinWidth(MAGIC100);
 
         // ***************** NEW FEATURE'S BUTTON *****************
         Button imgContainTag = new Button("Show Image with Tag");
-        imgContainTag.setMinWidth(150);
+        imgContainTag.setMinWidth(MAGIC150);
         // ***************** NEW FEATURE'S BUTTON *****************
 
 
         Button deleteTagHistory = new Button("Remove From History");
-        deleteTagHistory.setMinWidth(150);
+        deleteTagHistory.setMinWidth(MAGIC150);
 
 
         Pane addToTagSet = new Pane();
-        addToTagSet.setMinHeight(20);
-        addToTagSet.setMinWidth(20);
-        addToTagSet.setMaxWidth(20);
-        addToTagSet.setMaxHeight(20);
-        Line line1 = new Line(5,10,15,10);
-        line1.setStrokeWidth(3);
-        Line line2 = new Line(10,5,10,15);
-        line2.setStrokeWidth(3);
-        addToTagSet.getChildren().addAll(line1,line2);
-
-//        addToTagSet.setStyle("-fx-background-color:#fff8dc");
-
-
-
-//        Button addToTagSet = new Button("+");
-//        addToTagSet.setMinWidth(10);
-//        BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/test/dogTEST.jpeg").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-//        Background background = new Background(backgroundImage);
-//        addToTagSet.setBackground(background);
+        addToTagSet.setMinHeight(MAGIC20);
+        addToTagSet.setMinWidth(MAGIC20);
+        addToTagSet.setMaxWidth(MAGIC20);
+        addToTagSet.setMaxHeight(MAGIC20);
+        Line line1 = new Line(MAGIC5, MAGIC10, MAGIC15, MAGIC10);
+        line1.setStrokeWidth(MAGIC3);
+        Line line2 = new Line(MAGIC10, MAGIC5, MAGIC10, MAGIC15);
+        line2.setStrokeWidth(MAGIC3);
+        addToTagSet.getChildren().addAll(line1, line2);
 
         Button addToImageFile = new Button("Add to Image File");
-        addToImageFile.setMinWidth(150);
+        addToImageFile.setMinWidth(MAGIC150);
 
 
         Button getAllLog = new Button(("Get All Log History"));
@@ -231,10 +357,10 @@ public class ManipulationManagerScene extends Application {
         setTagSetView();
 
         VBox logLayout = new VBox(MAGIC20);
-        logTextScene = new Scene(logLayout, 1349, 1000);
+        logTextScene = new Scene(logLayout, MAGIC1349, MAGIC1000);
 
         VBox allLogLayout = new VBox(MAGIC20);
-        allLogTextScene = new Scene(allLogLayout, 1349,1000);
+        allLogTextScene = new Scene(allLogLayout, MAGIC1349, MAGIC1000);
 
         tagsView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -321,8 +447,8 @@ public class ManipulationManagerScene extends Application {
                                     if (imgFile.equals(inputImageFile)) {
                                         ArrayList<String> currentTagList = tagManager.getSerializedList();
                                         ArrayList<String> existTagList = imgFile.getExistTag();
-                                        for (String tag: existTagList){
-                                            if (!currentTagList.contains(tag)){
+                                        for (String tag : existTagList) {
+                                            if (!currentTagList.contains(tag)) {
                                                 try {
                                                     tagManager.add(tag, tagManagerPath);
                                                 } catch (IOException e1) {
@@ -336,8 +462,8 @@ public class ManipulationManagerScene extends Application {
                                 }
                                 if (!checkFileExist) {
                                     try {
-                                        ArrayList<String> autoAddTags= inputImageFile.getExistTag();
-                                        for (String tag: autoAddTags){
+                                        ArrayList<String> autoAddTags = inputImageFile.getExistTag();
+                                        for (String tag : autoAddTags) {
                                             tagManager.add(tag, tagManagerPath);
                                         }
                                         imageFileManager.add(inputImageFile, imageFileManagerPath);
@@ -363,12 +489,7 @@ public class ManipulationManagerScene extends Application {
         });
 
 
-        addToTagSet.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
-                AddToTagSet.display();
-            }
-            });
+        addToTagSet.setOnMouseClicked(event -> AddToTagSet.display());
 
         addToImageFile.setOnAction(event -> {
             try {
@@ -385,7 +506,7 @@ public class ManipulationManagerScene extends Application {
                     ArrayList<ImageFile> chooseFile = new ArrayList<>();
 
                     if (chooseTags.size() >= 1) {
-                        for (String chooseTag: chooseTags) {
+                        for (String chooseTag : chooseTags) {
                             for (ImageFile file : imgFiles) {
                                 if (file.getExistTag().contains(chooseTag) && !(chooseFile.contains(file))) {
                                     chooseFile.add(file);
@@ -394,7 +515,6 @@ public class ManipulationManagerScene extends Application {
                         }
                         ContainTagScene.setImageFilesWithTags(chooseFile);
                         ContainTagScene.setImage(null);
-//                        System.out.println(chooseFile.size());
                         ContainTagScene.display();
                     }
                 });
@@ -402,58 +522,41 @@ public class ManipulationManagerScene extends Application {
         // ***************** NEW FEATURE'S ACTION *****************
 
 
-        inputGridPane.setPrefSize(MAGIC800,MAGIC800);
+        inputGridPane.setPrefSize(MAGIC800, MAGIC800);
         Label tagHistory = new Label("Tag History");
-        pathArea.setPrefSize(MAGIC200,MAGIC30);
+        pathArea.setPrefSize(MAGIC200, MAGIC30);
         pathArea.getChildren().add(path);
-//        pathArea.setTranslateX(250);
         ToolBar toolbar = new ToolBar();
-        toolbar.getItems().addAll(openButton, getAllLog,imgContainTag,tagHistory,addToTagSet);
-        imgContainTag.setTranslateX(600);
-        tagHistory.setTranslateX(680);
-        addToTagSet.setTranslateX(700);
-        addToTagSet.setTranslateY(1);
+        toolbar.getItems().addAll(openButton, getAllLog, imgContainTag, tagHistory, addToTagSet);
+        imgContainTag.setTranslateX(MAGIC600);
+        tagHistory.setTranslateX(MAGIC680);
+        addToTagSet.setTranslateX(MAGIC700);
+        addToTagSet.setTranslateY(MAGIC1);
         ToolBar toolbarBottom = new ToolBar();
-        toolbarBottom.setMinHeight(100);
-        toolbarBottom.setPadding(new Insets(0,0,10,10));
+        toolbarBottom.setMinHeight(MAGIC100);
+        toolbarBottom.setPadding(new Insets(MAGIC0, MAGIC0, MAGIC10, MAGIC10));
 
-
-
-        FlowPane divisionBottom = new FlowPane();
-        divisionBottom.setMaxWidth(100);
-//        FlowPane divisionBottomRight = new FlowPane();
-//        divisionBottomRight.setMaxWidth(5);
-
-        toolbarBottom.getItems().addAll(quit, getLog, add, delete, selectOldTag,rename,move,
+        toolbarBottom.getItems().addAll(quit, getLog, add, delete, selectOldTag, rename, move,
                 deleteTagHistory, addToImageFile);
 
-//        add.setTranslateX(120);
-//        delete.setTranslateX(140);
-//        selectOldTag.setTranslateX(160);
-//        rename.setTranslateX(180);
-//        move.setTranslateX(200);
-//        addToTagSet.setTranslateX(220);
-//        deleteTagHistory.setTranslateX(300);
-//        addToImageFile.setTranslateX(300);
-        quit.setTranslateX(0);
-        quit.setTranslateY(20);
-        getLog.setTranslateX(-152);
-        getLog.setTranslateY(-30);
-        add.setTranslateX(-70);
-        add.setTranslateY(-30);
-        delete.setTranslateX(-30);
-        delete.setTranslateY(-30);
-        selectOldTag.setTranslateX(10);
-        selectOldTag.setTranslateY(-30);
-        rename.setTranslateX(50);
-        rename.setTranslateY(-30);
-        move.setTranslateX(90);
-        move.setTranslateY(-30);
- //       addToTagSet.setTranslateY(-30);
-        deleteTagHistory.setTranslateX(250);
-        deleteTagHistory.setTranslateY(20);
-        addToImageFile.setTranslateX(95);
-        addToImageFile.setTranslateY(-30);
+        quit.setTranslateX(MAGIC0);
+        quit.setTranslateY(MAGIC20);
+        getLog.setTranslateX(-MAGIC152);
+        getLog.setTranslateY(-MAGIC30);
+        add.setTranslateX(-MAGIC70);
+        add.setTranslateY(-MAGIC30);
+        delete.setTranslateX(-MAGIC30);
+        delete.setTranslateY(-MAGIC30);
+        selectOldTag.setTranslateX(MAGIC10);
+        selectOldTag.setTranslateY(-MAGIC30);
+        rename.setTranslateX(MAGIC50);
+        rename.setTranslateY(-MAGIC30);
+        move.setTranslateX(MAGIC90);
+        move.setTranslateY(-MAGIC30);
+        deleteTagHistory.setTranslateX(MAGIC250);
+        deleteTagHistory.setTranslateY(MAGIC20);
+        addToImageFile.setTranslateX(MAGIC95);
+        addToImageFile.setTranslateY(-MAGIC30);
 
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
@@ -463,12 +566,9 @@ public class ManipulationManagerScene extends Application {
         inputGridPane.setRight(tagsView);
         inputGridPane.setBottom(toolbarBottom);
         inputGridPane.getChildren().add(tagHistory);
-       // Pane bottomSelection = new Pane();
-       // bottomSelection.getChildren().addAll(quit, imgContainTag);
-
         generalLayout.getChildren().addAll(inputGridPane);
 
-        final Scene general = new Scene(generalLayout, 1350, 950);
+        final Scene general = new Scene(generalLayout, MAGIC1350, MAGIC950);
         goBack.setOnAction((ActionEvent event) -> window.setScene(general));
         back.setOnAction((ActionEvent event) -> window.setScene(general));
 
@@ -476,33 +576,29 @@ public class ManipulationManagerScene extends Application {
         window.show();
     }
 
-    /** Get the Image that user selected and show it onto the scene. */
-   static void setImage() {
+    /**
+     * Get the Image that user selected and show it onto the scene.
+     */
+    static void setImage() {
         paneCenter.getChildren().remove(imageView);
-        if (inputFile != null){
-        Image img = new Image(inputFile.getFile().toURI().toString());
-        imageView = new ImageView(img);
-        imageView.setFitHeight(400);
-        imageView.setFitWidth(400);
+        if (inputFile != null) {
+            Image img = new Image(inputFile.getFile().toURI().toString());
+            imageView = new ImageView(img);
+            imageView.setFitHeight(MAGIC400);
+            imageView.setFitWidth(MAGIC400);
 
-        paneCenter.getChildren().add(imageView);
-        StackPane.setMargin(imageView,new Insets(MAGIC50,MAGIC10,MAGIC50,MAGIC50));
+            paneCenter.getChildren().add(imageView);
+            StackPane.setMargin(imageView, new Insets(MAGIC50, MAGIC10, MAGIC50, MAGIC50));
+        }
     }
-   }
 
     /**
      * Pass in the file
      *
-     * @param imageFile the
+     * @param imageFile the imageFile selected
      */
     static void setFile(ImageFile imageFile) throws IOException {
-        //       inputGridPane.getChildren().remove(path);
         inputFile = imageFile;
-//        path.setText(inputFile.getFile().getAbsolutePath());
-//        for (String tags: inputFile.getExistTag()){
-//            tagsView.getItems().add(tags);
-//        }
-
     }
 
     private static void buttonClicked() throws IOException {
@@ -523,36 +619,35 @@ public class ManipulationManagerScene extends Application {
         }
     }
 
+    /**
+     * set the ImageListView to display the list of images under the selected directory.
+     *
+     * @param imgList: the collection of ImageFile under selected directory
+     */
     static void setImageListView(ArrayList<ImageFile> imgList) {
         imgListView.getItems().clear();
         for (ImageFile file : imgList) {
             imgListView.getItems().add(file.getFile().getName());
         }
-        imgListView.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
-                try {
-                    buttonClicked();
-                    if (inputFile != null){
-                        setPath(inputFile);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        imgListView.setOnMouseClicked(event -> {
+            try {
+                buttonClicked();
+                if (inputFile != null) {
+                    setPath(inputFile);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
-        }
-
-//        if(inputFile != null) {
-//            path.setText(inputFile.getFile().getAbsolutePath());
-//            tagsView.getItems().clear();
-//            for (String tags: inputFile.getExistTag()){
-//                tagsView.getItems().add(tags);
-//            }
-//        }
+    }
 
 
+    /**
+     * Set the path of the file selected to display.
+     *
+     * @param inputFile: the file user selected to view.
+     */
     static void setPath(ImageFile inputFile) {
         pathArea.getChildren().clear();
         if (inputFile != null) {
@@ -565,49 +660,49 @@ public class ManipulationManagerScene extends Application {
 
     }
 
-     static void setTagSetView(){
-//        inputGridPane.getChildren().remove(tagsView);
+
+    /**
+     * Set all history tag set list view
+     */
+    static void setTagSetView() {
         tagsView.getItems().clear();
         ArrayList<String> tagHistory = tagManager.getSerializedList();
-        for (String tag: tagHistory){
+        for (String tag : tagHistory) {
             tagsView.getItems().add(tag);
         }
-//        inputGridPane.getChildren().add(tagsView);
     }
 
+    /**
+     * Delete the selected tag from the tag set
+     *
+     * @throws IOException: throw an IOException
+     */
     private void deleteTagHistoryButtonClicked() throws IOException {
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
-//        if(tags.size() >= 1) {
-//            String name = tags.get(0);
-//            tagManager.delete(name, tagManagerPath);
-//            setTagSetView();
-//        }
-        for (String tag: tags){
+        for (String tag : tags) {
             tagManager.delete(tag, tagManagerPath);
         }
         setTagSetView();
-        }
+    }
 
+    /**
+     * Add the selected tag to file
+     *
+     * @throws IOException: throw an IOException
+     */
     private void addTagToFileButtonClicked() throws IOException {
 
-//        String temp = "";
         ObservableList<String> tags = tagsView.getSelectionModel().getSelectedItems();
-        if(tags.size() >= 1 && inputFile != null){
-            for (String tag : tags){
+        if (tags.size() >= 1 && inputFile != null) {
+            for (String tag : tags) {
                 ImageFile saveCurrent = inputFile;
                 String logHistory = inputFile.addTag(tag);
                 imageFileManager.add(inputFile, imageFileManagerPath);
                 imageFileManager.delete(saveCurrent, imageFileManagerPath);
-                logManager.add(logHistory,logManagerPath);
-//                temp += tag + "\n";
-//                System.out.println(tag);
+                logManager.add(logHistory, logManagerPath);
+                setImageListView(imgFiles);
             }
-//      System.out.println(temp);
-
-//            String tag = tags.get(0);
-//            inputFile.addTag(tag);
-            setImageListView(imgFiles);
         }
-    }
 
+    }
 }

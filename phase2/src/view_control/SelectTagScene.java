@@ -14,25 +14,39 @@ import java.util.ArrayList;
 class SelectTagScene {
 
 
-    /** Initialize an ImageFile */
+    /**
+     * Initialize an ImageFile
+     */
     private static ImageFile inputFile;
 
-    /** Magic Number 10 */
+    /**
+     * Magic Number 10
+     */
     private static final int MAGIC10 = 10;
 
-    /** Magic Number 20 */
+    /**
+     * Magic Number 20
+     */
     private static final int MAGIC20 = 20;
 
-    /** Magic Number 120 */
+    /**
+     * Magic Number 120
+     */
     private static final int MAGIC120 = 120;
 
-    /** Magic Number 550 */
+    /**
+     * Magic Number 550
+     */
     private static final int MAGIC550 = 550;
 
-    /** Magic Number 600 */
+    /**
+     * Magic Number 600
+     */
     private static final int MAGIC600 = 600;
 
-    /** Display the Scene and construct the buttons. */
+    /**
+     * Display the Scene and construct the buttons.
+     */
     static void display(){
         Stage window = new Stage();
         window.setTitle("Select Old Tag(s)");

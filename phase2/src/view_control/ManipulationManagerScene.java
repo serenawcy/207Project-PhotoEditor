@@ -387,7 +387,7 @@ public class ManipulationManagerScene extends Application {
                     if (chooseTags.size() >= 1) {
                         for (String chooseTag: chooseTags) {
                             for (ImageFile file : imgFiles) {
-                                if (file.getExistTag().contains(chooseTag)) {
+                                if (file.getExistTag().contains(chooseTag) && !(chooseFile.contains(file))) {
                                     chooseFile.add(file);
                                 }
                             }

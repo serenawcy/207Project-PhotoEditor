@@ -25,6 +25,9 @@ import java.util.ArrayList;
 
 public class ManipulationManagerScene extends Application {
 
+    private ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
+
+
     /**
      * Initialize a new ImageFile Object
      */
@@ -424,59 +427,8 @@ public class ManipulationManagerScene extends Application {
 
         openButton.setOnAction(
                 (ActionEvent e) -> {
-                    ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
-                    DirectoryChooser directoryChooser = new DirectoryChooser();
-
-                    File selectedDirectory = directoryChooser.showDialog(window);
-                    if (selectedDirectory != null) {
-                        for (File file : selectedDirectory.listFiles()) {
-                            if (file.getName().toLowerCase().endsWith(".jpg")
-                                    || file.getName().toLowerCase().endsWith(".jpeg")
-                                    || file.getName().toLowerCase().endsWith(".gif")
-                                    || file.getName().toLowerCase().endsWith(".png")) {
-                                boolean checkFileExist = false;
-                                ImageFile inputImageFile = null;
-                                try {
-                                    inputImageFile = new ImageFile(file);
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                }
-                                ArrayList<ImageFile> imageFiles = imageFileManager.getSerializedList();
-
-                                for (ImageFile imgFile : imageFiles) {
-                                    if (imgFile.equals(inputImageFile)) {
-                                        ArrayList<String> currentTagList = tagManager.getSerializedList();
-                                        ArrayList<String> existTagList = imgFile.getExistTag();
-                                        for (String tag : existTagList) {
-                                            if (!currentTagList.contains(tag)) {
-                                                try {
-                                                    tagManager.add(tag, tagManagerPath);
-                                                } catch (IOException e1) {
-                                                    e1.printStackTrace();
-                                                }
-                                            }
-                                        }
-                                        inputImageFile = imgFile;
-                                        checkFileExist = true;
-                                    }
-                                }
-                                if (!checkFileExist) {
-                                    try {
-                                        ArrayList<String> autoAddTags = inputImageFile.getExistTag();
-                                        for (String tag : autoAddTags) {
-                                            tagManager.add(tag, tagManagerPath);
-                                        }
-                                        imageFileManager.add(inputImageFile, imageFileManagerPath);
-                                    } catch (IOException e1) {
-                                        e1.printStackTrace();
-                                    }
-                                }
-                                directoryImageFile.add(inputImageFile);
-                            }
-                            imgFiles = directoryImageFile;
-                            setImageListView(imgFiles);
-                        }
-                    }
+                    directoryImageFile.clear();
+                    openButtonClicked();
                     setTagSetView();
                 });
 
@@ -574,6 +526,118 @@ public class ManipulationManagerScene extends Application {
 
         window.setScene(general);
         window.show();
+    }
+
+    private void setAction(File fileCollection) {
+        for (File file : fileCollection.listFiles()) {
+            if (file.getName().toLowerCase().endsWith(".jpg")
+                    || file.getName().toLowerCase().endsWith(".jpeg")
+                    || file.getName().toLowerCase().endsWith(".gif")
+                    || file.getName().toLowerCase().endsWith(".png")) {
+                boolean checkFileExist = false;
+                ImageFile inputImageFile = null;
+                try {
+                    inputImageFile = new ImageFile(file);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                ArrayList<ImageFile> imageFiles = imageFileManager.getSerializedList();
+
+                for (ImageFile imgFile : imageFiles) {
+                    if (imgFile.equals(inputImageFile)) {
+                        ArrayList<String> currentTagList = tagManager.getSerializedList();
+                        ArrayList<String> existTagList = imgFile.getExistTag();
+                        for (String tag : existTagList) {
+                            if (!currentTagList.contains(tag)) {
+                                try {
+                                    tagManager.add(tag, tagManagerPath);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                        }
+                        inputImageFile = imgFile;
+                        checkFileExist = true;
+                    }
+                }
+                if (!checkFileExist) {
+                    try {
+                        ArrayList<String> autoAddTags = inputImageFile.getExistTag();
+                        for (String tag : autoAddTags) {
+                            tagManager.add(tag, tagManagerPath);
+                        }
+                        imageFileManager.add(inputImageFile, imageFileManagerPath);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                directoryImageFile.add(inputImageFile);
+            } else if (file.isDirectory()) {
+                setAction(file);
+            }
+        }
+    }
+
+    private void openButtonClicked(){
+//        ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        File selectedDirectory = directoryChooser.showDialog(window);
+        if (selectedDirectory != null) {
+            setAction(selectedDirectory);
+        }
+            imgFiles = directoryImageFile;
+//            for (File file : selectedDirectory.listFiles()) {
+//                if (file.getName().toLowerCase().endsWith(".jpg")
+//                        || file.getName().toLowerCase().endsWith(".jpeg")
+//                        || file.getName().toLowerCase().endsWith(".gif")
+//                        || file.getName().toLowerCase().endsWith(".png")) {
+//                    boolean checkFileExist = false;
+//                    ImageFile inputImageFile = null;
+//                    try {
+//                        inputImageFile = new ImageFile(file);
+//                    } catch (IOException e1) {
+//                        e1.printStackTrace();
+//                    }
+//                    ArrayList<ImageFile> imageFiles = imageFileManager.getSerializedList();
+//
+//                    for (ImageFile imgFile : imageFiles) {
+//                        if (imgFile.equals(inputImageFile)) {
+//                            ArrayList<String> currentTagList = tagManager.getSerializedList();
+//                            ArrayList<String> existTagList = imgFile.getExistTag();
+//                            for (String tag : existTagList) {
+//                                if (!currentTagList.contains(tag)) {
+//                                    try {
+//                                        tagManager.add(tag, tagManagerPath);
+//                                    } catch (IOException e1) {
+//                                        e1.printStackTrace();
+//                                    }
+//                                }
+//                            }
+//                            inputImageFile = imgFile;
+//                            checkFileExist = true;
+//                        }
+//                    }
+//                    if (!checkFileExist) {
+//                        try {
+//                            ArrayList<String> autoAddTags = inputImageFile.getExistTag();
+//                            for (String tag : autoAddTags) {
+//                                tagManager.add(tag, tagManagerPath);
+//                            }
+//                            imageFileManager.add(inputImageFile, imageFileManagerPath);
+//                        } catch (IOException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                    }
+//                    directoryImageFile.add(inputImageFile);
+//                }
+//                else if (file.isDirectory()){
+//                    openButtonClicked();
+//                }
+//                imgFiles = directoryImageFile;
+            setImageListView(imgFiles);
+
+
     }
 
     /**

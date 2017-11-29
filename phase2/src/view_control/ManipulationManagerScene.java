@@ -7,9 +7,14 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.TriangleMesh;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.ImageFile;
@@ -17,10 +22,14 @@ import model.ImageFileManager;
 import model.LogManager;
 import model.TagManager;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static java.awt.Color.RED;
+import static java.awt.Color.red;
 
 public class ManipulationManagerScene extends Application {
 
@@ -146,8 +155,14 @@ public class ManipulationManagerScene extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         window.setTitle("Image Editor");
+
         Button add = new Button("Add Tag");
         add.setMinWidth(100);
+//        BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/icon/add.jpeg").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+//        Background background = new Background(backgroundImage);
+//        add.setBackground(background);
+
+
 
         Button delete = new Button("Delete Tag");
         delete.setMinWidth(100);
@@ -159,13 +174,13 @@ public class ManipulationManagerScene extends Application {
         move.setMinWidth(100);
 
         Button quit = new Button("Quit The Program");
-        quit.setMinWidth(100);
+        quit.setMinWidth(150);
 
         Button rename = new Button("Rename");
         rename.setMinWidth(100);
 
         Button getLog = new Button("Get Log History");
-        getLog.setMinWidth(100);
+        getLog.setMinWidth(150);
 
         Button goBack = new Button("Go Back");
         goBack.setMinWidth(100);
@@ -176,24 +191,40 @@ public class ManipulationManagerScene extends Application {
         Button openButton = new Button("Choose A Directory");
         openButton.setMinWidth(100);
 
-        Button selectImgFile = new Button("Select Image");
-        selectImgFile.setMinWidth(100);
-
         // ***************** NEW FEATURE'S BUTTON *****************
         Button imgContainTag = new Button("Show Image with Tag");
-        imgContainTag.setMinWidth(100);
+        imgContainTag.setMinWidth(150);
         // ***************** NEW FEATURE'S BUTTON *****************
 
-        // Button updateTagHistory = new Button("Add To History");
-        // updateTagHistory.setMinWidth(60);
-        Button deleteTagHistory = new Button("Remove From History");
-        deleteTagHistory.setMinWidth(100);
 
-        Button addToTagSet = new Button("Add to Tag Set");
-        addToTagSet.setMinWidth(100);
+        Button deleteTagHistory = new Button("Remove From History");
+        deleteTagHistory.setMinWidth(150);
+
+
+        Pane addToTagSet = new Pane();
+        addToTagSet.setMinHeight(20);
+        addToTagSet.setMinWidth(20);
+        addToTagSet.setMaxWidth(20);
+        addToTagSet.setMaxHeight(20);
+        Line line1 = new Line(5,10,15,10);
+        line1.setStrokeWidth(3);
+        Line line2 = new Line(10,5,10,15);
+        line2.setStrokeWidth(3);
+        addToTagSet.getChildren().addAll(line1,line2);
+
+//        addToTagSet.setStyle("-fx-background-color:#fff8dc");
+
+
+
+//        Button addToTagSet = new Button("+");
+//        addToTagSet.setMinWidth(10);
+//        BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/test/dogTEST.jpeg").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+//        Background background = new Background(backgroundImage);
+//        addToTagSet.setBackground(background);
 
         Button addToImageFile = new Button("Add to Image File");
-        addToImageFile.setMinWidth(100);
+        addToImageFile.setMinWidth(150);
+
 
         Button getAllLog = new Button(("Get All Log History"));
 
@@ -323,17 +354,6 @@ public class ManipulationManagerScene extends Application {
                     setTagSetView();
                 });
 
-        selectImgFile.setOnAction((ActionEvent event) -> {
-            try {
-                buttonClicked();
-                if (inputFile != null){
-                    setPath(inputFile);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
         deleteTagHistory.setOnAction((ActionEvent event) -> {
             try {
                 deleteTagHistoryButtonClicked();
@@ -343,7 +363,12 @@ public class ManipulationManagerScene extends Application {
         });
 
 
-        addToTagSet.setOnAction(event -> AddToTagSet.display());
+        addToTagSet.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                AddToTagSet.display();
+            }
+            });
 
         addToImageFile.setOnAction(event -> {
             try {
@@ -381,11 +406,16 @@ public class ManipulationManagerScene extends Application {
         Label tagHistory = new Label("Tag History");
         pathArea.setPrefSize(MAGIC200,MAGIC30);
         pathArea.getChildren().add(path);
-        pathArea.setTranslateX(MAGIC200);
+//        pathArea.setTranslateX(250);
         ToolBar toolbar = new ToolBar();
-        toolbar.getItems().addAll(openButton,selectImgFile, getAllLog, pathArea ,tagHistory);
-        tagHistory.setTranslateX(600);
+        toolbar.getItems().addAll(openButton, getAllLog,imgContainTag,tagHistory,addToTagSet);
+        imgContainTag.setTranslateX(600);
+        tagHistory.setTranslateX(680);
+        addToTagSet.setTranslateX(700);
+        addToTagSet.setTranslateY(1);
         ToolBar toolbarBottom = new ToolBar();
+        toolbarBottom.setMinHeight(100);
+        toolbarBottom.setPadding(new Insets(0,0,10,10));
 
 
 
@@ -394,17 +424,37 @@ public class ManipulationManagerScene extends Application {
 //        FlowPane divisionBottomRight = new FlowPane();
 //        divisionBottomRight.setMaxWidth(5);
 
-        toolbarBottom.getItems().addAll(getLog, add, delete, selectOldTag,rename,move, addToTagSet,
-                deleteTagHistory, addToImageFile, imgContainTag);
+        toolbarBottom.getItems().addAll(quit, getLog, add, delete, selectOldTag,rename,move,
+                deleteTagHistory, addToImageFile);
 
-        add.setTranslateX(120);
-        delete.setTranslateX(140);
-        selectOldTag.setTranslateX(160);
-        rename.setTranslateX(180);
-        move.setTranslateX(200);
-        addToTagSet.setTranslateX(220);
-        deleteTagHistory.setTranslateX(300);
-        addToImageFile.setTranslateX(300);
+//        add.setTranslateX(120);
+//        delete.setTranslateX(140);
+//        selectOldTag.setTranslateX(160);
+//        rename.setTranslateX(180);
+//        move.setTranslateX(200);
+//        addToTagSet.setTranslateX(220);
+//        deleteTagHistory.setTranslateX(300);
+//        addToImageFile.setTranslateX(300);
+        quit.setTranslateX(0);
+        quit.setTranslateY(20);
+        getLog.setTranslateX(-152);
+        getLog.setTranslateY(-30);
+        add.setTranslateX(-70);
+        add.setTranslateY(-30);
+        delete.setTranslateX(-30);
+        delete.setTranslateY(-30);
+        selectOldTag.setTranslateX(10);
+        selectOldTag.setTranslateY(-30);
+        rename.setTranslateX(50);
+        rename.setTranslateY(-30);
+        move.setTranslateX(90);
+        move.setTranslateY(-30);
+ //       addToTagSet.setTranslateY(-30);
+        deleteTagHistory.setTranslateX(250);
+        deleteTagHistory.setTranslateY(20);
+        addToImageFile.setTranslateX(95);
+        addToImageFile.setTranslateY(-30);
+
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
         inputGridPane.setCenter(paneCenter);
@@ -413,9 +463,12 @@ public class ManipulationManagerScene extends Application {
         inputGridPane.setRight(tagsView);
         inputGridPane.setBottom(toolbarBottom);
         inputGridPane.getChildren().add(tagHistory);
+       // Pane bottomSelection = new Pane();
+       // bottomSelection.getChildren().addAll(quit, imgContainTag);
 
-        generalLayout.getChildren().addAll(inputGridPane, quit);
-        final Scene general = new Scene(generalLayout, MAGIC1350, MAGIC1000);
+        generalLayout.getChildren().addAll(inputGridPane);
+
+        final Scene general = new Scene(generalLayout, 1350, 950);
         goBack.setOnAction((ActionEvent event) -> window.setScene(general));
         back.setOnAction((ActionEvent event) -> window.setScene(general));
 
@@ -429,8 +482,8 @@ public class ManipulationManagerScene extends Application {
         if (inputFile != null){
         Image img = new Image(inputFile.getFile().toURI().toString());
         imageView = new ImageView(img);
-        imageView.setFitHeight(MAGIC500);
-        imageView.setFitWidth(MAGIC550);
+        imageView.setFitHeight(400);
+        imageView.setFitWidth(400);
 
         paneCenter.getChildren().add(imageView);
         StackPane.setMargin(imageView,new Insets(MAGIC50,MAGIC10,MAGIC50,MAGIC50));
@@ -505,7 +558,11 @@ public class ManipulationManagerScene extends Application {
         if (inputFile != null) {
             path.setText(ManipulationManagerScene.inputFile.getFile().getAbsolutePath());
             pathArea.getChildren().add(path);
+            paneCenter.getChildren().remove(pathArea);
+            paneCenter.getChildren().add(pathArea);
+
         }
+
     }
 
      static void setTagSetView(){

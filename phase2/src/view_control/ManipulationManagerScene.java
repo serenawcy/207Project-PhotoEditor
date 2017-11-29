@@ -766,7 +766,7 @@ public class ManipulationManagerScene extends Application {
                 logManager.add(logHistory, logManagerPath);
                 setImageListView(imgFiles);
             }
+            setPath(inputFile);
         }
-
     }
 }

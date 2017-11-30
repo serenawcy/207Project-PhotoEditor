@@ -670,22 +670,15 @@ public class ManipulationManagerScene extends Application {
     }
 
     private static void buttonClicked() throws IOException {
-        ObservableList<String> names;
-        names = imgListView.getSelectionModel().getSelectedItems();
-        String selectedFile = "";
-        for (String name : names) {
-            selectedFile = name;
+        if (imgListView.getSelectionModel().getSelectedIndices().size() == 1) {
+            Integer index = imgListView.getSelectionModel().getSelectedIndices().get(0);
+            setFile(imgFiles.get(index));
+            setImage();
         }
 
-        if (!selectedFile.equals("")) {
-            for (ImageFile imageFile : imgFiles) {
-                if (imageFile.getFile().getName().equals(selectedFile)) {
-                    setFile(imageFile);
-                    setImage();
-                }
-            }
-        }
     }
+
+
 
     /**
      * set the ImageListView to display the list of images under the selected directory.

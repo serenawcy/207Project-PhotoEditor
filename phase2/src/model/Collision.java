@@ -16,7 +16,6 @@ public class Collision {
      * @param tagsToAdd        the ArrayList of String of tags which wanted to be added
      * @return the String of the current name
      */
-    // there is "." in the nameBeforeChange
     public String changeNameAdd(String nameBeforeChange, String tagsToAdd) {
         Integer target = nameBeforeChange.lastIndexOf(".");
 

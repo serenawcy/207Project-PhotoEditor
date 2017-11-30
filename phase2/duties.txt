@@ -1,0 +1,5 @@
+Jiayao Lin #1002936683:
+1. Discussed the design pattern of the whole project with all the group members.
+2. Fixed javafx display scene (combined the first and second scene together) and fixed the leftover bugs after
+combining two scenes 
+3. Debugged with all the group members together.

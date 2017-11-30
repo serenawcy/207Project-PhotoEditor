@@ -1,5 +1,11 @@
 Jiayao Lin #1002936683:
 1. Discussed the design pattern of the whole project with all the group members.
 2. Fixed javafx display scene (combined the first and second scene together) and fixed the leftover bugs after
-combining two scenes 
+combining two scenes.
 3. Debugged with all the group members together.
+
+Yuhan Shao #1002281327
+1. Discussed the design pattern of the whole project with all the group members.
+2. Added new feature: display all the picture in that directory with the tag(s) chosen by the user.
+3. Added the unit test ImageFileManagerTest.
+4. Debugged with all the group members together.

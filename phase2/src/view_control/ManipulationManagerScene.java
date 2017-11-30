@@ -175,7 +175,7 @@ public class ManipulationManagerScene extends Application {
   private static BorderPane inputGridPane = new BorderPane();
 
   /** Initialize an generalLayout to place all elements and buttons */
-  private static VBox generalLayout = new VBox(20);
+  private static VBox generalLayout = new VBox(MAGIC20);
 
   /** A Directory File */
   private static File currentDirectory;
@@ -581,7 +581,6 @@ public class ManipulationManagerScene extends Application {
   }
 
   private void openButtonClicked() {
-    //        ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
     DirectoryChooser directoryChooser = new DirectoryChooser();
 
     currentDirectory = directoryChooser.showDialog(window);
@@ -589,54 +588,6 @@ public class ManipulationManagerScene extends Application {
       setAction(currentDirectory);
     }
     imgFiles = directoryImageFile;
-    //            for (File file : selectedDirectory.listFiles()) {
-    //                if (file.getName().toLowerCase().endsWith(".jpg")
-    //                        || file.getName().toLowerCase().endsWith(".jpeg")
-    //                        || file.getName().toLowerCase().endsWith(".gif")
-    //                        || file.getName().toLowerCase().endsWith(".png")) {
-    //                    boolean checkFileExist = false;
-    //                    ImageFile inputImageFile = null;
-    //                    try {
-    //                        inputImageFile = new ImageFile(file);
-    //                    } catch (IOException e1) {
-    //                        e1.printStackTrace();
-    //                    }
-    //                    ArrayList<ImageFile> imageFiles = imageFileManager.getSerializedList();
-    //
-    //                    for (ImageFile imgFile : imageFiles) {
-    //                        if (imgFile.equals(inputImageFile)) {
-    //                            ArrayList<String> currentTagList = tagManager.getSerializedList();
-    //                            ArrayList<String> existTagList = imgFile.getExistTag();
-    //                            for (String tag : existTagList) {
-    //                                if (!currentTagList.contains(tag)) {
-    //                                    try {
-    //                                        tagManager.add(tag, tagManagerPath);
-    //                                    } catch (IOException e1) {
-    //                                        e1.printStackTrace();
-    //                                    }
-    //                                }
-    //                            }
-    //                            inputImageFile = imgFile;
-    //                            checkFileExist = true;
-    //                        }
-    //                    }
-    //                    if (!checkFileExist) {
-    //                        try {
-    //                            ArrayList<String> autoAddTags = inputImageFile.getExistTag();
-    //                            for (String tag : autoAddTags) {
-    //                                tagManager.add(tag, tagManagerPath);
-    //                            }
-    //                            imageFileManager.add(inputImageFile, imageFileManagerPath);
-    //                        } catch (IOException e1) {
-    //                            e1.printStackTrace();
-    //                        }
-    //                    }
-    //                    directoryImageFile.add(inputImageFile);
-    //                }
-    //                else if (file.isDirectory()){
-    //                    openButtonClicked();
-    //                }
-    //                imgFiles = directoryImageFile;
     setImageListView(imgFiles);
   }
 

@@ -23,7 +23,7 @@ class TagManagerTest {
         assertTrue(testTagManager.getSerializedList().contains("banana"));
         assertTrue(testTagManager.getSerializedList().contains("pop"));
         ArrayList<String> tagList = (ArrayList<String>) testTagManager.getSerializedList().clone();
-        for (String tag : tagList){
+        for (String tag : tagList) {
             testTagManager.delete(tag, "./testTagManager.ser");
         }
     }
@@ -40,7 +40,7 @@ class TagManagerTest {
         assertTrue(testTagManager.getSerializedList().contains("cat"));
         assertTrue(testTagManager.getSerializedList().contains("pig"));
         ArrayList<String> tagList = (ArrayList<String>) testTagManager.getSerializedList().clone();
-        for (String tag : tagList){
+        for (String tag : tagList) {
             testTagManager.delete(tag, "./testTagManager2.ser");
         }
     }
@@ -63,7 +63,7 @@ class TagManagerTest {
         testTagManager.delete("eraser", "./testTagManager3.ser");
         assertTrue(testTagManager.getSerializedList().size() == 0);
         ArrayList<String> tagList = (ArrayList<String>) testTagManager.getSerializedList().clone();
-        for (String tag : tagList){
+        for (String tag : tagList) {
             testTagManager.delete(tag, "./testTagManager3.ser");
         }
     }

@@ -21,11 +21,13 @@ import model.ImageFileManager;
 import model.LogManager;
 import model.TagManager;
 
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.sun.deploy.config.OSType.isUnix;
 import static java.awt.SystemColor.desktop;
 
 
@@ -552,11 +554,34 @@ public class ManipulationManagerScene extends Application {
 
         getDirectory.setOnAction((ActionEvent event) -> {
             if (inputFile != null) {
-                File file = new File(inputFile.getFile().getParent());
-                try {
-                    desktop.open(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
+//                File file = new File(inputFile.getFile().getParent());
+//                try {
+//                    desktop.open(file);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+                String path = inputFile.getFile().getParent();
+                Runtime runtime = Runtime.getRuntime();
+//                String OS = System.getProperty("os.name").toLowerCase();
+//                public static boolean isUnix(){
+//
+//                    return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
+//
+//                }
+
+                if(isUnix()){
+                    try {
+                        runtime.exec("nautilus " + path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    File file = new File(path);
+                    try {
+                        desktop.open(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -912,3 +937,4 @@ public class ManipulationManagerScene extends Application {
         return currentDirectory;
     }
 }
+

@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Collision;
 import model.ImageFile;
 
 import java.io.IOException;
@@ -47,6 +48,9 @@ class SelectTagScene {
     /**
      * Display the Scene and construct the buttons.
      */
+
+    private static Collision collision = new Collision();
+
     static void display(){
         Stage window = new Stage();
         window.setTitle("Select Old Tag(s)");
@@ -104,19 +108,22 @@ class SelectTagScene {
                     deleteTag.add(box.getText());
                 }
             }
-            if (checkDelete) {
-                ImageFile inputFileSer = inputFile;
-                ImageFile saveCurrent = inputFile;
-                String logHistory1 = inputFileSer.changeImageName(currentName.toString());
-                for (String a : deleteTag) {
-                    inputFileSer.resetExistTag(a);
+            String potentialName = collision.selectName(currentName.toString(), inputFile.getFile().getName());
+            if (!(collisionSelection(potentialName))) {
+                if (checkDelete) {
+                    ImageFile inputFileSer = inputFile;
+                    ImageFile saveCurrent = inputFile;
+                    String logHistory1 = inputFileSer.changeImageName(currentName.toString());
+                    for (String a : deleteTag) {
+                        inputFileSer.resetExistTag(a);
+                    }
+                    ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                    ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                    ManipulationManagerScene.logManager.add(logHistory1, ManipulationManagerScene.logManagerPath);
+                    inputFile = inputFileSer;
+                    ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                    ManipulationManagerScene.setPath(inputFile);
                 }
-                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
-                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
-                ManipulationManagerScene.logManager.add(logHistory1, ManipulationManagerScene.logManagerPath);
-                inputFile = inputFileSer;
-                ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-                ManipulationManagerScene.setPath(inputFile);
             }
         }
     }
@@ -128,6 +135,27 @@ class SelectTagScene {
 
     static void setImageFile(ImageFile imageFile) {
         inputFile = imageFile;
+    }
+
+    private static void inappropriateCombination() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Inappropriate Tag Combination");
+        alert.setHeaderText("This directory already has an image with the same name!");
+        alert.setContentText("Choose another Tag Combination");
+
+        alert.showAndWait();
+    }
+
+    private static boolean collisionSelection(String potentialName) {
+        for (ImageFile file : ManipulationManagerScene.imgFiles) {
+            if (!inputFile.equals(file) && file.getFile().getParent().equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
+                if ((file.getFile().getName().equals(potentialName))) {
+                    inappropriateCombination();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

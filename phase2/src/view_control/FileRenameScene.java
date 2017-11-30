@@ -3,6 +3,7 @@ package view_control;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -10,10 +11,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ImageFile;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The AddTagScene class.
+ * Construct the layout of this FilerRenameScene
+ *
+ * @author Dingyi Yu
+ * @version J.R.E 1.8.0
+ */
 class FileRenameScene {
 
     private static ListView<String> listView;
@@ -107,18 +114,20 @@ class FileRenameScene {
             for (String tag: tagWant) {
                 tagWanted.add(tag.trim());
             }
-            tagWanted.remove(0);
+            if (!collision(nameGet)) {
+                tagWanted.remove(0);
 
-            ImageFile inputFileSer = inputFile;
-            ImageFile saveCurrent = inputFile;
-            String logHistory = inputFileSer.changeImageName(nameToChange);
-            inputFileSer.changeTagHistory(tagWanted);
-            ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
-            ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
-            ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
-            inputFile = inputFileSer;
-            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-            ManipulationManagerScene.setPath(inputFile);
+                ImageFile inputFileSer = inputFile;
+                ImageFile saveCurrent = inputFile;
+                String logHistory = inputFileSer.changeImageName(nameToChange);
+                inputFileSer.changeTagHistory(tagWanted);
+                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
+                inputFile = inputFileSer;
+                ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                ManipulationManagerScene.setPath(inputFile);
+            }
         }
 
     }
@@ -129,5 +138,26 @@ class FileRenameScene {
      */
     static void setImageFile(ImageFile imageFile) {
         inputFile = imageFile;
+    }
+
+    private static void inappropriateRename() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Inappropriate Rename");
+        alert.setHeaderText("This directory already has an image with the same name!");
+        alert.setContentText("Choose another name");
+
+        alert.showAndWait();
+    }
+
+    private static boolean collision(String potentialName) {
+        for (ImageFile file : ManipulationManagerScene.imgFiles) {
+            if (!inputFile.equals(file) && file.getFile().getParent().equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
+                if ((file.getFile().getName().equals(potentialName))) {
+                    inappropriateRename();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

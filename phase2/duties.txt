@@ -18,3 +18,10 @@ Chenyue Wang #1003048052
 4. Created a super class of SerializeManager to manipulate the serialization and made TagManager, LogManager, ImageFileManager extend it.
 5. Added the unit test TagManagerTest.
 6. Debugged with all the group members together.
+
+Dingyi Yu #1002077753
+1. Discussed the design pattern of the whole project with all the group members.
+2. Design the general layout of the program.
+3. Handled all collision cases while the user changed the name of the file.
+4. New feature to display image file of all subfolder in the directory on the listview of the first scene.(Should be done in phase1)
+5. Debugged with all the group members together.

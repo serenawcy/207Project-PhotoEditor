@@ -16,19 +16,23 @@ public class Collision {
      * @param tagsToAdd        the ArrayList of String of tags which wanted to be added
      * @return the String of the current name
      */
+    // there is "." in the nameBeforeChange
     public String changeNameAdd(String nameBeforeChange, String tagsToAdd) {
-        StringBuilder currentName = new StringBuilder();
+        Integer target = nameBeforeChange.lastIndexOf(".");
+
+        StringBuilder previousName = new StringBuilder(nameBeforeChange.substring(0, target));
+        String suffix = nameBeforeChange.substring(target, nameBeforeChange.length());
 
         if (tagsToAdd.contains(",")) {
             String[] tagsAdd = tagsToAdd.split(",");
 
             for (String tags : tagsAdd) {
-                currentName.append(" @").append(tags.trim());
+                previousName.append(" @").append(tags.trim());
             }
         } else {
-            currentName.append(" @").append(tagsToAdd.trim());
+            previousName.append(" @").append(tagsToAdd.trim());
         }
-        return currentName.toString();
+        return previousName.append(suffix).toString();
     }
 
     /**

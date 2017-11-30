@@ -228,7 +228,7 @@ public class ManipulationManagerScene extends Application {
     /**
      * Initialize a directoryImageFile that contains the collection of ImageFile under directory
      */
-    private ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
+    static ArrayList<ImageFile> directoryImageFile = new ArrayList<>();
 
     /**
      * Initialize a new ImageFile Object

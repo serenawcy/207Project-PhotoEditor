@@ -133,7 +133,7 @@ class DeleteTagScene {
    * @return whether there is collision
    */
   private static boolean collisionDelete(String potentialName) {
-    for (ImageFile file : ManipulationManagerScene.imgFiles) {
+    for (ImageFile file : ManipulationManagerScene.directoryImageFile) {
       if (!inputFile.equals(file)
           && file.getFile()
               .getParent()

@@ -5,11 +5,20 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import model.Collision;
 import model.ImageFile;
 
 import java.io.IOException;
 import java.util.Objects;
 
+
+/**
+ * The AddTagScene class.
+ * Construct the layout of this AddTagScene
+ *
+ * @author Jiayao Lin
+ * @version J.R.E 1.8.0
+ */
 class AddTagScene {
 
     /**
@@ -37,6 +46,11 @@ class AddTagScene {
      */
     private static ImageFile inputFile;
 
+    /**
+     * Initialize a Collision Object
+     */
+    private static Collision collision = new Collision();
+
 
     /**
      * Display the Scene and construct the buttons.
@@ -58,23 +72,26 @@ class AddTagScene {
         done.setOnAction(
                 e -> {
                     String tags = tagInput.getText();
-                    if (!Objects.equals(tags, "" ) && inputFile != null) {
-                        try {
-                            ImageFile inputFileSer = inputFile;
-                            ImageFile saveCurrent = inputFile;
-                            String logHistory = inputFileSer.addTag(tags);
-                            ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
-                            ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
-                            ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
-                            ManipulationManagerScene.tagManager.add(tags, ManipulationManagerScene.tagManagerPath);
-                            inputFile = inputFileSer;
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
+                    if (!Objects.equals(tags, "") && inputFile != null) {
+                        String potentialName = collision.changeNameAdd(inputFile.getFile().getName(), tags);
+                        if (!collisionAdd(potentialName)) {
+                            try {
+                                ImageFile inputFileSer = inputFile;
+                                ImageFile saveCurrent = inputFile;
+                                String logHistory = inputFileSer.addTag(tags);
+                                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                                ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
+                                ManipulationManagerScene.tagManager.add(tags, ManipulationManagerScene.tagManagerPath);
+                                inputFile = inputFileSer;
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            tagInput.clear();
+                            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                            ManipulationManagerScene.setTagSetView();
+                            ManipulationManagerScene.setPath(inputFile);
                         }
-                        tagInput.clear();
-                        ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-                        ManipulationManagerScene.setTagSetView();
-                        ManipulationManagerScene.setPath(inputFile);
                     }
                 });
 
@@ -93,7 +110,7 @@ class AddTagScene {
     }
 
     /**
-     * Set the ImageFile
+     * Set this ImageFile
      *
      * @param imageFile the ImageFile
      */
@@ -102,4 +119,40 @@ class AddTagScene {
     }
 
 
+    /**
+     * A pop up warning box that says Inappropriate Add
+     */
+    private static void inappropriateAdd() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Inappropriate Tag To Add");
+        alert.setHeaderText("This directory already has an image with the same name!");
+        alert.setContentText("Choose Another Tag To Add");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Return true if there is collision in add, false otherwise.
+     *
+     * @param potentialName the potential name that this inputfile might change to
+     * @return whether there is collision
+     */
+    private static boolean collisionAdd(String potentialName) {
+        for (ImageFile file : ManipulationManagerScene.imgFiles) {
+            if (!inputFile.equals(file) && file.getFile().getParent().equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
+                if ((file.getFile().getName().equals(potentialName))) {
+                    inappropriateAdd();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
+
+
+
+
+
+
+

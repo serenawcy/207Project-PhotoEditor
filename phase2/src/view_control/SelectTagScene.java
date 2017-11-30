@@ -11,6 +11,12 @@ import model.ImageFile;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The SelectTagScene class. Construct the layout of this SelectTagScene
+ *
+ * @author Dingyi Yu
+ * @version J.R.E 1.8.0
+ */
 class SelectTagScene {
 
   /** Magic Number 10 */

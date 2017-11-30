@@ -7,6 +7,9 @@ import java.util.Objects;
 
 /**
  * This class generates an ImageFile instance with some variables and methods
+ *
+ * @author Yuhan Shao
+ * @version J.R.E 1.8.0
  */
 public class ImageFile implements Serializable {
     /**
@@ -38,7 +41,7 @@ public class ImageFile implements Serializable {
      * Creates a new empty ImageFile.
      *
      * @param file the File object which used to construct ImageFile
-     * @throws IOException throw a IOException
+     * @throws IOException throw an IOException
      */
     public ImageFile(File file) throws IOException {
         this.file = file;
@@ -87,6 +90,7 @@ public class ImageFile implements Serializable {
      * Adds user input tag name if it does not exist and rename this ImageFile.
      *
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
+     * @return the String of the name after adding the tags
      */
     public String addTag(String userInputAdd) throws IOException {
         String[] tagToAdd = userInputAdd.split(",");
@@ -111,6 +115,7 @@ public class ImageFile implements Serializable {
      * Deletes user input tag name and rename this ImageFile.
      *
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
+     * @return the String of the name after deleting the tag
      */
     public String deleteTag(String tagToDelete) throws IOException {
         this.existTag.remove(tagToDelete);
@@ -134,6 +139,7 @@ public class ImageFile implements Serializable {
      * Changes the name of this ImageFile object.
      *
      * @param newImageName new name of this ImageFile object
+     * @return the String of new name
      */
     public String changeImageName(String newImageName) throws IOException {
         Date time = new Date();
@@ -157,6 +163,7 @@ public class ImageFile implements Serializable {
      * Renames this ImageFile by deleting a tag.
      *
      * @param tagToDelete the tag name need to be deleted
+     * @return the String of new name after deleting the tag
      */
     private String renameDelete(String tagToDelete) throws IOException {
         StringBuilder newName = new StringBuilder(this.getOriginalName());
@@ -172,6 +179,7 @@ public class ImageFile implements Serializable {
      * Renames this ImageFile by adding a tag.
      *
      * @param tagToAdd the tag name need to be added
+     * @return the String of new name after adding the tag
      */
     private String renameAdd(String tagToAdd) throws IOException {
         return this.changeImageName(this.getNameWithoutSuffix(this.file) + " @" + tagToAdd);

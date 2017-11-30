@@ -106,9 +106,6 @@ public class ManipulationManagerScene extends Application {
      */
     private static final int MAGIC680 = 680;
 
-    /**Magic number 700*/
-    private static final int MAGIC700 = 700;
-
     /**
      * Magic number 50
      */
@@ -205,9 +202,85 @@ public class ManipulationManagerScene extends Application {
     private static final int MAGIC1350 = 1350;
 
     /**
-     * Magic number 400
+     * Magic number 40
      */
-    private static final int MAGIC400 = 400;
+    private static final int MAGIC40 = 40;
+
+    /**
+     * Magic number 553
+     */
+    private static final int MAGIC553 = 553;
+
+    /**
+     * Magic number 600
+     */
+    private static final int MAGIC600 = 600;
+
+
+    /**
+     * Magic number 650
+     */
+    private static final int MAGIC650 = 650;
+
+    /**
+     * Magic number 700
+     */
+    private static final int MAGIC700 = 700;
+
+    /**
+     * Magic number 153
+     */
+    private static final int MAGIC153 = 153;
+
+    /**
+     * Magic number -40
+     */
+    private static final int MAGIC_40 = -40;
+
+    /**
+     * Magic number 60
+     */
+    private static final int MAGIC60 = 60;
+
+    /**
+     * Magic number 153
+     */
+    private static final int MAGIC_153 = 153;
+
+    /**
+     * Magic number 80
+     */
+    private static final int MAGIC80 = 80;
+
+    /**
+     * Magic number 210
+     */
+    private static final int MAGIC210 = 210;
+
+    /**
+     * Magic number 55
+     */
+    private static final int MAGIC55 = 5;
+
+    /**
+     * Magic number 570
+     */
+    private static final int MAGIC570 = 570;
+
+    /**
+     * Magic number 280
+     */
+    private static final int MAGIC280 = 280;
+
+    /**
+     * Magic number 120
+     */
+    private static final int MAGIC120 = 120;
+
+    /**
+     * Magic number 60
+     */
+    private static final int MAGIC_150 = -150;
 
     /**
      * Initialize a new label for the path of the selected image
@@ -536,21 +609,21 @@ public class ManipulationManagerScene extends Application {
         Label tagHistory = new Label("Tag Set");
         pathArea.setPrefSize(MAGIC200, MAGIC30);
         pathArea.getChildren().add(path);
-        Line divTop = new Line(MAGIC10, 0, MAGIC10, 40);
+        Line divTop = new Line(MAGIC10, 0, MAGIC10, MAGIC40);
         divTop.setStroke(Paint.valueOf("#c0c0c0"));
-        divTop.setTranslateX(553);
+        divTop.setTranslateX(MAGIC553);
         ToolBar toolbar = new ToolBar();
         toolbar.getItems().addAll(openButton, getAllLog, getDirectory, divTop, deleteTagHistory, tagHistory, addToTagSet);
         toolbar.setPadding(new Insets(0,0,0,0));
-        deleteTagHistory.setTranslateX(600);
+        deleteTagHistory.setTranslateX(MAGIC600);
         deleteTagHistory.setTranslateY(MAGIC1);
-        tagHistory.setTranslateX(650);
-        addToTagSet.setTranslateX(700);
+        tagHistory.setTranslateX(MAGIC650);
+        addToTagSet.setTranslateX(MAGIC700);
         addToTagSet.setTranslateY(MAGIC1);
 
-        Line divBottom = new Line(MAGIC10, -40, MAGIC10, 60);
+        Line divBottom = new Line(MAGIC10, MAGIC_40, MAGIC10, MAGIC60);
         divBottom.setStroke(Paint.valueOf("#c0c0c0"));
-        divBottom.setTranslateX(153);
+        divBottom.setTranslateX(MAGIC153);
         ToolBar toolbarBottom = new ToolBar();
         toolbarBottom.setMinHeight(MAGIC100);
         toolbarBottom.setPadding(new Insets(MAGIC0, MAGIC0, MAGIC0, MAGIC10));
@@ -560,29 +633,29 @@ public class ManipulationManagerScene extends Application {
 
         quit.setTranslateX(MAGIC0);
         quit.setTranslateY(MAGIC20);
-        getLog.setTranslateX(-155);
+        getLog.setTranslateX(MAGIC_150);
         getLog.setTranslateY(-MAGIC30);
-        add.setTranslateX(-40);
+        add.setTranslateX(MAGIC_40);
         add.setTranslateY(-MAGIC30);
         delete.setTranslateX(0);
         delete.setTranslateY(-MAGIC30);
-        selectOldTag.setTranslateX(40);
+        selectOldTag.setTranslateX(MAGIC40);
         selectOldTag.setTranslateY(-MAGIC30);
-        rename.setTranslateX(80);
+        rename.setTranslateX(MAGIC80);
         rename.setTranslateY(-MAGIC30);
-        move.setTranslateX(120);
+        move.setTranslateX(MAGIC120);
         move.setTranslateY(-MAGIC30);
-        addToImageFile.setTranslateX(210);
+        addToImageFile.setTranslateX(MAGIC210);
         addToImageFile.setTranslateY(-MAGIC30);
-        imgContainTag.setTranslateX(55);
+        imgContainTag.setTranslateX(MAGIC55);
         imgContainTag.setTranslateY(MAGIC20);
 
 
         paneCenter.setStyle("-fx-background-color: #f5f5dc");
-        paneCenter.setMinHeight(570);
-        paneCenter.setMaxHeight(570);
+        paneCenter.setMinHeight(MAGIC570);
+        paneCenter.setMaxHeight(MAGIC570);
         StackPane tagsViewPane = new StackPane();
-        tagsViewPane.setPrefWidth(280);
+        tagsViewPane.setPrefWidth(MAGIC280);
         tagsViewPane.getChildren().add(tagsView);
         inputGridPane.setCenter(paneCenter);
         inputGridPane.setTop(toolbar);
@@ -721,7 +794,7 @@ public class ManipulationManagerScene extends Application {
             Image img = new Image(inputFile.getFile().toURI().toString());
             imageView = new ImageView(img);
             imageView.setFitHeight(MAGIC500);
-            imageView.setFitWidth(650);
+            imageView.setFitWidth(MAGIC650);
 
             paneCenter.getChildren().add(imageView);
             StackPane.setMargin(imageView, new Insets(MAGIC50, MAGIC10, MAGIC50, MAGIC50));

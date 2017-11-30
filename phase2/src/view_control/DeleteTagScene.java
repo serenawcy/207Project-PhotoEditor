@@ -2,13 +2,10 @@ package view_control;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.ListView;
 import model.Collision;
 import model.ImageFile;
 
@@ -74,6 +71,7 @@ class DeleteTagScene {
         back.setMinWidth(MAGIC120);
 
         listView = new ListView<>();
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if(inputFile != null) {
             for (String tag : inputFile.getExistTag()) {
                 listView.getItems().add(tag);

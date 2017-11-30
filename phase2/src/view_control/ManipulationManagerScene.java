@@ -22,8 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.sun.deploy.config.OSType.isUnix;
-
 /**
  * This class constructs and displays the Manipulation Scene
  *

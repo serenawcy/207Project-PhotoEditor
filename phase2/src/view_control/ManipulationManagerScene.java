@@ -508,8 +508,8 @@ public class ManipulationManagerScene extends Application {
         getDirectory.setOnAction(
                 (ActionEvent event) -> {
                     if (inputFile != null) {
-                      String OS = System.getProperty("os.name").toLowerCase();
-                      Boolean isLinux = OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0;
+                        String OS = System.getProperty("os.name").toLowerCase();
+                        Boolean isLinux = OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0;
                         String path = inputFile.getFile().getParent();
                         Runtime runtime = Runtime.getRuntime();
 
@@ -650,6 +650,12 @@ public class ManipulationManagerScene extends Application {
         window.show();
     }
 
+    /**
+     * Add all potential ImgFiles under directory inside directoryImageFile
+     * and set up imageFileManager and tagManager
+     *
+     * @param fileCollection: All files inside a direction
+     */
     private void setAction(File fileCollection) {
         for (File file : fileCollection.listFiles()) {
             if (file.getName().toLowerCase().endsWith(".jpg")
@@ -700,6 +706,9 @@ public class ManipulationManagerScene extends Application {
         }
     }
 
+    /**
+     * Open the directory chooser and set up the imgFiles and ImageListView
+     */
     private void openButtonClicked() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
 

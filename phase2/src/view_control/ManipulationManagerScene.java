@@ -19,9 +19,12 @@ import model.ImageFile;
 import model.ImageFileManager;
 import model.LogManager;
 import model.TagManager;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.awt.SystemColor.desktop;
 
 
 public class ManipulationManagerScene extends Application {
@@ -77,6 +80,11 @@ public class ManipulationManagerScene extends Application {
     private static final int MAGIC10 = 10;
 
     /**
+     * Magic number 500
+     */
+    private static final int MAGIC500 = 500;
+
+    /**
      * Magic number 0
      */
     private static final int MAGIC0 = 0;
@@ -87,9 +95,9 @@ public class ManipulationManagerScene extends Application {
     private static final int MAGIC1 = 1;
 
     /**
-     * Magic number 600
+     * Magic number 550
      */
-    private static final int MAGIC600 = 600;
+    private static final int MAGIC550 = 550;
 
     /**
      * Magic number 680
@@ -234,6 +242,8 @@ public class ManipulationManagerScene extends Application {
      */
     private static Pane pathArea = new Pane();
 
+    private static Desktop desktop = Desktop.getDesktop();
+
     /**
      * Path to serialize the logManager
      */
@@ -315,6 +325,9 @@ public class ManipulationManagerScene extends Application {
         Button move = new Button("Move To");
         move.setMinWidth(MAGIC100);
 
+        Button getDirectory = new Button("Show Current Directory");
+        getDirectory.setMinWidth(MAGIC150);
+
         Button quit = new Button("Quit The Program");
         quit.setMinWidth(MAGIC100);
 
@@ -354,7 +367,7 @@ public class ManipulationManagerScene extends Application {
         line2.setStrokeWidth(MAGIC3);
         addToTagSet.getChildren().addAll(line1, line2);
 
-        Button addToImageFile = new Button("Add to Image File");
+        Button addToImageFile = new Button("Add Tag to Image File");
         addToImageFile.setMinWidth(MAGIC150);
 
 
@@ -444,6 +457,18 @@ public class ManipulationManagerScene extends Application {
             }
         });
 
+        getDirectory.setOnAction((ActionEvent event) -> {
+            if (inputFile != null) {
+                File file = new File(inputFile.getFile().getParent());
+                try {
+                    desktop.open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
         addToTagSet.setOnMouseClicked(event -> AddToTagSet.display());
 
@@ -479,14 +504,14 @@ public class ManipulationManagerScene extends Application {
 
 
         inputGridPane.setPrefSize(MAGIC800, MAGIC800);
-        Label tagHistory = new Label("Tag History");
+        Label tagHistory = new Label("Tag Set");
         pathArea.setPrefSize(MAGIC200, MAGIC30);
         pathArea.getChildren().add(path);
         ToolBar toolbar = new ToolBar();
-        toolbar.getItems().addAll(openButton, getAllLog, imgContainTag, tagHistory, addToTagSet);
-        imgContainTag.setTranslateX(MAGIC600);
-        tagHistory.setTranslateX(MAGIC680);
-        addToTagSet.setTranslateX(MAGIC700);
+        toolbar.getItems().addAll(openButton, getAllLog, getDirectory, imgContainTag, tagHistory, addToTagSet);
+        imgContainTag.setTranslateX(MAGIC400);
+        tagHistory.setTranslateX(MAGIC500);
+        addToTagSet.setTranslateX(MAGIC550);
         addToTagSet.setTranslateY(MAGIC1);
         ToolBar toolbarBottom = new ToolBar();
         toolbarBottom.setMinHeight(MAGIC100);

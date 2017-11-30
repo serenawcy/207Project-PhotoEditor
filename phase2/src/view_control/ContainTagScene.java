@@ -17,10 +17,17 @@ import model.ImageFile;
 
 import java.util.ArrayList;
 
+/**
+ * The ContainTagScene class.
+ * Construct the layout of this ContainTagScene
+ *
+ * @author Jiayao Lin
+ * @version J.R.E 1.8.0
+ */
 class ContainTagScene {
 
     /**
-     * Initialize an ListView of string to display the current tags.
+     * Initialize an ListView of string to display current tags.
      */
     private static ListView<String> listView;
 
@@ -70,7 +77,7 @@ class ContainTagScene {
     private static final int MAGIC950 = 950;
 
     /**
-     * Initialize a collection of ImageFile contain the selected tag(s)
+     * Initialize a collection of ImageFile contain selected tag(s)
      */
     private static ArrayList<ImageFile> imgFiles = new ArrayList<>();
 
@@ -80,17 +87,17 @@ class ContainTagScene {
     private static ImageView imageView = new ImageView();
 
     /**
-     * Initialize a StackPane to place the image
+     * Initialize a StackPane to place this image
      */
     private static StackPane paneCenter = new StackPane();
 
     /**
-     * Initialize a BorderPane for the general layout format
+     * Initialize a BorderPane for this general layout format
      */
     private static BorderPane inputGridPane = new BorderPane();
 
     /**
-     * Display the Scene and construct the buttons.
+     * Display this Scene and construct buttons.
      */
     static void display(){
         Stage window = new Stage();
@@ -138,7 +145,7 @@ class ContainTagScene {
     }
 
     /**
-     * Delete the selected tags once button has been delete clicked.
+     * Delete this selected tags once button has been delete clicked.
      */
 
     private static void buttonClicked() {
@@ -156,9 +163,9 @@ class ContainTagScene {
 
 
     /**
-     * Set the imgFiles imgFiles variable to be the imageFile.
+     * Set the imgFiles imgFiles variable to be this imageFile.
      *
-     * @param imageFile a list of imgaeFiles contain the selected tag(s)
+     * @param imageFile a list of imageFiles contain the selected tag(s)
      */
     static void setImageFilesWithTags(ArrayList<ImageFile> imageFile){
         imgFiles = imageFile;
@@ -167,7 +174,7 @@ class ContainTagScene {
 
 
     /**
-     * Set the image of the selected file.
+     * Set the image of this selected file.
      *
      * @param file the file user selected to view.
      */

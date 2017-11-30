@@ -2,16 +2,24 @@ package view_control;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
+import model.Collision;
 import model.ImageFile;
 
 
-
+/**
+ * The DeleteTagScene class.
+ * Construct the layout of this AddTagScene
+ *
+ * @author Dingyi Yu
+ * @version J.R.E 1.8.0
+ */
 class DeleteTagScene {
 
     /**
@@ -21,7 +29,7 @@ class DeleteTagScene {
 
 
     /**
-     * Initialize an ListView of string to display the current tags.
+     * Initialize an ListView of string to display current tags.
      */
     private static ListView<String> listView;
 
@@ -49,6 +57,8 @@ class DeleteTagScene {
      * Magic number 400
      */
     private static final int MAGIC400 = 400;
+
+    private static Collision collision = new Collision();
 
     /**
      * Display the Scene and construct the buttons.
@@ -85,38 +95,65 @@ class DeleteTagScene {
     }
 
     /**
-     * Delete the selected tags once button has been delete clicked.
+     * Delete selected tags once button has been delete clicked.
      */
 
     private static void buttonClicked() {
         ObservableList<String> tags;
         tags = listView.getSelectionModel().getSelectedItems();
-        for (String tag: tags){
-            try {
-                ImageFile inputFileSer = inputFile;
-                ImageFile saveCurrent = inputFile;
-                String logHistory = inputFileSer.deleteTag(tag);
-                ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
-                ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
-                ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
-                inputFile = inputFileSer;
-            } catch (Exception e) {
-                e.printStackTrace();
+        StringBuilder collection = new StringBuilder();
+        for (String tag: tags) {
+            collection.append(tag);
+        }
+        String PotentialName = collision.changeNameDelete(inputFile.getFile().getName(),collection.toString());
+        if (!collisionDelete(PotentialName)){
+            for (String tag: tags) {
+                try {
+                    ImageFile inputFileSer = inputFile;
+                    ImageFile saveCurrent = inputFile;
+                    String logHistory = inputFileSer.deleteTag(tag);
+                    ManipulationManagerScene.imageFileManager.delete(saveCurrent, ManipulationManagerScene.imageFileManagerPath);
+                    ManipulationManagerScene.imageFileManager.add(inputFileSer, ManipulationManagerScene.imageFileManagerPath);
+                    ManipulationManagerScene.logManager.add(logHistory, ManipulationManagerScene.logManagerPath);
+                    inputFile = inputFileSer;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                listView.getItems().remove(tag);
+                ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
+                ManipulationManagerScene.setPath(inputFile);
             }
-            listView.getItems().remove(tag);
-            ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-            ManipulationManagerScene.setPath(inputFile);
-
         }
 
     }
 
     /**
-     * Set the ImageFile
+     * Set this ImageFile
      * @param imageFile the ImageFile
      */
     static void setImageFile(ImageFile imageFile){
         inputFile = imageFile;
+    }
+
+    private static void inappropriateDeletion() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Inappropriate Tag Deletion");
+        alert.setHeaderText("This directory already has an image with the same name!");
+        alert.setContentText("Choose Another Tag To Delete");
+
+        alert.showAndWait();
+    }
+
+    private static boolean collisionDelete(String potentialName) {
+        for (ImageFile file : ManipulationManagerScene.imgFiles) {
+            if (!inputFile.equals(file) && file.getFile().getParent().equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
+                if ((file.getFile().getName().equals(potentialName))) {
+                    inappropriateDeletion();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

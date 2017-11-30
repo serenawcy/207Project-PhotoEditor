@@ -1,14 +1,12 @@
 package view_control;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.*;
@@ -16,8 +14,15 @@ import javafx.stage.DirectoryChooser;
 import model.ImageFile;
 
 import java.io.File;
-import java.io.IOException;
 
+
+/**
+ * The MoveFileScene class.
+ * Construct the layout of this MoveFileScene
+ *
+ * @author Jiayao Lin
+ * @version J.R.E 1.8.0
+ */
 class MoveFileScene {
 
   /** Magic number 10 */
@@ -35,7 +40,6 @@ class MoveFileScene {
   /** Initialize an ImageFile */
   private static ImageFile inputFile;
 
-  private static Stage dialogStage;
 
   /** Display the Scene and construct the buttons. */
   static void display() {
@@ -63,7 +67,7 @@ class MoveFileScene {
             File selectedDirectory = directoryChooser.showDialog(moveToStage);
             if (selectedDirectory != null) {
               directory = selectedDirectory.getAbsolutePath();
-              if (!collison(directory)) {
+              if (!collisionMove(directory)) {
                 try {
                   ImageFile inputFileSer = inputFile;
                   ImageFile saveCurrent = inputFile;
@@ -103,7 +107,7 @@ class MoveFileScene {
   }
 
   /**
-   * Set the ImageFile
+   * Set this ImageFile
    *
    * @param imageFile the ImageFile
    */
@@ -125,10 +129,10 @@ class MoveFileScene {
     alert.showAndWait();
   }
 
-  private static boolean collison(String directory) {
+  private static boolean collisionMove(String directory) {
     for (ImageFile file : ManipulationManagerScene.imgFiles) {
       if (!inputFile.equals(file) && file.getFile().getParent().equals(directory)) {
-        if ((inputFile.getOriginalName()).equals(file.getOriginalName())) {
+        if ((inputFile.getFile().getName().equals(file.getFile().getName()))) {
           inappropriateMove();
           return true;
         }

@@ -9,11 +9,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Objects;
 
 
+/**
+ * The AddToTagSet class.
+ * Construct the layout of this AddToTagSet Scene.
+ *
+ * @author Jiayao Lin
+ * @version J.R.E 1.8.0
+ */
 class AddToTagSet {
 
     /**
@@ -38,7 +44,7 @@ class AddToTagSet {
 
 
     /**
-     * Display the Scene and construct the buttons.
+     * Display this Scene and construct this buttons.
      */
     static void display() {
         Stage addScene = new Stage();

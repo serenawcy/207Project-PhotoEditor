@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * This class generates an ImageFile instance with some variables and methods
+ */
 public class ImageFile implements Serializable {
     /**
      * A File object represented by file
@@ -32,15 +35,13 @@ public class ImageFile implements Serializable {
     private ArrayList<String> history;
 
     /**
-     * Create a new empty ImageFile.
+     * Creates a new empty ImageFile.
      *
      * @param file the File object which used to construct ImageFile
      * @throws IOException throw a IOException
      */
     public ImageFile(File file) throws IOException {
-
         this.file = file;
-
         this.history = new ArrayList<>();
         this.existTag = new ArrayList<>();
         this.oldName = new ArrayList<>();
@@ -54,7 +55,6 @@ public class ImageFile implements Serializable {
             String[] originalTag = this.getNameWithoutSuffix(this.file).split("@");
             for (int i = 1; i < originalTag.length; i++) {
                 this.existTag.add(originalTag[i].trim());
-               // TagManager.add(originalTag[i].trim());
             }
         }
 
@@ -62,7 +62,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get the name of a File object without suffix
+     * Gets the name of a File object without suffix
      *
      * @param file the File object to get its name without suffix
      * @return the name of the File object without suffix
@@ -73,7 +73,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get the suffix of a File object
+     * Gets the suffix of a File object
      *
      * @param file the File object to get its suffix
      * @return the suffix of the File object
@@ -84,7 +84,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Add user input tag name if it does not exist and rename this ImageFile.
+     * Adds user input tag name if it does not exist and rename this ImageFile.
      *
      * @param userInputAdd the tag name which is supposed to be added to this ImageFile name
      */
@@ -107,9 +107,8 @@ public class ImageFile implements Serializable {
         return " ";
     }
 
-
     /**
-     * Delete user input tag name and rename this ImageFile.
+     * Deletes user input tag name and rename this ImageFile.
      *
      * @param tagToDelete the tag name which is supposed to be deleted from this ImageFile name
      */
@@ -119,33 +118,26 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Change the Directory of this ImageFile object and reset the image of this ImageFile object.
+     * Changes the Directory of this ImageFile object and reset the image of this ImageFile object.
      *
      * @param newParentDirectory new parent directory of this ImageFile object
      */
+    @SuppressWarnings("unused")
     public void changeDirectory(String newParentDirectory) throws IOException {
-       // ImageFile saveCurrent = this;
         File dir = new File(newParentDirectory);
 
         boolean success = file.renameTo(new File(dir, file.getName()));
         this.file = new File(dir, file.getName());
-        if (success) {
-            //ImageFileManager.delete(saveCurrent);
-            //ImageFileManager.add(this);
-        }
     }
 
     /**
-     * Change the name of this ImageFile object.
+     * Changes the name of this ImageFile object.
      *
      * @param newImageName new name of this ImageFile object
      */
     public String changeImageName(String newImageName) throws IOException {
-       // ImageFile saveCurrent = this;
         Date time = new Date();
-
         String result = passHistory(time, this.file.getName(), newImageName, this.getSuffix(this.file));
-
         history.add(time + " Renamed this image file from " + this.file.getName() +
                 " to " + newImageName + "." + this.getSuffix(this.file) + "\n");
 
@@ -157,20 +149,18 @@ public class ImageFile implements Serializable {
             if (!this.oldName.contains(this.file.getName())) {
                 this.oldName.add(this.file.getName());
             }
-           // ImageFileManager.delete(saveCurrent);
-           // ImageFileManager.add(this);
         }
         return result;
     }
 
     /**
-     * Rename this ImageFile by deleting a tag.
+     * Renames this ImageFile by deleting a tag.
      *
      * @param tagToDelete the tag name need to be deleted
      */
     private String renameDelete(String tagToDelete) throws IOException {
         StringBuilder newName = new StringBuilder(this.getOriginalName());
-        for (String tag: this.existTag) {
+        for (String tag : this.existTag) {
             if (!Objects.equals(tag, tagToDelete)) {
                 newName.append(" @").append(tag);
             }
@@ -179,7 +169,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Rename this ImageFile by adding a tag.
+     * Renames this ImageFile by adding a tag.
      *
      * @param tagToAdd the tag name need to be added
      */
@@ -188,19 +178,16 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Update the existTag.
+     * Updates the existTag.
      *
      * @param tagsToRename the ArrayList of tags to be renamed
      */
     public void changeTagHistory(ArrayList<String> tagsToRename) throws IOException {
-       // ImageFile saveCurrent = this;
         this.existTag = tagsToRename;
-        //ImageFileManager.delete(saveCurrent);
-        //ImageFileManager.add(this);
     }
 
     /**
-     * Get the log history of this ImageFile object.
+     * Gets the log history of this ImageFile object.
      *
      * @return the ArrayList of String of log history
      */
@@ -209,7 +196,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get this ImageFile object's file.
+     * Gets this ImageFile object's file.
      *
      * @return the file of this ImageFile object
      */
@@ -218,7 +205,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get this ImageFile object's originalName.
+     * Gets this ImageFile object's originalName.
      *
      * @return the originalName of this ImageFile object
      */
@@ -227,7 +214,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get this ImageFile object's oldName.
+     * Gets this ImageFile object's oldName.
      *
      * @return the oldName of this ImageFile object
      */
@@ -236,7 +223,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Get this ImageFile object's existTag.
+     * Gets this ImageFile object's existTag.
      *
      * @return the existTag of this ImageFile object
      */
@@ -245,7 +232,7 @@ public class ImageFile implements Serializable {
     }
 
     /**
-     * Return whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
+     * Returns whether this ImageFile's file has the same absolute path as the other ImageFile's file's.
      *
      * @param imageFile other ImageFile object which compare with this ImageFile object
      * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
@@ -254,14 +241,26 @@ public class ImageFile implements Serializable {
         return (imageFile.getFile().getAbsolutePath()).equals(this.file.getAbsolutePath());
     }
 
-    private String passHistory(Date time, String oldName, String newName, String suffixName){
+    /**
+     * Returns a String of this ImageFile's pass log history.
+     *
+     * @param time       the time stamp of this ImageFile when it change the name
+     * @param oldName    the old name of this ImageFile before it changed name
+     * @param newName    the old name of this ImageFile before it changed name
+     * @param suffixName the new name of this ImageFile after it changed name
+     * @return whether this ImageFile's file has the same absolute path as the other ImageFile's file's
+     */
+    private String passHistory(Date time, String oldName, String newName, String suffixName) {
         String result = "";
-
         result += time + " Renamed this image file from " + oldName + " to " + newName + "." + suffixName + "\n";
-
         return result;
     }
 
+    /**
+     * Resets this ImageFile's exist tag in order to delete the tag in the exist tag.
+     *
+     * @param tagToDelete the tag to be deleted in the exist set
+     */
     public void resetExistTag(String tagToDelete) {
         this.existTag.remove(tagToDelete);
     }

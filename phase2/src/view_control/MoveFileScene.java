@@ -1,6 +1,5 @@
 package view_control;
 
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,10 +14,8 @@ import model.ImageFile;
 
 import java.io.File;
 
-
 /**
- * The MoveFileScene class.
- * Construct the layout of this MoveFileScene
+ * The MoveFileScene class. Construct the layout of this MoveFileScene
  *
  * @author Jiayao Lin
  * @version J.R.E 1.8.0
@@ -39,7 +36,6 @@ class MoveFileScene {
 
   /** Initialize an ImageFile */
   private static ImageFile inputFile;
-
 
   /** Display the Scene and construct the buttons. */
   static void display() {
@@ -85,10 +81,8 @@ class MoveFileScene {
                   ManipulationManagerScene.imgFiles.remove(inputFile);
                 }
                 ManipulationManagerScene.setImageListView(ManipulationManagerScene.imgFiles);
-                  //                  ManipulationManagerScene.setFile(null);
-//                  ManipulationManagerScene.setImage();
-                  ManipulationManagerScene.setPath(inputFile);
-                  moveToStage.close();
+                ManipulationManagerScene.setPath(inputFile);
+                moveToStage.close();
               }
             }
           }
@@ -120,6 +114,7 @@ class MoveFileScene {
     return file != null && (file.equals(dir) || isInSubDirectory(dir, file.getParentFile()));
   }
 
+  /** A pop up warning box that says Inappropriate Move */
   private static void inappropriateMove() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Inappropriate Move");
@@ -129,6 +124,12 @@ class MoveFileScene {
     alert.showAndWait();
   }
 
+  /**
+   * Return true if there is collision in the directory, false otherwise.
+   *
+   * @param directory the directory that this inputfile is currently in
+   * @return whether there is collision
+   */
   private static boolean collisionMove(String directory) {
     for (ImageFile file : ManipulationManagerScene.imgFiles) {
       if (!inputFile.equals(file) && file.getFile().getParent().equals(directory)) {

@@ -148,7 +148,38 @@ class ImageFileTest {
         File outFileCat = new File("/catTEST @Garfield.jpeg");
         ImageFile fileCat = new ImageFile(outFileCat);
 
-        assertNotEquals(fileDog, fileCat);
-        assertEquals(fileDog, fileDog);
+        boolean test1 = fileDog.equals(fileCat);
+        boolean test2 = fileDog.equals(fileDog);
+
+        assertNotEquals(test1, true);
+        assertEquals(test2, true);
+    }
+
+    @Test
+    void testImageFileGetFile() throws IOException {
+        File outFileDog = new File("/dogTEST.jpeg");
+        ImageFile fileDog = new ImageFile(outFileDog);
+        File testFileDog = fileDog.getFile();
+
+        File outFileCat = new File("/catTEST @Garfield.jpeg");
+        ImageFile fileCat = new ImageFile(outFileCat);
+        File testFileCat = fileCat.getFile();
+
+        assertEquals(testFileDog, outFileDog);
+        assertEquals(testFileCat, outFileCat);
+    }
+
+    @Test
+    void testImageFileResetExistTag() throws IOException {
+        File outFileDog = new File("/dogTEST.jpeg");
+        ImageFile fileDog = new ImageFile(outFileDog);
+        File testFileDog = fileDog.getFile();
+
+        File outFileCat = new File("/catTEST @Garfield.jpeg");
+        ImageFile fileCat = new ImageFile(outFileCat);
+        File testFileCat = fileCat.getFile();
+
+        assertEquals(testFileDog, outFileDog);
+        assertEquals(testFileCat, outFileCat);
     }
 }

@@ -84,6 +84,24 @@ class ImageFileTest {
         file.addTag("Alaska");
 
         assertTrue(file.getLog().size() == 2);
+        assertTrue(file.getLog().get(0).contains("dogTEST.jpeg"));
+        assertTrue(file.getLog().get(0).contains("dogTEST @Husky.jpeg"));
+        assertTrue(file.getLog().get(1).contains("dogTEST @Husky.jpeg"));
+        assertTrue(file.getLog().get(1).contains("dogTEST @Husky @Alaska.jpeg"));
+    }
+
+    @Test
+    void testImageFileGetFile() throws IOException {
+        File outFileDog = new File("/dogTEST.jpeg");
+        ImageFile fileDog = new ImageFile(outFileDog);
+        File testFileDog = fileDog.getFile();
+
+        File outFileCat = new File("/catTEST @Garfield.jpeg");
+        ImageFile fileCat = new ImageFile(outFileCat);
+        File testFileCat = fileCat.getFile();
+
+        assertEquals(testFileDog, outFileDog);
+        assertEquals(testFileCat, outFileCat);
     }
 
     @Test
@@ -153,20 +171,6 @@ class ImageFileTest {
 
         assertNotEquals(test1, true);
         assertEquals(test2, true);
-    }
-
-    @Test
-    void testImageFileGetFile() throws IOException {
-        File outFileDog = new File("/dogTEST.jpeg");
-        ImageFile fileDog = new ImageFile(outFileDog);
-        File testFileDog = fileDog.getFile();
-
-        File outFileCat = new File("/catTEST @Garfield.jpeg");
-        ImageFile fileCat = new ImageFile(outFileCat);
-        File testFileCat = fileCat.getFile();
-
-        assertEquals(testFileDog, outFileDog);
-        assertEquals(testFileCat, outFileCat);
     }
 
     @Test

@@ -64,7 +64,6 @@ class DeleteTagScene {
     static void display() {
         Stage window = new Stage();
         window.setTitle("Delete Tag(s)");
-        window.initModality(Modality.APPLICATION_MODAL);
         Label label = new Label("Please check the tag(s) you want to delete");
         Button delete = new Button("Delete");
         Button back = new Button("Go back");

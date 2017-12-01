@@ -1,0 +1,7 @@
+out/*
+*.iml
+*.ser
+.idea/*
+**/out/*
+**/.idea/*
+*.uml

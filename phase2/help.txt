@@ -8,7 +8,14 @@
     javac -cp lib/junit-jupiter-api-5.0.jar */*.java
     java view_control.ManipulationManagerScene
 
-2. Some notes for running our application
+2. To run unit test
+    Create a intellij project in group_0546
+    Find phase2/src/test
+    Open CollisionTest.java, or ImageFileTest.java, or TagManager.java
+    Import junit5
+    Run
+
+3. Some notes for running our application
     1. "Get All Log History" -- get log histories of all image files
     2. "Add Tag", "Delete Tag", "Select Old Tag(s)", "Rename", "Move To", "Get Log History" on the bottom bar
         are for current image file

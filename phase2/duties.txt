@@ -7,7 +7,7 @@ combining two scenes.
 Yuhan Shao #1002281327
 1. Discussed the design pattern of the whole project with all the group members.
 2. Added new feature: display all the picture in that directory with the tag(s) chosen by the user.
-3. Added the unit test ImageFileTest.
+3. Added the unit test ImageFileTest and CollisionTest.
 4. Added Collision class to deal with the potential file collision.
 5. Drew the UML diagram for the whole project.
 6. Debugged with all the group members together.

@@ -151,13 +151,12 @@ class FileRenameScene {
    */
   private static boolean collision(String potentialName) {
     for (ImageFile file : ManipulationManagerScene.imgFiles) {
-      if (!inputFile.equals(file)
-          && file.getFile()
-              .getParent()
-              .equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
-        if ((file.getFile().getName().equals(potentialName))) {
-          inappropriateRename();
-          return true;
+      if (!inputFile.equals(file)) {
+        if (inputFile.getFile().getParent().equals(file.getFile().getParent())) {
+          if ((file.getFile().getName().equals(potentialName))) {
+            inappropriateRename();
+            return true;
+          }
         }
       }
     }

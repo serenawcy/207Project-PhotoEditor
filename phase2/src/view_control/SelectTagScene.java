@@ -149,13 +149,12 @@ class SelectTagScene {
    */
   private static boolean collisionSelection(String potentialName) {
     for (ImageFile file : ManipulationManagerScene.imgFiles) {
-      if (!inputFile.equals(file)
-          && file.getFile()
-              .getParent()
-              .equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
-        if ((file.getFile().getName().equals(potentialName))) {
-          inappropriateCombination();
-          return true;
+      if (!inputFile.equals(file)) {
+        if (inputFile.getFile().getParent().equals(file.getFile().getParent())) {
+          if ((file.getFile().getName().equals(potentialName))) {
+            inappropriateCombination();
+            return true;
+          }
         }
       }
     }

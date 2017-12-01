@@ -872,10 +872,12 @@ public class ManipulationManagerScene extends Application {
      */
     private static boolean collisionAdd(String potentialName) {
         for (ImageFile file : ManipulationManagerScene.imgFiles) {
-            if (!inputFile.equals(file) && file.getFile().getParent().equals(ManipulationManagerScene.getCurrentDirectory().getPath())) {
-                if ((file.getFile().getName().equals(potentialName))) {
-                    inappropriateAdd();
-                    return true;
+            if (!inputFile.equals(file)) {
+                if (inputFile.getFile().getParent().equals(file.getFile().getParent())) {
+                    if ((file.getFile().getName().equals(potentialName))) {
+                        inappropriateAdd();
+                        return true;
+                    }
                 }
             }
         }

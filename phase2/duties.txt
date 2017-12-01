@@ -18,7 +18,8 @@ Chenyue Wang #1003048052
 3. Created a new class called TagManager to manipulate the serialization of the tag set.
 4. Created a super class of SerializeManager to manipulate the serialization and made TagManager, LogManager, ImageFileManager extend it.
 5. Added the unit test TagManagerTest.
-6. Debugged with all the group members together.
+6. Added .gitignore
+7. Debugged with all the group members together.
 
 Dingyi Yu #1002077753
 1. Discussed the design pattern of the whole project with all the group members.
